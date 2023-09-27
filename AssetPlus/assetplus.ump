@@ -1,0 +1,196 @@
+class User
+{
+	immutable email;
+	password;
+	lazy name;
+	lazy phoneNumber;
+	abstract;
+    1 ticketCreator -- * MaintenanceTicket createdTickets;
+    1 imageProvider -- * ImageLink images;
+	}
+
+class Employee
+{
+  isA HotelEmployee;
+  }
+
+class Asset
+{
+  autounique assetNumber;
+  assetType;
+  Date purchaseDate;
+  expectedLifespan;
+  Integer floor;
+  lazy Integer roomNumber;
+  0.. 1  -- * MaintenanceTicket tickets;
+  * assets -- 1 Manager assetCreator; 
+  }
+
+class MaintenanceTicket
+{
+  autounique ticketNumber;
+  description;
+  date;
+  Boolean isOpen;
+  Boolean isResolved;
+  Boolean requiresManagerApproval;
+  enum PriorityLevel { Urgent, Normal, Low }
+  PriorityLevel priorityLevel;
+  enum TimeEstimate { LessThanOneDay, OneToThreeDays, ThreeToSevenDays, OneToThreeWeeks, MoreThanThreeWeeks }
+  TimeEstimate timeEstimate;
+  1 ticket <@>- * MaintenanceNote notes;
+  1 concernedTicket -- * ImageLink images;
+  * viewedTickets -- * User viewers;
+}
+
+class Guest
+{
+  isA User;
+}
+
+class Manager
+{
+  isA HotelEmployee;
+  email = "manager@ap.com";
+  defaulted password = "manager";
+  0.. 1 ticketSupervisor -- * MaintenanceTicket existingTickets;
+}
+
+class MaintenanceNote
+{
+  autounique noteNumber;
+  Date date;
+  description;
+}
+
+class AssetPlus
+{ 
+  1 <@>-* User users;
+  1 <@>-* MaintenanceTicket tickets;
+}
+class ImageLink
+{
+  linkUrl;
+}
+
+class HotelEmployee
+{
+  abstract;
+  isA User;
+  1 noteCreator -- * MaintenanceNote notes;
+  1 taskAssignee -- * MaintenanceTicket assignedTasks;
+}
+
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class User
+{
+  position 47 307 170.191 129.878;
+  position.association MaintenanceTicket:createdTicket__User:ticketCreator 171,42 0,47;
+  position.association ImageLink:images__User 171,107 0,10;
+  position.association ImageLink:images__User:imageProvider 170,123 0,35;
+  position.association MaintenanceTicket:createdTickets__User:ticketCreator 170,5 0,14;
+}
+
+class Employee
+{
+  position 192 741 109 42.5868;
+  position.association Employee__MaintenanceTicket 110,6 0,34;
+  position.association Employee:MaintenanceStaff__MaintenanceTicket 110,0 0,10;
+  position.association Employee__MaintenanceNote 110,20 0,28;
+  position.association Employee:Employee__MaintenanceTicket 110,9 0,10;
+  position.association Employee:TicketA__MaintenanceTicket 110,9 0,10;
+  position.association Employee:TicketAuthor__MaintenanceTicket 103,0 0,10;
+  position.association Employee__MaintenanceTask 110,41 0,28;
+    position.association Employee:noteCreator__MaintenanceNote 64,0 0,0;
+  position.association Employee:maintenanceStaff__MaintenanceNote:maintenanceTask 110,30 0,43;
+}
+
+class Asset
+{
+  position 832 53 191.58 148.524;
+  position.association Asset:asset__MaintenanceTicket:ticket 99,222 127,0;
+  position.association Asset__MaintenanceTicket:ticket 0,10 1,0;
+  position.association Asset__MaintenanceTicket:tickets 123,157 178,0;
+  position.association Asset:assets__Manager:assetCreator 0,0 33,0;
+}
+
+class MaintenanceTicket
+{
+  position 801 298 259.444 183.837;
+  position.association MaintenanceNote:note__MaintenanceTicket:ticket 124,166 75,0;
+  position.association MaintenanceTicket:ticket__User:user 0,6 163,127;
+  position.association MaintenanceTicket__Manager 0,131 132,3;
+  position.association MaintenanceTicket__Manager:ticketAuthor 0,10 133,0;
+  position.association MaintenanceTicket__Manager:maintenanceStaff 0,159 10,0;
+  position.association MaintenanceTicket__User 27,0 171,38;
+  position.association MaintenanceTicket:ticket__User:viewer 0,33 170,12;
+  position.association MaintenanceTicket__User:ticketAuthor 0,30 171,103;
+  position.association MaintenanceTicket__User:ticketCreated 0,30 171,103;
+  position.association MaintenanceTicket__User:ticketCreateor 0,30 171,103;
+  position.association MaintenanceTicket__User:ticketCreator 0,80 171,60;
+  position.association HotelEmployee:dedicatedStaff__MaintenanceTicket 0,111 95,0;
+  position.association MaintenanceTicket:vieticket__User:viewer 0,10 171,0;
+  position.association MaintenanceTicket:viewedticket__User:viewer 0,11 171,7;
+  position.association MaintenanceTicket:viewedTicket__User:viewer 0,12 171,0;
+  position.association MaintenanceTicket:createdTicker__User:ticketCreator 0,33 170,31;
+  position.association ImageLink__MaintenanceTicket 130,166 56,0;
+  position.association ImageLink__MaintenanceTicket:concernedTicket 49,166 0,10;
+  position.association ImageLink:image__MaintenanceTicket:concernedTicket 0,110 120,1;
+  position.association MaintenanceNote:notes__MaintenanceTicket:ticket 142,225 70,0;
+  position.association ImageLink:images__MaintenanceTicket:concernedTicket 0,116 111,19;
+  position.association MaintenanceTicket:viewedTickets__User:viewers 0,61 162,52;
+}
+
+class Guest
+{
+  position 74 581 109 42.5868;
+}
+
+class Manager
+{
+  position 343 743 138.889 77.8993;
+  position.association MaintenanceTicket__Manager:maintenanceStaff 47,0 0,76;
+  position.association MaintenanceTicket__Manager:taskAssignerApprover 115,0 20,166;
+  position.association MaintenanceTicket:existingTicket__Manager:taskAssignerApprover 71,17 0,166;
+  position.association MaintenanceTicket:existingTicket__Manager:ticketSupervisor 7,0 0,10;
+  position.association MaintenanceTicket:existingTickets__Manager:ticketSupervisor 131,12 0,184;
+}
+
+class MaintenanceNote
+{
+  position 849 564 167.431 95.5556;
+  position.association MaintenanceNote__Manager 0,56 140,21;
+}
+
+class AssetPlus
+{
+  position 51 200 109 42.5868;
+  position.association AssetPlus:assetPlus__User:user 48,43 52,0;
+  position.association AssetPlus:assetPlus__User:users 48,43 52,0;
+  position.association AssetPlus__MaintenanceTicket:tickets 110,13 34,0;
+  position.association AssetPlus__User:users 53,41 66,0;
+}
+
+class ImageLink
+{
+  position 388 395 118.455 60.2431;
+  position.association ImageLink__MaintenanceTicket 60,0 123,166;
+  position.association ImageLink__User 0,28 171,117;
+}
+
+class HotelEmployee
+{
+  position 194 581 123.802 42.5868;
+  position.association HotelEmployee__MaintenanceTicket 103,0 0,139;
+  position.association HotelEmployee:dedicatedStaff__MaintenanceTicket:assignedTicket 118,0 0,152;
+  position.association HotelEmployee:noteCreator__MaintenanceNote 125,24 0,40;
+  position.association HotelEmployee:dedicatedStaff__MaintenanceTicket:assignedTask 6,0 0,10;
+  position.association HotelEmployee:dedicatedStaff__MaintenanceTicket:assignedTasks 17,0 0,119;
+  position.association HotelEmployee:taskAssignee__MaintenanceTicket:assignedTasks 104,13 0,171;
+  position.association HotelEmployee:noteCreator__MaintenanceNote:note 125,5 0,10;
+  position.association HotelEmployee:noteCreator__MaintenanceNote:notes 104,47 0,63;
+}
