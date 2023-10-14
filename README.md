@@ -1,4 +1,4 @@
-# :hotel::heavy_plus_sign: ECSE223 AssetPlus Project: Team N
+# :hotel::heavy_plus_sign: ECSE223 AssetPlus Project: Team P1
 
 _(Edit this file as needed, then remove this sentence)._
 
@@ -12,9 +12,9 @@ For more information about the AssetPlus application, please consult the [wiki](
 
 | Name          | GitHub username |
 | ------------- | --------------- |
-| Team Member A | ...             |
-| Team Member B | ...             |
-| Team Member C | ...             |
-| Team Member D | ...             |
-| Team Member E | ...             |
-| Team Member F | ...             |
+| Mathieu Allaire | Mathieu-Allaire             |
+| Jérôme Desrosiers | JDesro             |
+| Tessa Hason | tessahas             |
+| Luis Felipe Jarquin Romero | LuisAtMcGill             |
+| Kevin Li | kevinruikai-li             |
+| Yuri Sorice | YuriSorice             |
