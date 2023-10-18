@@ -35,7 +35,7 @@ public class DeleteEmployeeStepDefinitions {
   @When("the employee attempts to delete their own account linked to the {string} \\(p1)")
   public void the_employee_attempts_to_delete_their_own_account_linked_to_the_p1(String string) {
     // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(string);
   }
 
   @Then("the employee account linked to {string} shall not exist in the system \\(p1)")
