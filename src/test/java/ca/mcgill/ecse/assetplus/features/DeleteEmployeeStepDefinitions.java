@@ -12,8 +12,9 @@ public class DeleteEmployeeStepDefinitions {
   private AssetPlus assetPlus = ca.mcgill.ecse.assetplus.application.AssetPlusApplication.getAssetPlus();
 
   /**
+   * This step ensures that the provided employees exist in the system.
    * @author Kevin Li
-   * @param dataTable
+   * @param dataTable Table containing the information on the employees we want to exist in the system.
    */
   @Given("the following employees exist in the system \\(p1)")
   public void the_following_employees_exist_in_the_system_p1(
