@@ -45,6 +45,7 @@ public class DeleteEmployeeStepDefinitions {
   }
   
   /**
+   * This step checks that after the employee attempts to delete their own account, their account does not exist in the system.
    * @author Jerome Desrosiers
    */
   @Then("the employee account linked to {string} shall not exist in the system \\(p1)")
