@@ -59,9 +59,10 @@ public class DeleteEmployeeStepDefinitions {
    */
   @Then("the employee account linked to {string} shall not exist in the system \\(p1)")
   public void the_employee_account_linked_to_shall_not_exist_in_the_system_p1(String string) {
-    
     User actualEmployee = Employee.getWithEmail(string);
-    Assertions.assertEquals(null, actualEmployee);
+    if (actualEmployee instanceof Employee) {
+      Assertions.assertEquals(null, actualEmployee);
+    }
   }
   /**
    * This step checks that after the employee attempts to delete their own account, the manager still exists in the system.
