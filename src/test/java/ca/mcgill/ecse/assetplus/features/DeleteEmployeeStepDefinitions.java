@@ -54,6 +54,7 @@ public class DeleteEmployeeStepDefinitions {
     Assertions.assertEquals(null, actualEmployee);
   }
   /**
+   * This step checks that after the employee attempts to delete their own account, the manager still exists in the system.
    * @author Yuri Sorice
    */
   @Then("the manager account linked to {string} shall exist in the system \\(p1)")
