@@ -1,6 +1,5 @@
 package ca.mcgill.ecse.assetplus.features;
 import ca.mcgill.ecse.assetplus.model.*;
-import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,8 +9,12 @@ import org.junit.jupiter.api.Assertions;
 
 public class DeleteEmployeeStepDefinitions {
 
-  private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
+  private AssetPlus assetPlus = ca.mcgill.ecse.assetplus.application.AssetPlusApplication.getAssetPlus();
 
+  /**
+   * @author Kevin Li
+   * @param dataTable
+   */
   @Given("the following employees exist in the system \\(p1)")
   public void the_following_employees_exist_in_the_system_p1(
       io.cucumber.datatable.DataTable dataTable) {
@@ -25,19 +28,25 @@ public class DeleteEmployeeStepDefinitions {
     }
   }
 
+  /**
+   * @author 
+   * @param dataTable
+   */
   @Given("the following manager exists in the system \\(p1)")
   public void the_following_manager_exists_in_the_system_p1(
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+    List<Map<String, String>> rows = dataTable.asMaps();
+    for (var row: rows) {
+      String email = row.get("email");
+      String password = row.get("password");
+      new Manager(email, "", password, "", assetPlus);
+    }
   }
 
+  /**
+   * @author 
+   * @param string
+   */
   @When("the employee attempts to delete their own account linked to the {string} \\(p1)")
   public void the_employee_attempts_to_delete_their_own_account_linked_to_the_p1(String string) {
     ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(string);
@@ -69,7 +78,7 @@ public class DeleteEmployeeStepDefinitions {
   @Then("the number of employees in the system shall be {string} \\(p1)")
   public void the_number_of_employees_in_the_system_shall_be_p1(String string) {
     int expectedNumOfEmployees = Integer.parseInt(string);
-    int actualNumOfEmployees = assetPlus.numberOfGuests();
+    int actualNumOfEmployees = assetPlus.numberOfEmployees();
     Assertions.assertEquals(expectedNumOfEmployees,actualNumOfEmployees);
   }
 }
