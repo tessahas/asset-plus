@@ -16,33 +16,21 @@ public class AssetPlusFeatureSet6Controller {
 
   /**
    * @author Tessa Hason
-   * This method is used to delete an Employee or a Guest within AssetPlus.
+   * This method is used to delete an Employee or a Guest within the AssetPlus application.
    * @param email The employee or guest with the given email must be deleted.
    */
 
   public static void deleteEmployeeOrGuest(String email) {
-
-    AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-
-    int index = email.length() - 7;
-
-    if (email.substring(index).equals("@ap.com")){
-      if (User.hasWithEmail(email)) {
-        Employee employeeToDelete = (Employee) User.getWithEmail(email);
-        assetPlus.removeEmployee(employeeToDelete);
-      }
+    User userToDelete = User.getWithEmail(email);
+    if(userToDelete instanceof Guest || userToDelete instanceof Employee){
+      userToDelete.delete();
     }
-    else {
-      if (User.hasWithEmail(email)){
-        Guest guestToDelete = (Guest) User.getWithEmail(email);
-        assetPlus.removeGuest(guestToDelete);
-      }
-    }
+
   }
 
   /**
    * @author Tessa Hason
-   * This method is used to view the status of Maintenance Tickets for an employee/manager.
+   * The method is used to view the status of Maintenance Tickets for an employee/manager.
    * @return Returns a list of TOMaintenanceTicket objects representing all MaintenanceTickets
    * in the AssetPlus System.
    */
@@ -55,29 +43,24 @@ public class AssetPlusFeatureSet6Controller {
       List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
 
       for (MaintenanceTicket ticket : maintenanceTickets) {
-        List<String> urls = null;
-        List<TOMaintenanceNote> notes = null;
-
-        if (ticket.hasTicketImages()){
-          urls = new ArrayList<String>();
-          for (int i=0; i<ticket.numberOfTicketImages(); i++){
-            String currUrl = ticket.getTicketImage(i).getImageURL();
-            urls.add(currUrl);
+        List<String> urls = new ArrayList<String>();
+        List<TicketImage> images = ticket.getTicketImages();
+          for (TicketImage TicketImage : images) {
+            urls.add(TicketImage.getImageURL());
           }
+
+        TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.numberOfTicketNotes()];
+        int i = 0;
+        for (MaintenanceNote note : ticket.getTicketNotes()) {
+          Date noteDate = note.getDate();
+          String noteDescription = note.getDescription();
+          String noteTakerEmail = note.getNoteTaker().getEmail();
+          TOMaintenanceNote TOMaintenanceNote = new TOMaintenanceNote(noteDate, noteDescription, noteTakerEmail);
+          notes[i] = TOMaintenanceNote;
+          i++;
         }
 
-        if (ticket.hasTicketNotes()) {
-          List<MaintenanceNote> maintenanceNotes = ticket.getTicketNotes();
-          for (MaintenanceNote note : maintenanceNotes) {
-            Date noteDate = note.getDate();
-            String noteDescription = note.getDescription();
-            String noteTakerEmail = note.getNoteTaker().getEmail();
-            TOMaintenanceNote TOMaintenanceNote = new TOMaintenanceNote(noteDate, noteDescription, noteTakerEmail);
-            notes.add(TOMaintenanceNote);
-          }
-        }
-
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getAsset().getAssetType().getName(), ticket.getAsset().getAssetType().getExpectedLifeSpan(), ticket.getAsset().getPurchaseDate(), ticket.getAsset().getFloorNumber(), ticket.getAsset().getRoomNumber(), urls, notes.toArray(new TOMaintenanceNote[0]));
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getAsset().getAssetType().getName(), ticket.getAsset().getAssetType().getExpectedLifeSpan(), ticket.getAsset().getPurchaseDate(), ticket.getAsset().getFloorNumber(), ticket.getAsset().getRoomNumber(), urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
