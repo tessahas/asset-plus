@@ -55,18 +55,8 @@ public class AssetPlusFeatureSet6Controller {
       List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
 
       for (MaintenanceTicket ticket : maintenanceTickets) {
-        int id = ticket.getId();
-        Date date = ticket.getRaisedOnDate();
-        String description = ticket.getDescription();
-        String ticketRaiserEmail = ticket.getTicketRaiser().getEmail();
-        String assetName = ticket.getAsset().getAssetType().getName();
-        int lifespan = ticket.getAsset().getAssetType().getExpectedLifeSpan();
-        Date purchaseDate = ticket.getAsset().getPurchaseDate();
-        int floorNumber = ticket.getAsset().getFloorNumber();
-        int roomNumber = ticket.getAsset().getRoomNumber();
         List<String> urls = null;
         List<TOMaintenanceNote> notes = null;
-
 
         if (ticket.hasTicketImages()){
           urls = new ArrayList<String>();
@@ -82,15 +72,12 @@ public class AssetPlusFeatureSet6Controller {
             Date noteDate = note.getDate();
             String noteDescription = note.getDescription();
             String noteTakerEmail = note.getNoteTaker().getEmail();
-
-            // Create a TOMaintenanceNote
             TOMaintenanceNote TOMaintenanceNote = new TOMaintenanceNote(noteDate, noteDescription, noteTakerEmail);
             notes.add(TOMaintenanceNote);
           }
         }
 
-
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(id, date, description, ticketRaiserEmail, assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes.toArray(new TOMaintenanceNote[0]));
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getAsset().getAssetType().getName(), ticket.getAsset().getAssetType().getExpectedLifeSpan(), ticket.getAsset().getPurchaseDate(), ticket.getAsset().getFloorNumber(), ticket.getAsset().getRoomNumber(), urls, notes.toArray(new TOMaintenanceNote[0]));
         TOMaintenanceTickets.add(TOticket);
 
       }
