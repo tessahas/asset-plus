@@ -22,10 +22,10 @@ public class AssetPlusFeatureSet6Controller {
 
   public static void deleteEmployeeOrGuest(String email) {
     User userToDelete = User.getWithEmail(email);
-    if(userToDelete instanceof Guest || userToDelete instanceof Employee){
+    if(email.equals("manager@ap.com")){
+    } else if (userToDelete instanceof Employee || userToDelete instanceof Guest){
       userToDelete.delete();
     }
-
   }
 
   /**
@@ -60,7 +60,24 @@ public class AssetPlusFeatureSet6Controller {
           i++;
         }
 
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getAsset().getAssetType().getName(), ticket.getAsset().getAssetType().getExpectedLifeSpan(), ticket.getAsset().getPurchaseDate(), ticket.getAsset().getFloorNumber(), ticket.getAsset().getRoomNumber(), urls, notes);
+        String assetName;
+        int lifespan = -1;
+        Date purchaseDate;
+        int floorNumber = -1;
+        int roomNumber =-1;
+
+        if (ticket.hasAsset()){
+          assetName = ticket.getAsset().getAssetType().getName();
+          lifespan = ticket.getAsset().getAssetType().getExpectedLifeSpan();
+          purchaseDate = ticket.getAsset().getPurchaseDate();
+          floorNumber = ticket.getAsset().getFloorNumber();
+          roomNumber = ticket.getAsset().getRoomNumber();
+        }else{
+          assetName = null;
+          purchaseDate = null;
+        }
+
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
