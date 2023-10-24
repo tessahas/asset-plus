@@ -92,27 +92,29 @@ public class AssetPlusFeatureSet1Controller {
     else if (!(manager.getPassword().equals("manager"))) {
     	errorMessage += "You do not have permission to change the password";
     }
+		else if(password.equals("")) {
+    	errorMessage += "Password cannot be empty";
+    }
     else if(password.length()<4) {
-    	errorMessage += "The password must be at least four characters long";
+    	errorMessage += "Password must be at least four characters long";
     }
-    else if(  (password.contains("!")&& !password.contains("#") && !password.contains("$")) ||  (!password.contains("!")&& password.contains("#") && !password.contains("$"))
-    		|| (!password.contains("!")&& !password.contains("#") && password.contains("$")) ){
-    	errorMessage += "The password must contain one character out of !#$";		
-    }
-    else if(password.equals("")) {
-    	errorMessage += "The password must not be empty";
+    else if(!((password.contains("!")&& (!password.contains("#")) && (!password.contains("$"))) ||  ((!password.contains("!"))&& password.contains("#") && (!password.contains("$")))
+    		|| ((!password.contains("!"))&& (!password.contains("#")) && password.contains("$")) )){
+    	errorMessage += "Password must contain one character out of !#$";		
     }
     else if(!onlyOneLowerChar(password)) {
-    	errorMessage += "The password must contain exactly one lower-case character";
+    	errorMessage += "Password must contain one lower-case character";
     }
     else if(!onlyOneUpperChar(password)) {
-    	errorMessage += "The password must contain exactly one upper-case character";
+    	errorMessage += "Password must contain one upper-case character";
     }
     else if(password.contains(" ")) {
     	errorMessage += "The password must not contain any spaces";
     }
-    if(!errorMessage.isEmpty()) return errorMessage + ", the manager has unsuccessfully updated their password";
-    manager.setPassword(password);
+    if(!errorMessage.isEmpty()) {
+			return errorMessage + ", the manager has unsuccessfully updated their password";
+		}
+		manager.setPassword(password);
     return errorMessage;
   }
   
@@ -138,63 +140,83 @@ public class AssetPlusFeatureSet1Controller {
 	    	errorMessage += "The manager does not yet exist";
 	    }
 	    else if(email.equals("manager@ap.com")) {
-	    	errorMessage += "Only the manager can have this email";
+	    	errorMessage += "Email cannot be manager@ap.com";
 	    }
-	    else if(!(email.substring(email.length()-4).equals(".com"))) {
-	    	errorMessage += "The email must end in .com";
+			else if(email.isEmpty()){
+				errorMessage += "Email cannot be empty";
+			}
+	    else if(email.length()<4 || (!(email.substring(email.length()-4).equals(".com")))) {
+	    	errorMessage += "Invalid email";
 	    }
+			
+			else if(password.isEmpty()){
+				errorMessage += "Password cannot be empty";
+			}
 	    else if(email.contains(" ")) {
-	    	errorMessage += "The email must not contain any spaces";
+	    	errorMessage += "Email must not contain any spaces";
 	    }
 	    
 	    else if(!email.contains("@")){
-	    	errorMessage += "The email must contain at least one @";
+	    	errorMessage += "Invalid email";
+	    }
+			else if(email.substring(email.indexOf("@")+1).contains("@")){
+				errorMessage += "Invalid email";
+			}
+			else if (password.contains(" ")) {
+	    	errorMessage +="The password must not contain any spaces";
 	    }
 	    
-	    else if(password.equals("")) {
-	    	errorMessage += "The password must not be empty";
-	    }
-	    
-	    else if (password.contains(" ")) {
-	    	errorMessage +=" The password must not contain any spaces";
-	    }
 	    else if (isEmployee) {
+
 	    	if(email.length()<8) {
-	    		errorMessage += "The employee's email must at least have one character before ending with @ap.com";
-	    		
+	    		errorMessage += "Invalid email";
 	    	}
+
 	    	else if(!(email.substring(email.length()-7).equals("@ap.com"))) {
-	    		errorMessage += "The employee's email must end in @ap.com";
-	    		
-	    	}
-	    	if(!errorMessage.isEmpty()) return errorMessage + ", the employee has unsuccessfully been added";
+					if(email.contains("yahoo.com")||email.contains("hotmail.com")||email.contains("gmail.com")){
+						errorMessage += "Email domain must be @ap.com";
+					}
+					else{
+						errorMessage += "Invalid email";
+
+					}
+				}
+
+	    	if(!errorMessage.isEmpty()) return errorMessage;
 	    	for(Employee employee:assetPlus.getEmployees()) {
 	    		if (employee.getEmail().equals(email)) {
-	    			errorMessage += "This email is already linked to another employee's account";
-	    			break;
+	    			errorMessage += "Email already linked to an employee account";
+	    			return errorMessage;
 	    		}
 	    	}
-	    	Employee newEmployee = new Employee(email, password, name, phoneNumber, assetPlus);
+	    	Employee newEmployee = new Employee(email, name, password, phoneNumber, assetPlus);
 	    	assetPlus.addEmployee(newEmployee);
 	    	return errorMessage;
 	    }
 	    else {
-	    	if(email.length()<7) {
+				if(email.indexOf("@")==0){
+					errorMessage += "Invalid email";
+				}
+				else if(email.substring(email.length()-7).equals("@ap.com")) {
+	    		errorMessage += "Email domain cannot be @ap.com";
+	    	
+	    	}
+				else if(!(email.contains("yahoo.com")||email.contains("hotmail.com")||email.contains("gmail.com"))){
+						errorMessage += "Invalid email";
+					}
+	    	else if(email.length()<7) {
 	    		errorMessage += "The guest's email must at least have 7 characters";
 	    		
 	    	}
-	    	else if(email.substring(email.length()-7).equals("@ap.com")) {
-	    		errorMessage += "The guest's email must not end in @ap.com";
 	    	
-	    	}
-	    	if(!errorMessage.isEmpty()) return errorMessage + ", the guest has unsuccessfully been added";
+	    	if(!errorMessage.isEmpty()) return errorMessage;
 	    	for(Guest guest:assetPlus.getGuests()) {
 	    		if (guest.getEmail().equals(email)) {
-	    			errorMessage += "This email is already linked to another guest's account";
-	    			break;
+	    			errorMessage += "Email already linked to an guest account";
+	    			return errorMessage;
 	    		}
 	    	}
-	    	Guest newGuest = new Guest(email,password,name,phoneNumber,assetPlus);
+	    	Guest newGuest = new Guest(email,name, password,phoneNumber,assetPlus);
 	    	assetPlus.addGuest(newGuest);
 	    	return errorMessage;
 	    	
@@ -227,7 +249,7 @@ public class AssetPlusFeatureSet1Controller {
 	    errorMessage += "The manager does not yet exist";
 	  }
 	  else if(newPassword.equals("")) {
-	    errorMessage += "The password must not be empty";
+	    errorMessage += "Password cannot be empty";
 	  }
 	    
 	  else if (newPassword.contains(" ")) {
