@@ -30,19 +30,19 @@ public class AssetPlusFeatureSet3Controller {
         String ErrorMessage="";
 
         if(SpecificAsset.hasWithAssetNumber(assetNumber)){
-          ErrorMessage+="The asset already exists. ";
+          ErrorMessage+="The asset already exists";
         }
         if(!AssetType.hasWithName(assetTypeName)){
-          ErrorMessage+="The asset type does not exist. ";
+          ErrorMessage+="The asset type does not exist";
         }
         if(assetNumber < 1){
-          ErrorMessage+="The asset number shall not be less than 1. ";
+          ErrorMessage+="The asset number shall not be less than 1";
         }
         if(floorNumber < 0){
-          ErrorMessage+="The floor number shall not be less than 0. ";
+          ErrorMessage+="The floor number shall not be less than 0";
         }
         if(roomNumber < -1){
-          ErrorMessage+="The room number shall not be less than -1. ";
+          ErrorMessage+="The room number shall not be less than -1";
         }
         if(!ErrorMessage.equalsIgnoreCase("")){
           return ErrorMessage;
@@ -72,19 +72,19 @@ public class AssetPlusFeatureSet3Controller {
         String ErrorMessage="";
         
         if(!SpecificAsset.hasWithAssetNumber(assetNumber)){
-          ErrorMessage+="The asset does not exist. ";
+          ErrorMessage+="The asset does not exist";
         }
         if(!AssetType.hasWithName(newAssetTypeName)){
-          ErrorMessage+="The asset type does not exist. ";
+          ErrorMessage+="The asset type does not exist";
         }
         if(assetNumber < 1){
-          ErrorMessage+="The asset number shall not be less than 1. ";
+          ErrorMessage+="The asset number shall not be less than 1";
         }
         if(newFloorNumber < 0){
-          ErrorMessage+="The floor number shall not be less than 0. ";
+          ErrorMessage+="The floor number shall not be less than 0";
         }
         if(newRoomNumber < -1){
-          ErrorMessage+="The room number shall not be less than -1. ";
+          ErrorMessage+="The room number shall not be less than -1";
         }
         if(!ErrorMessage.equalsIgnoreCase("")){
           return ErrorMessage;
