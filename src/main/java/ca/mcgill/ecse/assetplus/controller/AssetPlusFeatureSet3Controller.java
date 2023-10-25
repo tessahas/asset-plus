@@ -99,7 +99,6 @@ public class AssetPlusFeatureSet3Controller {
 }
 
 
-
 /**
  * @author Luis Felipe Jarquin Romero
  * @param assetNumber The asset number of the specific asset to be deleted.
