@@ -34,7 +34,7 @@ public class AssetPlusFeatureSet4Controller {
         if (!User.hasWithEmail(email)) {
           errorMessage += "The ticket raiser does not exist";
         }
-        if (description == null || description == "") {
+        if (description == null || description.isEmpty()) {
           errorMessage += "Ticket description cannot be empty";
         }
         if (!errorMessage.isEmpty()) {
@@ -83,7 +83,7 @@ public class AssetPlusFeatureSet4Controller {
         if (!HotelStaff.hasWithEmail(newEmail)) {
           errorMessage += "The ticket raiser does not exist";
         }
-        if (newDescription == null) {
+        if (newDescription == null || newDescription.isEmpty()) {
           errorMessage += "The Description cannot be empty";
         }
         if (!SpecificAsset.hasWithAssetNumber(newAssetNumber) && newAssetNumber != -1) {
