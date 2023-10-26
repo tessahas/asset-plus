@@ -89,7 +89,7 @@ public class AssetPlusFeatureSet2Controller {
     }
 
     /* Check if the new name differs from the old name and there already exists an asset type with the new name, return coressponding error message. */
-    if (AssetType.hasWithName(newName) && (newName != oldName)) {
+    if (AssetType.hasWithName(newName) && !(newName.equals(oldName))) {
       return "The asset type already exists";
     }
 
