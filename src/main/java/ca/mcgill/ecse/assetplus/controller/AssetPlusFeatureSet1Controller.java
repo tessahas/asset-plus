@@ -212,7 +212,7 @@ public class AssetPlusFeatureSet1Controller {
 	    	if(!errorMessage.isEmpty()) return errorMessage;
 	    	for(Guest guest:assetPlus.getGuests()) {
 	    		if (guest.getEmail().equals(email)) {
-	    			errorMessage += "Email already linked to an guest account";
+	    			errorMessage += "Email already linked to a guest account";
 	    			return errorMessage;
 	    		}
 	    	}
