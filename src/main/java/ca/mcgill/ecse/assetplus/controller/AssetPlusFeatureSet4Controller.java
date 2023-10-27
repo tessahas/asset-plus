@@ -84,7 +84,7 @@ public class AssetPlusFeatureSet4Controller {
           errorMessage += "The ticket raiser does not exist";
         }
         if (newDescription == null || newDescription.isEmpty()) {
-          errorMessage += "The Description cannot be empty";
+          errorMessage += "Ticket description cannot be empty";
         }
         if (!SpecificAsset.hasWithAssetNumber(newAssetNumber) && newAssetNumber != -1) {
           errorMessage += "The asset does not exist";
