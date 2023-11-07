@@ -24,7 +24,7 @@ class MaintenanceTicket {
     }
 
     private void assignTo(HotelStaff hotelStaff) {
-        setTicketFixer(HotelStaff hotelStaff);
+        setTicketFixer(hotelStaff);
     }
     private void setPriorityLevel(PriorityLevel priorityLevel) {
         setPriority(priorityLevel);
@@ -34,7 +34,7 @@ class MaintenanceTicket {
     }
     private void setRequiresManagerApproval(boolean isRequired) {
         if (isRequired) {
-            setFixApprover(getManager());
+            setFixApprover(getAssetPlus().getManager());
         }
     }
   	private boolean requiresManagerApproval() {
