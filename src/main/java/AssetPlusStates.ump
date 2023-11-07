@@ -1,0 +1,43 @@
+class MaintenanceTicket {
+	ticketStatus {
+      Open {
+      	assign(HotelStaff ticketFixer, PriorityLevel priorityLevel, TimeEstimate timeEstimate, boolean isRequired) / {
+            assignTo(ticketFixer);
+            setPriorityLevel(priorityLevel);
+            setTimeEstimate(timeEstimate);
+            setRequiresManagerApproval(isRequired);
+        } -> Assigned;
+      }
+      Assigned {
+        startWork() -> InProgress;
+      }
+      InProgress {
+      	markAsResolved() [!requiresManagerApproval()] -> Closed;
+        markAsResolved() [requiresManagerApproval()] -> AwaitingApproval;
+      }
+      AwaitingApproval {
+      	approveWork() -> Closed;
+        disapproveWork() -> InProgress; // maintenance note action?
+      }
+      Closed {
+      }
+    }
+
+    private void assignTo(HotelStaff hotelStaff) {
+        setTicketFixer(HotelStaff hotelStaff);
+    }
+    private void setPriorityLevel(PriorityLevel priorityLevel) {
+        setPriority(priorityLevel);
+    }
+    private void setTimeEstimate(TimeEstimate timeEstimate) {
+        setTimeToResolve(timeEstimate);
+    }
+    private void setRequiresManagerApproval(boolean isRequired) {
+        if (isRequired) {
+            setFixApprover(getManager());
+        }
+    }
+  	private boolean requiresManagerApproval() {
+        return hasFixApprover();
+    }
+}
