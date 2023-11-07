@@ -1,11 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 43 "../../../../../AssetPlus.ump"
+// line 1 "../../../../../AssetPlusStates.ump"
+// line 45 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
 
@@ -32,6 +33,10 @@ public class MaintenanceTicket
   private String description;
   private TimeEstimate timeToResolve;
   private PriorityLevel priority;
+
+  //MaintenanceTicket State Machines
+  public enum TicketStatus { Open, Assigned, InProgress, AwaitingApproval, Closed }
+  private TicketStatus ticketStatus;
 
   //MaintenanceTicket Associations
   private List<MaintenanceNote> ticketNotes;
@@ -66,6 +71,7 @@ public class MaintenanceTicket
     {
       throw new RuntimeException("Unable to create raisedTicket due to ticketRaiser. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
+    setTicketStatus(TicketStatus.Open);
   }
 
   //------------------------
@@ -156,6 +162,127 @@ public class MaintenanceTicket
   public PriorityLevel getPriority()
   {
     return priority;
+  }
+
+  public String getTicketStatusFullName()
+  {
+    String answer = ticketStatus.toString();
+    return answer;
+  }
+
+  public TicketStatus getTicketStatus()
+  {
+    return ticketStatus;
+  }
+
+  public boolean assign(HotelStaff ticketFixer,PriorityLevel priorityLevel,TimeEstimate timeEstimate,boolean isRequired)
+  {
+    boolean wasEventProcessed = false;
+    
+    TicketStatus aTicketStatus = ticketStatus;
+    switch (aTicketStatus)
+    {
+      case Open:
+        // line 4 "../../../../../AssetPlusStates.ump"
+        assignTo(ticketFixer);
+            setPriorityLevel(priorityLevel);
+            setTimeEstimate(timeEstimate);
+            setRequiresManagerApproval(isRequired);
+        setTicketStatus(TicketStatus.Assigned);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean startWork()
+  {
+    boolean wasEventProcessed = false;
+    
+    TicketStatus aTicketStatus = ticketStatus;
+    switch (aTicketStatus)
+    {
+      case Assigned:
+        setTicketStatus(TicketStatus.InProgress);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean markAsResolved()
+  {
+    boolean wasEventProcessed = false;
+    
+    TicketStatus aTicketStatus = ticketStatus;
+    switch (aTicketStatus)
+    {
+      case InProgress:
+        if (!(requiresManagerApproval()))
+        {
+          setTicketStatus(TicketStatus.Closed);
+          wasEventProcessed = true;
+          break;
+        }
+        if (requiresManagerApproval())
+        {
+          setTicketStatus(TicketStatus.AwaitingApproval);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean approveWork()
+  {
+    boolean wasEventProcessed = false;
+    
+    TicketStatus aTicketStatus = ticketStatus;
+    switch (aTicketStatus)
+    {
+      case AwaitingApproval:
+        setTicketStatus(TicketStatus.Closed);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean disapproveWork()
+  {
+    boolean wasEventProcessed = false;
+    
+    TicketStatus aTicketStatus = ticketStatus;
+    switch (aTicketStatus)
+    {
+      case AwaitingApproval:
+        setTicketStatus(TicketStatus.InProgress);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  private void setTicketStatus(TicketStatus aTicketStatus)
+  {
+    ticketStatus = aTicketStatus;
   }
   /* Code from template association_GetMany */
   public MaintenanceNote getTicketNote(int index)
@@ -541,6 +668,33 @@ public class MaintenanceTicket
       this.fixApprover = null;
       placeholderFixApprover.removeTicketsForApproval(this);
     }
+  }
+
+  // line 27 "../../../../../AssetPlusStates.ump"
+   private void assignTo(HotelStaff hotelStaff){
+    setTicketFixer(hotelStaff);
+  }
+
+  // line 30 "../../../../../AssetPlusStates.ump"
+   private void setPriorityLevel(PriorityLevel priorityLevel){
+    setPriority(priorityLevel);
+  }
+
+  // line 33 "../../../../../AssetPlusStates.ump"
+   private void setTimeEstimate(TimeEstimate timeEstimate){
+    setTimeToResolve(timeEstimate);
+  }
+
+  // line 36 "../../../../../AssetPlusStates.ump"
+   private void setRequiresManagerApproval(boolean isRequired){
+    if (isRequired) {
+            setFixApprover(getAssetPlus().getManager());
+        }
+  }
+
+  // line 41 "../../../../../AssetPlusStates.ump"
+   private boolean requiresManagerApproval(){
+    return hasFixApprover();
   }
 
 
