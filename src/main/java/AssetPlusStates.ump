@@ -17,7 +17,7 @@ class MaintenanceTicket {
       }
       Resolved {
       	approveWork() -> Closed;
-        disapproveWork() -> InProgress; // maintenance note action?
+        disapproveWork(Date date, String reason) -> InProgress;
       }
       Closed {
       }
