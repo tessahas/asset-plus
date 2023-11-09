@@ -24,21 +24,20 @@ public class MaintenanceTicketsStepDefinitions {
     private List<TOMaintenanceTicket> tickets;
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step checks if the following employees exist in the system.
      * @author Luis Jarquin
-     * @param dataTable
+     * @param dataTable This is a table containing emails, names, passwords, and phone numbers associated to different employees
      */
     @Given("the following employees exist in the system")
-    public void the_following_employees_exist_in_the_system(
-            io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_following_employees_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+            List<Map<String, String>> rows = dataTable.asMaps();
+            for (var row: rows) {
+                String email = row.get("email");
+                String name = row.get("name");
+                String password = row.get("password");
+                String phoneNumber = row.get("phoneNumber");
+                new Employee(email, name, password, phoneNumber, assetPlus);
+            }
     }
 
     /**
@@ -128,21 +127,18 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step definition initializes the images is the system
      * @author Luis Jarquin
-     * @param dataTable
+     * @param dataTable This table contains the image URLs associated to different ticket IDs
      */
     @Given("the following ticket images exist in the system")
-    public void the_following_ticket_images_exist_in_the_system(
-            io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_following_ticket_images_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (var row : rows) {
+            String imageUrl = row.get("imageUrl");
+            int ticketId = Integer.parseInt(row.get("ticketId"));
+            new TicketImage(imageUrl, MaintenanceTicket.getWithId(ticketId));
+        }
     }
 
     /**
@@ -207,14 +203,14 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Sets the ticket status to approved
      * @author Luis Jarquin
-     * @param string
+     * @param string ticket ID of desired ticket
      */
     @When("the manager attempts to approve the ticket {string}")
     public void the_manager_attempts_to_approve_the_ticket(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        MaintenanceTicket toApprove = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
+        toApprove.approveWork();
     }
 
     /**
@@ -288,18 +284,24 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Verifies that the ticket in question has the appropriate estimated time, priority, and approval requirement
      * @author Luis Jarquin
-     * @param string
-     * @param string2
-     * @param string3
-     * @param string4
+     * @param string Ticket ID
+     * @param string2 Estimated time for ticket resolution
+     * @param string3 Priority level of the ticket
+     * @param string4 Approval is or is not required (boolean)
      */
     @Then("the ticket {string} shall have estimated time {string}, priority {string}, and requires approval {string}")
     public void the_ticket_shall_have_estimated_time_priority_and_requires_approval(String string,
-                                                                                    String string2, String string3, String string4) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    String string2, String string3, String string4) {
+        MaintenanceTicket timePriorityApprovalTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
+        Assert.assertEquals(string2, timePriorityApprovalTicket.getTimeToResolve().toString());
+        Assert.assertEquals(string3, timePriorityApprovalTicket.getPriority().toString());
+        if (timePriorityApprovalTicket.getTicketStatusFullName().equalsIgnoreCase("open")){
+            assertNull(timePriorityApprovalTicket.getFixApprover());
+        } else {
+            Assert.assertEquals(Boolean.parseBoolean(string4), timePriorityApprovalTicket.hasFixApprover());
+        }
     }
 
     /**
@@ -463,22 +465,20 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
-     * @author Luis Jarquin
-     * @param string
-     * @param dataTable
+     * Verifies that the ticket has the following images
+     * @author Luis Jarquin, Jerome Desrosiers
+     * @param string ticket ID
+     * @param dataTable Contains image URLs of corresponding ticket ID
      */
     @Then("the ticket with id {string} shall have the following images")
-    public void the_ticket_with_id_shall_have_the_following_images(String string,
-                                                                   io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_ticket_with_id_shall_have_the_following_images(String string, io.cucumber.datatable.DataTable dataTable) {
+        
+        MaintenanceTicket hasTheseImages = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // gets the maintenance ticket using string parameter
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (var row : rows){
+            assertTrue(hasTheseImages.getTicketImages().contains(row.get("imageUrl")));
+        }
+
     }
 
     /**
