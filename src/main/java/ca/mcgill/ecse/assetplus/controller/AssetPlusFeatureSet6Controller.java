@@ -35,6 +35,7 @@ public class AssetPlusFeatureSet6Controller {
    * in the AssetPlus System.
    */
 
+  
   public static List<TOMaintenanceTicket> getTickets() {
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
@@ -77,7 +78,9 @@ public class AssetPlusFeatureSet6Controller {
           purchaseDate = null;
         }
 
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
+        //TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, String aRaisedByEmail, String aStatus, String aFixedByEmail, String aTimeToResolve, String aPriority, boolean aApprovalRequired, String aAssetName, int aExpectLifeSpanInDays, Date aPurchaseDate, int aFloorNumber, int aRoomNumber, List<String> aImageURLs, TOMaintenanceNote... allNotes)
+
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getTicketStatusFullName(), ticket.getTicketFixer().getEmail(), ticket.getTimeToResolve().toString(), ticket.getPriority().toString(), ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
