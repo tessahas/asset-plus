@@ -6,7 +6,8 @@ import java.util.*;
 import java.sql.Date;
 
 // line 1 "../../../../../AssetPlusStates.ump"
-// line 45 "../../../../../AssetPlus.ump"
+// line 19 "../../../../../AssetPlusPersistence.ump"
+// line 46 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
 
@@ -35,7 +36,7 @@ public class MaintenanceTicket
   private PriorityLevel priority;
 
   //MaintenanceTicket State Machines
-  public enum TicketStatus { Open, Assigned, InProgress, AwaitingApproval, Closed }
+  public enum TicketStatus { Open, Assigned, InProgress, Resolved, Closed }
   private TicketStatus ticketStatus;
 
   //MaintenanceTicket Associations
@@ -232,7 +233,7 @@ public class MaintenanceTicket
         }
         if (requiresManagerApproval())
         {
-          setTicketStatus(TicketStatus.AwaitingApproval);
+          setTicketStatus(TicketStatus.Resolved);
           wasEventProcessed = true;
           break;
         }
@@ -251,7 +252,7 @@ public class MaintenanceTicket
     TicketStatus aTicketStatus = ticketStatus;
     switch (aTicketStatus)
     {
-      case AwaitingApproval:
+      case Resolved:
         setTicketStatus(TicketStatus.Closed);
         wasEventProcessed = true;
         break;
@@ -269,7 +270,7 @@ public class MaintenanceTicket
     TicketStatus aTicketStatus = ticketStatus;
     switch (aTicketStatus)
     {
-      case AwaitingApproval:
+      case Resolved:
         setTicketStatus(TicketStatus.InProgress);
         wasEventProcessed = true;
         break;
@@ -695,6 +696,14 @@ public class MaintenanceTicket
   // line 41 "../../../../../AssetPlusStates.ump"
    private boolean requiresManagerApproval(){
     return hasFixApprover();
+  }
+
+  // line 21 "../../../../../AssetPlusPersistence.ump"
+   public static  void reinitializeUniqueId(List<MaintenanceTicket> tickets){
+    ticketsById.clear();
+        for (var ticket: tickets) {
+            ticketsById.put(ticket.getId(), ticket);
+        }
   }
 
 

@@ -5,7 +5,8 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 15 "../../../../../AssetPlus.ump"
+// line 10 "../../../../../AssetPlusPersistence.ump"
+// line 16 "../../../../../AssetPlus.ump"
 public abstract class User
 {
 
@@ -231,6 +232,14 @@ public abstract class User
       MaintenanceTicket aRaisedTicket = raisedTickets.get(i - 1);
       aRaisedTicket.delete();
     }
+  }
+
+  // line 12 "../../../../../AssetPlusPersistence.ump"
+   public static  void reinitializeUniqueEmail(List<User> users){
+    usersByEmail.clear();
+        for (var user: users) {
+            usersByEmail.put(user.getEmail(), user);
+        }
   }
 
 

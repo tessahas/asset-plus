@@ -13,9 +13,9 @@ class MaintenanceTicket {
       }
       InProgress {
       	markAsResolved() [!requiresManagerApproval()] -> Closed;
-        markAsResolved() [requiresManagerApproval()] -> AwaitingApproval;
+        markAsResolved() [requiresManagerApproval()] -> Resolved;
       }
-      AwaitingApproval {
+      Resolved {
       	approveWork() -> Closed;
         disapproveWork() -> InProgress; // maintenance note action?
       }
