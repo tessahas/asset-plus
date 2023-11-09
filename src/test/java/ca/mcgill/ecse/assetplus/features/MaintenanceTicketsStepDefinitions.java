@@ -16,7 +16,9 @@ import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TicketStatus;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,21 +61,19 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Initializes asset types with the given name and expected life span.
      * @author Kevin Li
      * @param dataTable
      */
     @Given("the following asset types exist in the system")
-    public void the_following_asset_types_exist_in_the_system(
-            io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_following_asset_types_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, Object>> rows = dataTable.asMaps(String.class, Object.class);
+
+        for (Map<String, Object> row : rows) {
+            String name = (row.get("name")).toString();
+            int expectedLifeSpan = Integer.parseInt(row.get("expectedLifeSpan").toString());
+            assetPlus.addAssetType(name, expectedLifeSpan);
+        }
     }
 
     /**
@@ -195,8 +195,8 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Given("ticket {string} is marked as {string}")
     public void ticket_is_marked_as(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        MaintenanceTicket ticket = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
+        ticket.getTicketStatusFullName();
     }
 
     /**
@@ -258,17 +258,16 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step attempts to disapprove work on a ticket and set its status as InProgress.
      * @author Kevin Li
      * @param string
      * @param string2
      * @param string3
      */
     @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
-    public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string,
-                                                                                      String string2, String string3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string, String string2, String string3) {
+        MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
+        toDisapprove.disapproveWork(string2, string3);
     }
 
     /**
@@ -350,14 +349,15 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step checks that the number of tickets in the system is the expected number.
      * @author Kevin Li
      * @param string
      */
     @Then("the number of tickets in the system shall be {string}")
     public void the_number_of_tickets_in_the_system_shall_be(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        int expectedNumberOfTickets = Integer.parseInt(string);
+        int actualNumberOfTickets = assetPlus.numberOfMaintenanceTickets();
+        Assertions.assertEquals(expectedNumberOfTickets, actualNumberOfTickets);
     }
 
     /**

@@ -1,44 +1,48 @@
 class AssetPlus {
     public void reinitialize() {
-        User.reinitializeUniqueEmail(getUsers());
-        MaintenanceTicket.reinitializeUniqueId(getTickets());
+        User.reinitializeUniqueEmail(getManager(), getEmployees(), getGuests());
+        MaintenanceTicket.reinitializeUniqueId(getMaintenanceTickets());
         SpecificAsset.reinitializeUniqueAssetNumber(getSpecificAssets());
         AssetType.reinitializeUniqueName(getAssetTypes());
     }
 }
 
 class User {
-    public static void reinitializeUniqueEmail(List<User> users) {
+    public static void reinitializeUniqueEmail(Manager manager, List<Employee> employees, List<Guest> guests) {
         usersByEmail.clear();
-        for (var user: users) {
-            usersByEmail.put(user.getEmail(), user);
+        usersByEmail.put(manager.getEmail(), manager);
+        for (var employee: employees) {
+            usersByEmail.put(employee.getEmail(), employee);
+        }
+        for (var guest: guests) {
+            usersByEmail.put(guest.getEmail(), guest);
         }
     }
 }
 
 class MaintenanceTicket {
     public static void reinitializeUniqueId(List<MaintenanceTicket> tickets) {
-        ticketsById.clear();
+        maintenanceticketsById.clear();
         for (var ticket: tickets) {
-            ticketsById.put(ticket.getId(), ticket);
+            maintenanceticketsById.put(ticket.getId(), ticket);
         }
     }
 }
 
 class SpecificAsset {
     public static void reinitializeUniqueAssetNumber(List<SpecificAsset> specificAssets) {
-        specificAssetsByAssetNumber.clear();
+        specificassetsByAssetNumber.clear();
         for (var specificAsset: specificAssets) {
-            specificAssetsByAssetNumber.put(specificAsset.getAssetNumber(), specificAsset);
+            specificassetsByAssetNumber.put(specificAsset.getAssetNumber(), specificAsset);
         }
     }
 }
 
 class AssetType {
     public static void reinitializeUniqueName(List<AssetType> assetTypes) {
-        assetTypesByName.clear();
+        assettypesByName.clear();
         for (var assetType: assetTypes) {
-            assetTypesByName.put(assetType.getName(), assetType);
+            assettypesByName.put(assetType.getName(), assetType);
         }
     }
 }
