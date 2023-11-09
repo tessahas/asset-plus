@@ -43,7 +43,42 @@ public class AssetPlusAPI {
     return errorMessage;
   }
 
+  /**
+   * <h1>completeTicketWork</h1>
+   * This method is called whenever the hotel staff tries to complete work on the maintenance ticket toComplete.
+   *
+   * @param toComplete This is the MaintenanceTicket object which's status will be changed to "Resolved" if approval is required and "Closed" otherwise.
+   * @return String - This method returns a string containing an error message gathered during execution, if this returned string is empty, the status of toStart maintenance ticket was successfully changed to "Resolved" or "Closed" depending on whether or not approval is required.
+   * 
+   * @author Luis Jarquin, Jerome Desrosiers
+   */
   public static String completeTicketWork(MaintenanceTicket toComplete){
+    String errorMessage = "";
+    
+    if (!MaintenanceTicket.hasWithId(toComplete.getId())) {
+      errorMessage += "Maintenance ticket does not exist.";
+    }
+    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("open")) {
+      errorMessage += "Cannot complete a maintenance ticket which is open.";
+    }
+    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("assigned")) {
+      errorMessage += "Cannot complete a maintenance ticket which is assigned.";
+    }
+    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("closed")) {
+      errorMessage += "The maintenance ticket is already closed.";
+    }
+    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
+      errorMessage += "The maintenance ticket is already resolved.";
+    }
+
+    try {
+      toComplete.markAsResolved();
+    }
+    catch(Exception e) {
+      errorMessage += "Unknown exception";
+    }
+
+    return errorMessage;
   }
   
   public static String approveTicketWork(MaintenanceTicket toApprove){
