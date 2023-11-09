@@ -2,6 +2,47 @@ package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
 
 public class AssetPlusAPI {
+  public static String assignTicket(MaintenanceTicket toAssign){
+  }
+
+  /**
+   * METHOD DEF
+   * @author Jerome Desrosiers
+   * @param toStart
+   * @return
+   */
+  public static String startTicketWork(MaintenanceTicket toStart){
+    String errorMessage = "";
+    
+    if (!MaintenanceTicket.hasWithId(toStart.getId())) {
+      errorMessage += "Maintenance ticket does not exist.";
+    }
+    if (toStart.getTicketStatusFullName().equalsIgnoreCase("open")) {
+      errorMessage += "Cannot start a maintenance ticket which is open.";
+    }
+    if (toStart.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
+      errorMessage += "Cannot start a maintenance ticket which is resolved.";
+    }
+    if (toStart.getTicketStatusFullName().equalsIgnoreCase("closed")) {
+      errorMessage += "Cannot start a maintenance ticket which is closed.";
+    }
+    if (toStart.getTicketStatusFullName().equalsIgnoreCase("inprogress")) {
+      errorMessage += "The maintenance ticket is already in progress.";
+    }
+
+    try {
+      toStart.startWork();
+    }
+    catch(Exception e) {
+      errorMessage += "Unknown exception";
+    }
+
+    return errorMessage;
+  }
+
+  public static String completeTicketWork(MaintenanceTicket toComplete){
+  }
+  
   public static String approveTicketWork(MaintenanceTicket toApprove){
     String errorMessage = "";
     if (!MaintenanceTicket.hasWithId(toApprove.getId())) {
