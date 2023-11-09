@@ -5,13 +5,17 @@ import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.sl.In;
 import java.util.Map;
+import java.util.PrimitiveIterator;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 import org.junit.Assert;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -142,16 +146,45 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step initializes the maintenace ticket with ticket iD string to the state string2 and if string3 is "True", assigns a ticket approver to the ticket.
      * @author Jerome Desrosiers
-     * @param string
-     * @param string2
-     * @param string3
+     * @param string This string contains the ticket iD of the desired maintenance ticket.
+     * @param string2 This string contains the state of the maintenance ticket.
+     * @param string3 This string contains either "True" or "False" and is used to determine if the maintenance ticket needs manager approval.
      */
     @Given("ticket {string} is marked as {string} with requires approval {string}")
     public void ticket_is_marked_as_with_requires_approval(String string, String string2, String string3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        MaintenanceTicket markedTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Getting the maintenance ticket from the input ticket iD in string.
+
+        // General values (HotelStaff, PriorityLevel, TimeEstimate)
+        HotelStaff ticketFixer = (HotelStaff) assetPlus.getManager(); // Here we chose the manager as the assigned hotel staff to a ticket as there's always a manager but we are unaware of the existing employees and it is possible that no employees other than the manager exists.
+        PriorityLevel priorityLevel = PriorityLevel.Low; // Initialise at lowest possible value.
+        TimeEstimate timeEstimate = TimeEstimate.LessThanADay; // Initialise at lowest possible value.
+
+        // If string3 is "true", the maintenance ticket requires manager approval.
+        if (string3.equalsIgnoreCase("true")) {
+            markedTicket.setFixApprover(assetPlus.getManager());
+        }
+
+        // Set the state of the maintenance ticket according to the state stored in string2.
+        // Note, if string2 is "Open", nothing happens.
+        if (string2.equalsIgnoreCase("assigned")) {
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+        }
+        else if (string2.equalsIgnoreCase("inprogress")) {
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            markedTicket.startWork();
+        }
+        else if (string2.equalsIgnoreCase("resolved")) {
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, true);
+            markedTicket.startWork();
+            markedTicket.markAsResolved();
+        }
+        else if (string2.equalsIgnoreCase("closed")) {
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            markedTicket.startWork();
+            markedTicket.markAsResolved();
+        }
     }
 
     /**
