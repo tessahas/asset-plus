@@ -77,7 +77,7 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Initializes assets each with a specific assetNumber, floorNumber, roomNumber, purchaseDate, and type for future testing.
      * @author Tessa Hason
      * @param dataTable
      */
@@ -175,7 +175,7 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Initializes the tickets field
      * @author Tessa Hason
      */
     @When("the manager attempts to view all maintenance tickets in the system")
@@ -247,14 +247,14 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Checks if the ticket in question has expected status expectedStatus.
      * @author Tessa Hason
-     * @param string
-     * @param string2
+     * @param givenTicketID
+     * @param expectedStatus
      */
-    @Then("the ticket {string} shall be marked as {string}")
-    public void the_ticket_shall_be_marked_as(String string, String string2) {
-        int ticketID = Integer.parseInt(string);
+    @Then("the ticket {givenTicketID} shall be marked as {expectedStatus}")
+    public void the_ticket_shall_be_marked_as(String givenTicketID, String expectedStatus) {
+        int ticketID = Integer.parseInt(givenTicketID);
 
         TOMaintenanceTicket ticketInQuestion = null;
         for (TOMaintenanceTicket ticket : tickets) { //check all tickets for the ticket in question with the specific ticketID
@@ -264,9 +264,9 @@ public class MaintenanceTicketsStepDefinitions {
         }
 
         assertNotNull(ticketInQuestion);
-        
+
         //expected, actual
-        assertEquals(string2, ticketInQuestion.getStatus());
+        assertEquals(expectedStatus, ticketInQuestion.getStatus());
     }
 
     /**
@@ -330,7 +330,7 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Checks if the maintenance tickets are present in the system. Checks if they have all of the same features (ie ticketID, raisedByEmail, etc). 
      * @author Tessa Hason
      * @param dataTable
      */
@@ -400,6 +400,38 @@ public class MaintenanceTicketsStepDefinitions {
             }
             Assert.assertEquals(roomNumber, currentTicket.getRoomNumber());
 
+            //check if status is the same
+
+            String status = row.get("status");
+            Assert.assertEquals(status, currentTicket.getStatus());
+
+
+            //check if fixedByEmail is the same
+
+            String fixedByEmail = row.get("fixedByEmail");
+            Assert.assertEquals(fixedByEmail, currentTicket.getFixedByEmail());
+
+            //check if time to resolve is the same
+            String timeToResolve = row.get("timeToResolve");
+            Assert.assertEquals(timeToResolve, currentTicket.getTimeToResolve());
+
+            //check if priority to resolve is the same
+
+            String priority = row.get("priority");
+            Assert.assertEquals(priority, currentTicket.getPriority());
+
+            String approvalRequiredString = row.get("approvalRequired");
+            boolean approvalRequired;
+            if (approvalRequiredString.equals("true")){
+                approvalRequired = (currentTicket.getApprovalRequired() == true);
+                Assert.assertTrue(approvalRequired);
+            } else if (approvalRequiredString.equals("false")){
+                approvalRequired = (currentTicket.getApprovalRequired() == false);
+                Assert.assertTrue(approvalRequired);
+            } else{
+                Assert.assertNull(currentTicket.getApprovalRequired());
+            }
+            
             //increment i
             i++;
         }
