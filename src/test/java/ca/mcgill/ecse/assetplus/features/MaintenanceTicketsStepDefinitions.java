@@ -41,21 +41,17 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step initializes the manager account with the email and password provided in the dataTable.
      * @author Jerome Desrosiers
-     * @param dataTable
+     * @param dataTable This is a table containing the email and password that will be linked to the manager account.
      */
     @Given("the following manager exists in the system")
-    public void the_following_manager_exists_in_the_system(
-            io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_following_manager_exists_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> rows = dataTable.asMaps(); // Gets data from the given dataTable
+
+        for (var row : rows) { // Iterating through the rows of the dataTable (should only be one here)
+            new Manager(row.get("email"), "", row.get("password"), "", assetPlus);
+        }
     }
 
     /**
@@ -156,8 +152,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param string3
      */
     @Given("ticket {string} is marked as {string} with requires approval {string}")
-    public void ticket_is_marked_as_with_requires_approval(String string, String string2,
-                                                           String string3) {
+    public void ticket_is_marked_as_with_requires_approval(String string, String string2, String string3) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
@@ -222,14 +217,14 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step sets the ticket's status as Closed.
      * @author Jerome Desrosiers
-     * @param string
+     * @param string This is a string containing the ticket iD of the ticket to mark as Closed.
      */
     @When("the hotel staff attempts to complete the ticket {string}")
     public void the_hotel_staff_attempts_to_complete_the_ticket(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        MaintenanceTicket toComplete = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Getting the maintenance ticket from the input ticket iD in string.
+        toComplete.markAsResolved(); // Setting the ticket status to Closed.
     }
 
     /**
@@ -307,15 +302,28 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step makes sure that the assigned ticket is assigned to the right employee.
      * @author Jerome Desrosiers
-     * @param string
-     * @param string2
+     * @param string This string contains the ticket iD of the ticket that should be assigned.
+     * @param string2 This string contains the employee email of the employee the ticket should be assigned to.
      */
     @Then("the ticket {string} shall be assigned to {string}")
     public void the_ticket_shall_be_assigned_to(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        int ticketID = Integer.parseInt(string); // Gets the ticket's iD from the string.
+
+        TOMaintenanceTicket ticketInQuestion = null;
+        for (TOMaintenanceTicket ticket : tickets) { // Check all tickets for the ticket in question with the specific ticketID specified in string.
+            if (ticketID == ticket.getId()) {
+                ticketInQuestion = ticket; // Once found, assign it to a TOMaintenanceTicket object and get out of the search loop.
+                break;
+            }
+        }
+
+        // Makes sure the ticket exists and was found by the above code.
+        assertNotNull(ticketInQuestion);
+
+        // Expected vs actual employee emails.
+        assertEquals(string2, ticketInQuestion.getFixedByEmail());
     }
 
     /**
@@ -486,13 +494,26 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step makes sure that the ticket with a specific id does not have any images.
      * @author Jerome Desrosiers
-     * @param string
+     * @param string This string contains the ticket iD of the ticket that should not have any images.
      */
     @Then("the ticket with id {string} shall have no images")
     public void the_ticket_with_id_shall_have_no_images(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+         int ticketID = Integer.parseInt(string); // Gets the ticket's iD from the string.
+
+        TOMaintenanceTicket ticketInQuestion = null;
+        for (TOMaintenanceTicket ticket : tickets) { // Check all tickets for the ticket in question with the specific ticketID specified in string.
+            if (ticketID == ticket.getId()) {
+                ticketInQuestion = ticket; // Once found, assign it to a TOMaintenanceTicket object and get out of the search loop.
+                break;
+            }
+        }
+
+        // Makes sure the ticket exists and was found by the above code.
+        assertNotNull(ticketInQuestion);
+
+        // Expected vs actual number of images associated with the ticket.
+        assertEquals(0, ticketInQuestion.getImageURLs().size());
     }
 }
