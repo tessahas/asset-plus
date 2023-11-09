@@ -13,7 +13,8 @@ import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import org.junit.Assert;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -309,21 +310,8 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket {string} shall be assigned to {string}")
     public void the_ticket_shall_be_assigned_to(String string, String string2) {
-        int ticketID = Integer.parseInt(string); // Gets the ticket's iD from the string.
-
-        TOMaintenanceTicket ticketInQuestion = null;
-        for (TOMaintenanceTicket ticket : tickets) { // Check all tickets for the ticket in question with the specific ticketID specified in string.
-            if (ticketID == ticket.getId()) {
-                ticketInQuestion = ticket; // Once found, assign it to a TOMaintenanceTicket object and get out of the search loop.
-                break;
-            }
-        }
-
-        // Makes sure the ticket exists and was found by the above code.
-        assertNotNull(ticketInQuestion);
-
-        // Expected vs actual employee emails.
-        assertEquals(string2, ticketInQuestion.getFixedByEmail());
+        MaintenanceTicket isAssigned = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Gets the desired ticket using the ticket iD stored in string. 
+        assertEquals(string2, isAssigned.getTicketFixer().getEmail());
     }
 
     /**
@@ -500,20 +488,7 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket with id {string} shall have no images")
     public void the_ticket_with_id_shall_have_no_images(String string) {
-         int ticketID = Integer.parseInt(string); // Gets the ticket's iD from the string.
-
-        TOMaintenanceTicket ticketInQuestion = null;
-        for (TOMaintenanceTicket ticket : tickets) { // Check all tickets for the ticket in question with the specific ticketID specified in string.
-            if (ticketID == ticket.getId()) {
-                ticketInQuestion = ticket; // Once found, assign it to a TOMaintenanceTicket object and get out of the search loop.
-                break;
-            }
-        }
-
-        // Makes sure the ticket exists and was found by the above code.
-        assertNotNull(ticketInQuestion);
-
-        // Expected vs actual number of images associated with the ticket.
-        assertEquals(0, ticketInQuestion.getImageURLs().size());
+        MaintenanceTicket noImages = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Gets desired maintenance ticket using the ticket iD stored in string
+        assertFalse(noImages.hasTicketImages()); // Verifies that the maintenance ticket has no associated images.
     }
 }
