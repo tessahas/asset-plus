@@ -5,7 +5,7 @@ import java.util.List;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 import java.sql.Date;
-import ca.mcgill.eces.assetplus.persistence.AssetPlusPersistence;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 
 public class AssetPlusAPI {
