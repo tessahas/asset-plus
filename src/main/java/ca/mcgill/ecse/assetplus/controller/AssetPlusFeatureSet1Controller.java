@@ -114,7 +114,15 @@ public class AssetPlusFeatureSet1Controller {
     if(!errorMessage.isEmpty()) {
 			return errorMessage + ", the manager has unsuccessfully updated their password";
 		}
-		manager.setPassword(password);
+	  try {
+		  manager.setPassword(password);
+    AssetPlusPersistence.save();
+}
+catch(Exception e) {
+  errorMessage += "Unknown exception";
+}
+	  
+		
     return errorMessage;
   }
   
@@ -189,8 +197,17 @@ public class AssetPlusFeatureSet1Controller {
 	    			return errorMessage;
 	    		}
 	    	}
-	    	Employee newEmployee = new Employee(email, name, password, phoneNumber, assetPlus);
+		try {
+			Employee newEmployee = new Employee(email, name, password, phoneNumber, assetPlus);
 	    	assetPlus.addEmployee(newEmployee);
+		    AssetPlusPersistence.save();
+		}
+		catch(Exception e) {
+		  errorMessage += "Unknown exception";
+		}
+  			
+		    
+	    	
 	    	return errorMessage;
 	    }
 	    else {
@@ -216,8 +233,16 @@ public class AssetPlusFeatureSet1Controller {
 	    			return errorMessage;
 	    		}
 	    	}
-	    	Guest newGuest = new Guest(email,name, password,phoneNumber,assetPlus);
+	 try {
+		 Guest newGuest = new Guest(email,name, password,phoneNumber,assetPlus);
 	    	assetPlus.addGuest(newGuest);
+		    AssetPlusPersistence.save();
+		}
+		catch(Exception e) {
+		  errorMessage += "Unknown exception";
+		}
+		    
+	    	
 	    	return errorMessage;
 	    	
 	    }
@@ -260,9 +285,16 @@ public class AssetPlusFeatureSet1Controller {
 	  if(email.substring(email.length()-7).equals("@ap.com")) {
 		  for(Employee employee:assetPlus.getEmployees()) {
 			  if (employee.getEmail().equals(email)) {
-				  employee.setPassword(newPassword);
+				  try {
+					  employee.setPassword(newPassword);
 				  employee.setName(newName);
 				  employee.setPhoneNumber(newPhoneNumber);
+				    AssetPlusPersistence.save();
+				}
+				catch(Exception e) {
+				  errorMessage += "Unknown exception";
+				}
+				  
 				  return errorMessage;
 			  }
 			  errorMessage += "This employee does not exist";
@@ -272,9 +304,17 @@ public class AssetPlusFeatureSet1Controller {
 	  else{
 		  for(Guest guest:assetPlus.getGuests()) {
 			  if (guest.getEmail().equals(email)) {
-				  guest.setPassword(newPassword);
+				  try {
+					  guest.setPassword(newPassword);
 				  guest.setName(newName);
 				  guest.setPhoneNumber(newPhoneNumber);
+				    AssetPlusPersistence.save();
+				}
+				catch(Exception e) {
+				  errorMessage += "Unknown exception";
+				}
+  	
+		
 				  return errorMessage;
 			  }
 			  errorMessage += "This guest does not exist";
