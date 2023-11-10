@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
@@ -635,8 +635,8 @@ public class AssetPlus
 
   // line 3 "../../../../../AssetPlusPersistence.ump"
    public void reinitialize(){
-    User.reinitializeUniqueEmail(getUsers());
-        MaintenanceTicket.reinitializeUniqueId(getTickets());
+    User.reinitializeUniqueEmail(getManager(), getEmployees(), getGuests());
+        MaintenanceTicket.reinitializeUniqueId(getMaintenanceTickets());
         SpecificAsset.reinitializeUniqueAssetNumber(getSpecificAssets());
         AssetType.reinitializeUniqueName(getAssetTypes());
   }

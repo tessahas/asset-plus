@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 37 "../../../../../AssetPlusPersistence.ump"
+// line 41 "../../../../../AssetPlusPersistence.ump"
 // line 81 "../../../../../AssetPlus.ump"
 public class AssetType
 {
@@ -240,11 +240,11 @@ public class AssetType
     }
   }
 
-  // line 39 "../../../../../AssetPlusPersistence.ump"
+  // line 43 "../../../../../AssetPlusPersistence.ump"
    public static  void reinitializeUniqueName(List<AssetType> assetTypes){
-    assetTypesByName.clear();
+    assettypesByName.clear();
         for (var assetType: assetTypes) {
-            assetTypesByName.put(assetType.getName(), assetType);
+            assettypesByName.put(assetType.getName(), assetType);
         }
   }
 

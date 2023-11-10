@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
 // line 1 "../../../../../AssetPlusStates.ump"
-// line 19 "../../../../../AssetPlusPersistence.ump"
+// line 23 "../../../../../AssetPlusPersistence.ump"
 // line 46 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
@@ -263,7 +263,7 @@ public class MaintenanceTicket
     return wasEventProcessed;
   }
 
-  public boolean disapproveWork()
+  public boolean disapproveWork(Date date,String reason)
   {
     boolean wasEventProcessed = false;
     
@@ -698,11 +698,11 @@ public class MaintenanceTicket
     return hasFixApprover();
   }
 
-  // line 21 "../../../../../AssetPlusPersistence.ump"
+  // line 25 "../../../../../AssetPlusPersistence.ump"
    public static  void reinitializeUniqueId(List<MaintenanceTicket> tickets){
-    ticketsById.clear();
+    maintenanceticketsById.clear();
         for (var ticket: tickets) {
-            ticketsById.put(ticket.getId(), ticket);
+            maintenanceticketsById.put(ticket.getId(), ticket);
         }
   }
 

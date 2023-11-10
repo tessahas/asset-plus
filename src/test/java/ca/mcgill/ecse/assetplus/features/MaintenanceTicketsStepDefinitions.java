@@ -496,7 +496,6 @@ public class MaintenanceTicketsStepDefinitions {
       MaintenanceTicket noNotes = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
       Assert.assertEquals(0, noNotes.numberOfTicketNotes());
     }
-    }
 
     /**
      * Verifies that the ticket has the following images
