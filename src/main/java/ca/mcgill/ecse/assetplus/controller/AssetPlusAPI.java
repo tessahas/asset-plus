@@ -201,13 +201,13 @@ public class AssetPlusAPI {
       errorMessage += "Cannot approve a maintenance ticket which is open.";
     }
     else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("Assigned")) {
-      errorMessage += "Cannot approve a maintenance ticket which is open.";
+      errorMessage += "Cannot approve a maintenance ticket which is assigned.";
     }
     else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("Closed")) {
-      errorMessage += "Cannot approve a maintenance ticket which is open.";
+      errorMessage += "The maintenance ticket is already closed.";
     }
     else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("InProgress")) {
-      errorMessage += "Cannot approve a maintenance ticket which is open.";
+      errorMessage += "Cannot approve a maintenance ticket which is is progress.";
     }
     try {
       toApprove.approveWork();
