@@ -5,6 +5,7 @@ import java.util.List;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 import java.sql.Date;
+import ca.mcgill.eces.assetplus.persistence.AssetPlusPersistence;
 
 
 public class AssetPlusAPI {
@@ -125,6 +126,7 @@ public class AssetPlusAPI {
 
     try {
       toStart.startWork();
+      AssetPlusPersistence.save();
     }
     catch(Exception e) {
       errorMessage += "Unknown exception";
@@ -163,6 +165,7 @@ public class AssetPlusAPI {
 
     try {
       toComplete.markAsResolved();
+      AssetPlusPersistence.save();
     }
     catch(Exception e) {
       errorMessage += "Unknown exception";
@@ -195,6 +198,7 @@ public class AssetPlusAPI {
     }
     try {
       toApprove.approveWork();
+      AssetPlusPersistence.save();
     }
     catch(Exception e) {
       errorMessage += "Some unknown error.";
@@ -232,6 +236,7 @@ public class AssetPlusAPI {
     try {
       toDisapprove.disapproveWork(date, reason);
       MaintenanceNote note = new MaintenanceNote(date, reason, toDisapprove, toDisapprove.getAssetPlus().getManager());
+      AssetPlusPersistence.save();
     }
     catch(Exception e) {
       errorMessage += "Some unknown error.";
