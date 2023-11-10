@@ -1,7 +1,7 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import java.sql.Date;
 
 /** <h1>AssetPlusFeature4Controller</h1>
@@ -48,6 +48,7 @@ public class AssetPlusFeatureSet4Controller {
           else if (assetNumber > 0){
             newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
         }
+        AssetPlusPersistence.save();
       
       }
       catch (Exception e){
@@ -92,17 +93,22 @@ public class AssetPlusFeatureSet4Controller {
         if (!errorMessage.isEmpty()) {
           return errorMessage;
         }
-        MaintenanceTicket ticketToEdit = MaintenanceTicket.getWithId(id);
-        ticketToEdit.setRaisedOnDate(newRaisedOnDate);
-        ticketToEdit.setDescription(newDescription);
-        ticketToEdit.setTicketRaiser(User.getWithEmail(newEmail));
-        if (newAssetNumber > 0){
-        ticketToEdit.setAsset(SpecificAsset.getWithAssetNumber(newAssetNumber));
+        try {
+          MaintenanceTicket ticketToEdit = MaintenanceTicket.getWithId(id);
+          ticketToEdit.setRaisedOnDate(newRaisedOnDate);
+          ticketToEdit.setDescription(newDescription);
+          ticketToEdit.setTicketRaiser(User.getWithEmail(newEmail));
+          if (newAssetNumber > 0){
+          ticketToEdit.setAsset(SpecificAsset.getWithAssetNumber(newAssetNumber));
+          }
+          else if (newAssetNumber == -1) {
+            ticketToEdit.setAsset(null);
+          }
+          AssetPlusPersistence.save();
         }
-        else if (newAssetNumber == -1) {
-          ticketToEdit.setAsset(null);
+        catch (RuntimeException e) {
+          return e.getMessage();
         }
-
 
         return errorMessage;
     }
@@ -114,9 +120,12 @@ public class AssetPlusFeatureSet4Controller {
    * If the id given does not have a corresponding ticket, then nothing happens.
    */
   public static void deleteMaintenanceTicket(int id) {
-
-    if (MaintenanceTicket.hasWithId(id)) {
-        MaintenanceTicket.getWithId(id).delete();
+    try {
+      if (MaintenanceTicket.hasWithId(id)) {
+          MaintenanceTicket.getWithId(id).delete(); 
+      }
+      AssetPlusPersistence.save();
     }
+    catch (RuntimeException e) {}
   }
 }
