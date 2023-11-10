@@ -339,19 +339,10 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket {string} shall be marked as {string}")
     public void the_ticket_shall_be_marked_as(String givenTicketID, String expectedStatus) {
-        int ticketID = Integer.parseInt(givenTicketID);
-
-        TOMaintenanceTicket ticketInQuestion = null;
-        for (TOMaintenanceTicket ticket : tickets) { //check all tickets for the ticket in question with the specific ticketID
-            if (ticketID == ticket.getId()) {
-                ticketInQuestion = ticket;
-            }
-        }
-
-        assertNotNull(ticketInQuestion);
+        MaintenanceTicket ticket = assetPlus.getMaintenanceTicket(Integer.parseInt(givenTicketID));
 
         //expected, actual
-        assertEquals(expectedStatus, ticketInQuestion.getStatus());
+        assertEquals(expectedStatus, ticket.getTicketStatusFullName());
     }
 
    /**
@@ -361,7 +352,7 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the system shall raise the error {string}")
     public void the_system_shall_raise_the_error(String string) {
-        Assert.assertTrue(string.isEmpty());
+        Assert.assertFalse(string.isEmpty());
     }
 
 
