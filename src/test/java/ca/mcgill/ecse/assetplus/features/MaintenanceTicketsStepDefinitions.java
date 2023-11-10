@@ -310,7 +310,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to approve the ticket {string}")
     public void the_manager_attempts_to_approve_the_ticket(String ticketID) {
         MaintenanceTicket toApprove = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
-        AssetPlusAPI.completeTicketWork(toApprove);
+        AssetPlusAPI.approveTicketWork(toApprove);
     }
 
     /**
@@ -321,7 +321,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the hotel staff attempts to complete the ticket {string}")
     public void the_hotel_staff_attempts_to_complete_the_ticket(String ticketId) {
         MaintenanceTicket toComplete = MaintenanceTicket.getWithId(Integer.parseInt(ticketId)); // Getting the maintenance ticket from the input ticketId.
-        AssetPlusAPI.approveTicketWork(toComplete); // Setting the ticket status to Closed.
+        AssetPlusAPI.completeTicketWork(toComplete); // Setting the ticket status to Closed.
     }
 
     /**
