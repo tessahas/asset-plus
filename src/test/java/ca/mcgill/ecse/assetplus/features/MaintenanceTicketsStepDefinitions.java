@@ -146,41 +146,41 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * This step initializes the maintenace ticket with ticket iD string to the state string2 and if string3 is "True", assigns a ticket approver to the ticket.
+     * This step initializes the maintenace ticket with ticket iD ticketId to the state ticketState and if needsManagerApproval is "True", assigns a ticket approver to the ticket.
      * @author Jerome Desrosiers
-     * @param string This string contains the ticket iD of the desired maintenance ticket.
-     * @param string2 This string contains the state of the maintenance ticket.
-     * @param string3 This string contains either "True" or "False" and is used to determine if the maintenance ticket needs manager approval.
+     * @param ticketId This string contains the ticket iD of the desired maintenance ticket.
+     * @param ticketState This string contains the state of the maintenance ticket.
+     * @param needsManagerApproval This string contains either "True" or "False" and is used to determine if the maintenance ticket needs manager approval.
      */
-    @Given("ticket {string} is marked as {string} with requires approval {string}")
-    public void ticket_is_marked_as_with_requires_approval(String string, String string2, String string3) {
-        MaintenanceTicket markedTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Getting the maintenance ticket from the input ticket iD in string.
+    @Given("ticket {ticketId} is marked as {ticketState} with requires approval {needsManagerApproval}")
+    public void ticket_is_marked_as_with_requires_approval(String ticketId, String ticketState, String needsManagerApproval) {
+        MaintenanceTicket markedTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Getting the maintenance ticket from the input ticketId.
 
         // General values (HotelStaff, PriorityLevel, TimeEstimate)
         HotelStaff ticketFixer = (HotelStaff) assetPlus.getManager(); // Here we chose the manager as the assigned hotel staff to a ticket as there's always a manager but we are unaware of the existing employees and it is possible that no employees other than the manager exists.
         PriorityLevel priorityLevel = PriorityLevel.Low; // Initialise at lowest possible value.
         TimeEstimate timeEstimate = TimeEstimate.LessThanADay; // Initialise at lowest possible value.
 
-        // If string3 is "true", the maintenance ticket requires manager approval.
-        if (string3.equalsIgnoreCase("true")) {
+        // If needsManagerApproval is "true", the maintenance ticket requires manager approval.
+        if (needsManagerApproval.equalsIgnoreCase("true")) {
             markedTicket.setFixApprover(assetPlus.getManager());
         }
 
-        // Set the state of the maintenance ticket according to the state stored in string2.
-        // Note, if string2 is "Open", nothing happens.
-        if (string2.equalsIgnoreCase("assigned")) {
+        // Set the state of the maintenance ticket according to the ticketState input.
+        // Note, if ticketState is "Open", nothing happens.
+        if (ticketState.equalsIgnoreCase("assigned")) {
             markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
         }
-        else if (string2.equalsIgnoreCase("inprogress")) {
+        else if (ticketState.equalsIgnoreCase("inprogress")) {
             markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
             markedTicket.startWork();
         }
-        else if (string2.equalsIgnoreCase("resolved")) {
+        else if (ticketState.equalsIgnoreCase("resolved")) {
             markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, true);
             markedTicket.startWork();
             markedTicket.markAsResolved();
         }
-        else if (string2.equalsIgnoreCase("closed")) {
+        else if (ticketState.equalsIgnoreCase("closed")) {
             markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
             markedTicket.startWork();
             markedTicket.markAsResolved();
@@ -249,11 +249,11 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * This step sets the ticket's status as Closed.
      * @author Jerome Desrosiers
-     * @param string This is a string containing the ticket iD of the ticket to mark as Closed.
+     * @param ticketId This is a string containing the ticketId of the ticket to mark as Closed.
      */
-    @When("the hotel staff attempts to complete the ticket {string}")
-    public void the_hotel_staff_attempts_to_complete_the_ticket(String string) {
-        MaintenanceTicket toComplete = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Getting the maintenance ticket from the input ticket iD in string.
+    @When("the hotel staff attempts to complete the ticket {ticketId}")
+    public void the_hotel_staff_attempts_to_complete_the_ticket(String ticketId) {
+        MaintenanceTicket toComplete = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Getting the maintenance ticket from the input ticketId.
         toComplete.markAsResolved(); // Setting the ticket status to Closed.
     }
 
@@ -339,13 +339,13 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * This step makes sure that the assigned ticket is assigned to the right employee.
      * @author Jerome Desrosiers
-     * @param string This string contains the ticket iD of the ticket that should be assigned.
-     * @param string2 This string contains the employee email of the employee the ticket should be assigned to.
+     * @param ticketId This string contains the ticket iD of the ticket that should be assigned to an hotel employee.
+     * @param employeeEmail This string contains the employee email of the employee the ticket should be assigned to.
      */
-    @Then("the ticket {string} shall be assigned to {string}")
-    public void the_ticket_shall_be_assigned_to(String string, String string2) {
-        MaintenanceTicket isAssigned = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Gets the desired ticket using the ticket iD stored in string. 
-        assertEquals(string2, isAssigned.getTicketFixer().getEmail());
+    @Then("the ticket {ticketId} shall be assigned to {employeeEmail}")
+    public void the_ticket_shall_be_assigned_to(String ticketId, String employeeEmail) {
+        MaintenanceTicket isAssigned = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Gets the desired ticket using the ticket iD stored in ticketId string. 
+        assertEquals(employeeEmail, isAssigned.getTicketFixer().getEmail());
     }
 
     /**
@@ -518,11 +518,11 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * This step makes sure that the ticket with a specific id does not have any images.
      * @author Jerome Desrosiers
-     * @param string This string contains the ticket iD of the ticket that should not have any images.
+     * @param ticketId This string contains the ticket iD of the ticket that should not have any images.
      */
-    @Then("the ticket with id {string} shall have no images")
-    public void the_ticket_with_id_shall_have_no_images(String string) {
-        MaintenanceTicket noImages = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // Gets desired maintenance ticket using the ticket iD stored in string
+    @Then("the ticket with id {ticketId} shall have no images")
+    public void the_ticket_with_id_shall_have_no_images(String ticketId) {
+        MaintenanceTicket noImages = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Gets desired maintenance ticket using the ticket iD given in ticketId input.
         assertFalse(noImages.hasTicketImages()); // Verifies that the maintenance ticket has no associated images.
     }
 }
