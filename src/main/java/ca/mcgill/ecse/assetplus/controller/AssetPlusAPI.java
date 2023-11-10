@@ -122,7 +122,10 @@ public class AssetPlusAPI {
    */
   public static String startTicketWork(MaintenanceTicket toStart){
     String errorMessage = "";
-    
+    if (toStart == null) {
+      errorMessage += "Maintenance ticket is null.";
+      return errorMessage;
+    }
     if (!MaintenanceTicket.hasWithId(toStart.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
     }
@@ -161,8 +164,11 @@ public class AssetPlusAPI {
    */
   public static String completeTicketWork(MaintenanceTicket toComplete){
     String errorMessage = "";
-    
-    if (!MaintenanceTicket.hasWithId(toComplete.getId())) {
+    if (toComplete == null) {
+      errorMessage += "Maintenance ticket is null.";
+      return errorMessage;
+    }
+    else if (!MaintenanceTicket.hasWithId(toComplete.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
     }
     if (toComplete.getTicketStatusFullName().equalsIgnoreCase("open")) {
@@ -196,7 +202,11 @@ public class AssetPlusAPI {
    */
   public static String approveTicketWork(MaintenanceTicket toApprove){
     String errorMessage = "";
-    if (!MaintenanceTicket.hasWithId(toApprove.getId())) {
+    if (toApprove == null) {
+      errorMessage += "Maintenance ticket is null.";
+      return errorMessage;
+    }
+    else if (!MaintenanceTicket.hasWithId(toApprove.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
     }
     else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("open")) {
@@ -233,6 +243,10 @@ public class AssetPlusAPI {
 
    public static String disapproveTicketWork(Date date, String reason, MaintenanceTicket toDisapprove){
     String errorMessage = "";
+    if (toDisapprove == null) {
+      errorMessage += "Maintenance ticket is null.";
+      return errorMessage;
+    }
     if (!MaintenanceTicket.hasWithId(toDisapprove.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
     }
