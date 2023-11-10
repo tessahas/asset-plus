@@ -53,19 +53,19 @@ public class AssetPlusAPI {
   			errorMessage += "Maintenance ticket does not exist.";
   			return errorMessage;
   		}
-  		if(right_ticket.getTicketStatusFullName().equals("Assigned")){
+  		if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("assigned")){
   			errorMessage += "The maintenance ticket is already assigned.";
   		}
-  		else if(right_ticket.getTicketStatusFullName().equals("Resolved")){
+  		else if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("resolved")){
   			errorMessage += "Cannot assign a maintenance ticket which is resolved.";
   		}
-  		else if(right_ticket.getTicketStatusFullName().equals("Closed")){
+  		else if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("closed")){
   			errorMessage += "Cannot assign a maintenance ticket which is closed.";
   		}
-  		else if(right_ticket.getTicketStatusFullName().equals("InProgress")){
+  		else if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("inprogress")){
   			errorMessage += "Cannot assign a maintenance ticket which is in progress.";
   		}
-  		if(!errorMessage.equals("")){
+  		if(!errorMessage.isEmpty()){
   			return errorMessage;
   		}
   		if(assetPlus.getManager().getEmail().equals(employeeEmail)){
@@ -169,6 +169,9 @@ public class AssetPlusAPI {
       errorMessage += "The maintenance ticket is already closed.";
     }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
       errorMessage += "The maintenance ticket is already resolved.";
+    }
+    if(!errorMessage.isEmpty()){
+      return errorMessage;
     }
 
     try {
