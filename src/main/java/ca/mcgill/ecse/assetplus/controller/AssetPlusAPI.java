@@ -13,7 +13,6 @@ public class AssetPlusAPI {
   /**
   * <h1>assign</h1> 
   * This method is called when a Hotel Staff member is assigned to a ticket
-  * 
   * @param int ticketId - Id of the ticket that a Hotel Staff member is assigned to.
   * @param String employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
   * @param TimeEstimate timeEstimate - Time Estimate of the ticket.
@@ -122,20 +121,17 @@ public class AssetPlusAPI {
    */
   public static String startTicketWork(MaintenanceTicket toStart){
     String errorMessage = "";
-    
-    if (!MaintenanceTicket.hasWithId(toStart.getId())) {
+    if(toStart == null){
+        errorMessage += "Maintenance ticket does not exist.";
+    }else if (!MaintenanceTicket.hasWithId(toStart.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
-    }
-    if (toStart.getTicketStatusFullName().equalsIgnoreCase("open")) {
+    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("open")) {
       errorMessage += "Cannot start a maintenance ticket which is open.";
-    }
-    if (toStart.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
+    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
       errorMessage += "Cannot start a maintenance ticket which is resolved.";
-    }
-    if (toStart.getTicketStatusFullName().equalsIgnoreCase("closed")) {
+    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("closed")) {
       errorMessage += "Cannot start a maintenance ticket which is closed.";
-    }
-    if (toStart.getTicketStatusFullName().equalsIgnoreCase("inprogress")) {
+    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("inprogress")) {
       errorMessage += "The maintenance ticket is already in progress.";
     }
 
@@ -161,20 +157,17 @@ public class AssetPlusAPI {
    */
   public static String completeTicketWork(MaintenanceTicket toComplete){
     String errorMessage = "";
-    
-    if (!MaintenanceTicket.hasWithId(toComplete.getId())) {
+    if (toComplete == null){
+        errorMessage += "Maintenance ticket does not exist.";
+    }else if (!MaintenanceTicket.hasWithId(toComplete.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
-    }
-    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("open")) {
+    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("open")) {
       errorMessage += "Cannot complete a maintenance ticket which is open.";
-    }
-    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("assigned")) {
+    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("assigned")) {
       errorMessage += "Cannot complete a maintenance ticket which is assigned.";
-    }
-    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("closed")) {
+    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("closed")) {
       errorMessage += "The maintenance ticket is already closed.";
-    }
-    if (toComplete.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
+    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
       errorMessage += "The maintenance ticket is already resolved.";
     }
 
