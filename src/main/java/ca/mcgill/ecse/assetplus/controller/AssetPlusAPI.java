@@ -1,9 +1,100 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
+import java.util.List;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
+
 
 public class AssetPlusAPI {
-  public static String assignTicket(MaintenanceTicket toAssign){
-  }
+
+  /**
+ 	* <h1>assign</h1> 
+ 	* This method is called when a Hotel Staff member is assigned to a ticket
+ 	* 
+ 	* @param int ticketId - Id of the ticket that a Hotel Staff member is assigned to.
+ 	* @param String employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
+ 	* @param TimeEstimate timeEstimate - Time Estimate of the ticket.
+ 	* @param PriorityLevel priority - Priority of the ticket.
+ 	* @param Boolean requiresApproval - Whether the ticket requires approval from the manager to be closed.
+ 	* @return String - This returns a string with an error message gathered during execution. If it is empty, the Employee or Guest's account registration was successful.
+ 	*
+ 	* @author Mathieu Allaire
+ 	*/
+
+  public static String assign(int ticketId, String employeeEmail, TimeEstimate timeEstimate, PriorityLevel priority, Boolean requiresApproval){
+  		String errorMessage = "";
+  		AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
+  		if(!(assetPlus.hasMaintenanceTickets())){
+  			errorMessage+="There are no maintenance tickets in the system.";
+  			return errorMessage;
+  		}
+  		if(!assetPlus.hasEmployees()){
+  			errorMessage += "There are no employees in the system";
+  			return errorMessage;
+  		}
+  		if(!assetPlus.hasManager()){
+  			errorMessage += "There is no manager in the system";
+  			return errorMessage;
+  		}
+  		List<Employee> employees = assetPlus.getEmployees();
+  		List<MaintenanceTicket> tickets = assetPlus.getMaintenanceTickets();
+  		MaintenanceTicket right_ticket = null;
+  		Boolean foundTicket = false;
+  		for (MaintenanceTicket ticket: tickets){
+  		if(ticket.getId()==ticketId){
+  			right_ticket = ticket;
+  			foundTicket = true;
+  			break;
+  		}
+  	}
+  		if(!foundTicket || right_ticket==null){
+  			errorMessage += "Maintenance ticket does not exist.";
+  			return errorMessage;
+  		}
+  		if(right_ticket.getTicketStatusFullName().equals("Assigned")){
+  			errorMessage += "The maintenance ticket is already assigned.";
+  		}
+  		else if(right_ticket.getTicketStatusFullName().equals("Resolved")){
+  			errorMessage += "Cannot assign a maintenance ticket which is resolved.";
+  		}
+  		else if(right_ticket.getTicketStatusFullName().equals("Closed")){
+  			errorMessage += "Cannot assign a maintenance ticket which is closed.";
+  		}
+  		else if(right_ticket.getTicketStatusFullName().equals("InProgress")){
+  			errorMessage += "Cannot assign a maintenance ticket which is in progress.";
+  		}
+  		if(!errorMessage.equals("")){
+  			return errorMessage;
+  		}
+  		if(assetPlus.getManager().getEmail().equals(employeeEmail)){
+  			HotelStaff manager = assetPlus.getManager();
+  			right_ticket.setFixApprover(assetPlus.getManager());
+  			right_ticket.assign(manager, priority, timeEstimate, requiresApproval);
+  			AssetPlusPersistence.save();
+  			return errorMessage;
+  		}
+  		Boolean foundEmployee = false;
+  		HotelStaff right_employee = null;
+  		for (Employee employee: employees){
+  		if(employee.getEmail().equals(employeeEmail)){
+  			foundEmployee = true;
+  			right_employee = employee;
+  			break;
+  			}
+  		}
+  		if(!foundEmployee){
+  		errorMessage += "Staff to assign does not exist.";
+  		return errorMessage;
+  		}
+  		right_ticket.setFixApprover(assetPlus.getManager());
+  		right_ticket.assign(right_employee, priority, timeEstimate, requiresApproval);
+  		AssetPlusPersistence.save();
+  		return errorMessage;
+  	}
+
+
+
 
   /**
    * <h1>startTicketWork</h1>
