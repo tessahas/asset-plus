@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 
 /**
@@ -47,7 +48,15 @@ public class AssetPlusFeatureSet3Controller {
         if(!ErrorMessage.equalsIgnoreCase("")){
           return ErrorMessage;
         }
-        assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, AssetType.getWithName(assetTypeName));
+        
+        try{
+          assetPlus.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, AssetType.getWithName(assetTypeName));
+          AssetPlusPersistence.save();
+        }
+        catch(Exception e){
+          return ErrorMessage;
+        }
+        
 
         return ErrorMessage;
   }
@@ -89,11 +98,19 @@ public class AssetPlusFeatureSet3Controller {
         if(!ErrorMessage.equalsIgnoreCase("")){
           return ErrorMessage;
         }
-        SpecificAsset specificAssetToEdit = SpecificAsset.getWithAssetNumber(assetNumber);
-        specificAssetToEdit.setFloorNumber(newFloorNumber);
-        specificAssetToEdit.setRoomNumber(newRoomNumber);
-        specificAssetToEdit.setPurchaseDate(newPurchaseDate);
-        specificAssetToEdit.setAssetType(AssetType.getWithName(newAssetTypeName));
+
+        try{
+          SpecificAsset specificAssetToEdit = SpecificAsset.getWithAssetNumber(assetNumber);
+          specificAssetToEdit.setFloorNumber(newFloorNumber);
+          specificAssetToEdit.setRoomNumber(newRoomNumber);
+          specificAssetToEdit.setPurchaseDate(newPurchaseDate);
+          specificAssetToEdit.setAssetType(AssetType.getWithName(newAssetTypeName));
+          AssetPlusPersistence.save();
+        }
+        catch(Exception e){
+          return ErrorMessage;
+        }
+        
 
         return ErrorMessage;
 }
@@ -110,7 +127,11 @@ public class AssetPlusFeatureSet3Controller {
   {
     if (SpecificAsset.hasWithAssetNumber(assetNumber))
     {
-      SpecificAsset.getWithAssetNumber(assetNumber).delete();
+      try{
+        SpecificAsset.getWithAssetNumber(assetNumber).delete();
+        AssetPlusPersistence.save();
+      } catch (Exception e){}
+      
     }
     
   }
