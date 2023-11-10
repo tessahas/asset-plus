@@ -135,7 +135,8 @@ public class MaintenanceTicketsStepDefinitions {
 
                         if(status != TicketStatus.InProgress){
                             maintenanceTicket.markAsResolved();
-                            if(status == TicketStatus.Closed && maintenanceTicket.getTicketStatusFullName().equalsIgnoreCase("Resolved")){
+                            if(status == TicketStatus.Closed && maintenanceTicket.getTicketStatusFullName().equalsIgnoreCase("resolved")){
+                                maintenanceTicket.approveWork();
                             }
 
                         }
@@ -279,12 +280,14 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
     public void the_manager_attempts_to_assign_the_ticket_to_with_estimated_time_priority_and_requires_approval(
             String ticketId, String employeeEmail, String timeEstimate, String priority, String requiresApproval) {
+
         int id = Integer.parseInt(ticketId);
         TimeEstimate timeEstimate_object = TimeEstimate.valueOf(timeEstimate);
         PriorityLevel priority_object = PriorityLevel.valueOf(priority);
         Boolean approvalRequired_bool = Boolean.parseBoolean(requiresApproval);
 
         AssetPlusAPI.assign(id, employeeEmail, timeEstimate_object, priority_object, approvalRequired_bool);
+        
 
     }
 
@@ -383,11 +386,8 @@ public class MaintenanceTicketsStepDefinitions {
         MaintenanceTicket timePriorityApprovalTicket = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
         Assert.assertEquals(estimatedTime, timePriorityApprovalTicket.getTimeToResolve().toString());
         Assert.assertEquals(priorityLevel, timePriorityApprovalTicket.getPriority().toString());
-        if (timePriorityApprovalTicket.getTicketStatusFullName().equalsIgnoreCase("open")){
-            assertNull(timePriorityApprovalTicket.getFixApprover());
-        } else {
-            Assert.assertEquals(Boolean.parseBoolean(requiresApproval), timePriorityApprovalTicket.hasFixApprover());
-        }
+        Assert.assertEquals(Boolean.parseBoolean(requiresApproval), timePriorityApprovalTicket.hasFixApprover()); //THIS IS THE PROBLEMATIC LINE
+    
     }
 
     /**
