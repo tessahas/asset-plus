@@ -114,7 +114,7 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Initializes the notes with the date they were added and the description, then adds them to the corresponding notes.
      * @author Yuri Sorice
      * @param dataTable
      */
@@ -225,13 +225,13 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This method sets the ticket status to inProgress
      * @author Yuri Sorice
-     * @param string
+     * @param ticketID ID of the given maintenance ticket
      */
-    @When("the hotel staff attempts to start the ticket {string}")
-    public void the_hotel_staff_attempts_to_start_the_ticket(String string) {
-        MaintenanceTicket toStart = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); //getting the maintenance ticket from input
+    @When("the hotel staff attempts to start the ticket {ticketID}")
+    public void the_hotel_staff_attempts_to_start_the_ticket(String ticketID) {
+        MaintenanceTicket toStart = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID)); //getting the maintenance ticket from input
         toStart.startWork(); //setting the ticket status to inProgress
     }
 
@@ -305,13 +305,13 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Checks if the given ticketID does not exist
      * @author Yuri Sorice
-     * @param string
+     * @param ticketID ID of a maintenance ticket
      */
-    @Then("the ticket {string} shall not exist in the system")
-    public void the_ticket_shall_not_exist_in_the_system(String string) {
-      Assert.assertNull(assetPlus.getMaintenanceTicket(Integer.parseInt(string))); 
+    @Then("the ticket {ticketID} shall not exist in the system")
+    public void the_ticket_shall_not_exist_in_the_system(String ticketID) {
+      Assert.assertNull(assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID))); 
       //Asserts that when trying to retrieve the nonexisting ticket, nothing is returned
     }
 
@@ -487,14 +487,15 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Makes sure that the number of notes of a specific maintenance ticket is zero
      * @author Yuri Sorice
-     * @param string
+     * @param ticketID ID of a maintenance ticket
      */
     @Then("the ticket with id {string} shall have no notes")
-    public void the_ticket_with_id_shall_have_no_notes(String string) {
-      MaintenanceTicket noNotes = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
+    public void the_ticket_with_id_shall_have_no_notes(String ticketID) {
+      MaintenanceTicket noNotes = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
       Assert.assertEquals(0, noNotes.numberOfTicketNotes());
+    }
     }
 
     /**
