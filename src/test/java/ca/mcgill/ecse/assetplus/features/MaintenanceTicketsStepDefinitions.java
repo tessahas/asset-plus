@@ -290,7 +290,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to disapprove the ticket {ticketID} on date {date} and with reason {reason}")
     public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String ticketID, String date, String reason) {
         MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
-        toDisapprove.disapproveWork(Date.valueOf(date), reason);
+        toDisapprove.disapproveWork(Date.valueOf(date), reason, toDisapprove);
     }
 
     /**
