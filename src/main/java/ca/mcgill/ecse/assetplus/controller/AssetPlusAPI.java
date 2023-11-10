@@ -201,6 +201,7 @@ public class AssetPlusAPI {
   * This method is called when a manager wants to disapprove a ticket that requires approval,
   * 
   * @param MaintenanceTicket disapproveTicketWork - maintenance ticket to disapprove
+  * @return String - error message
   *
   * @author Tessa Hason
   */
