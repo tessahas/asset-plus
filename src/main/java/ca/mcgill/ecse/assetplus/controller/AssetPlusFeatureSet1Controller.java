@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 

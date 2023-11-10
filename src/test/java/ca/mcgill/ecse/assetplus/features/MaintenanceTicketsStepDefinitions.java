@@ -186,7 +186,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param ticketState This string contains the state of the maintenance ticket.
      * @param needsManagerApproval This string contains either "True" or "False" and is used to determine if the maintenance ticket needs manager approval.
      */
-    @Given("ticket {ticketId} is marked as {ticketState} with requires approval {needsManagerApproval}")
+    @Given("ticket {string} is marked as {string} with requires approval {string}")
     public void ticket_is_marked_as_with_requires_approval(String ticketId, String ticketState, String needsManagerApproval) {
         MaintenanceTicket markedTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Getting the maintenance ticket from the input ticketId.
 
@@ -227,7 +227,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param ticketID The ticket ID number
      * @param state The state of the ticket
      */
-    @Given("ticket {ticketID} is marked as {state}")
+    @Given("ticket {string} is marked as {string}")
     public void ticket_is_marked_as(String ticketID, String state) {
         MaintenanceTicket ticket = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
         
@@ -273,7 +273,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param priority
      * @param requiresApproval
      */
-    @When("the manager attempts to assign the ticket {ticketId} to {employeeEmail} with estimated time {timeEstimate}, priority {priority}, and requires approval {requiresApproval}")
+    @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
     public void the_manager_attempts_to_assign_the_ticket_to_with_estimated_time_priority_and_requires_approval(
             String ticketId, String employeeEmail, String timeEstimate, String priority, String requiresApproval) {
                 int id = Integer.parseInt(ticketId);
@@ -290,7 +290,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Yuri Sorice
      * @param ticketID ID of the given maintenance ticket
      */
-    @When("the hotel staff attempts to start the ticket {ticketID}")
+    @When("the hotel staff attempts to start the ticket {string}")
     public void the_hotel_staff_attempts_to_start_the_ticket(String ticketID) {
         MaintenanceTicket toStart = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID)); //getting the maintenance ticket from input
          AssetPlusAPI.startTicketWork(toStart); //setting the ticket status to inProgress
@@ -301,7 +301,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Luis Jarquin
      * @param ticketID ticket ID of desired ticket
      */
-    @When("the manager attempts to approve the ticket {ticketID}")
+    @When("the manager attempts to approve the ticket {string}")
     public void the_manager_attempts_to_approve_the_ticket(String ticketID) {
         MaintenanceTicket toApprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
         AssetPlusAPI.completeTicketWork(toApprove);
@@ -312,7 +312,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Jerome Desrosiers
      * @param ticketId This is a string containing the ticketId of the ticket to mark as Closed.
      */
-    @When("the hotel staff attempts to complete the ticket {ticketId}")
+    @When("the hotel staff attempts to complete the ticket {string}")
     public void the_hotel_staff_attempts_to_complete_the_ticket(String ticketId) {
         MaintenanceTicket toComplete = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Getting the maintenance ticket from the input ticketId.
         AssetPlusAPI.approveTicketWork(toComplete); // Setting the ticket status to Closed.
@@ -325,7 +325,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param date The date where of the disapproval
      * @param reason The reason for the disapproval
      */
-    @When("the manager attempts to disapprove the ticket {ticketID} on date {date} and with reason {reason}")
+    @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
     public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String ticketID, String date, String reason) {
         MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
         AssetPlusAPI.disapproveTicketWork(Date.valueOf(date), reason, toDisapprove);
@@ -337,7 +337,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param givenTicketID
      * @param expectedStatus
      */
-    @Then("the ticket {givenTicketID} shall be marked as {expectedStatus}")
+    @Then("the ticket {string} shall be marked as {string}")
     public void the_ticket_shall_be_marked_as(String givenTicketID, String expectedStatus) {
         int ticketID = Integer.parseInt(givenTicketID);
 
@@ -370,7 +370,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Yuri Sorice
      * @param ticketID ID of a maintenance ticket
      */
-    @Then("the ticket {ticketID} shall not exist in the system")
+    @Then("the ticket {string} shall not exist in the system")
     public void the_ticket_shall_not_exist_in_the_system(String ticketID) {
       Assert.assertNull(assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID))); 
       //Asserts that when trying to retrieve the nonexisting ticket, nothing is returned
@@ -384,7 +384,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param priorityLevel Priority level of the ticket
      * @param requiresApproval Approval is or is not required (boolean)
      */
-    @Then("the ticket {ticketID} shall have estimated time {estimatedTime}, priority {priorityLevel}, and requires approval {requiresApproval}")
+    @Then("the ticket {string} shall have estimated time {string}, priority {string}, and requires approval {string}")
     public void the_ticket_shall_have_estimated_time_priority_and_requires_approval(String ticketID,
     String estimatedTime, String priorityLevel, String requiresApproval) {
         MaintenanceTicket timePriorityApprovalTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
@@ -403,7 +403,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param ticketId This string contains the ticket iD of the ticket that should be assigned to an hotel employee.
      * @param employeeEmail This string contains the employee email of the employee the ticket should be assigned to.
      */
-    @Then("the ticket {ticketId} shall be assigned to {employeeEmail}")
+    @Then("the ticket {string} shall be assigned to {string}")
     public void the_ticket_shall_be_assigned_to(String ticketId, String employeeEmail) {
         MaintenanceTicket isAssigned = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Gets the desired ticket using the ticket iD stored in ticketId string. 
         assertEquals(employeeEmail, isAssigned.getTicketFixer().getEmail());
@@ -414,7 +414,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Kevin Li
      * @param numOfTickets The expected number of tickets in the system
      */
-    @Then("the number of tickets in the system shall be {numOfTickets}")
+    @Then("the number of tickets in the system shall be {string}")
     public void the_number_of_tickets_in_the_system_shall_be(String numOfTickets) {
         int expectedNumberOfTickets = Integer.parseInt(numOfTickets);
         int actualNumberOfTickets = assetPlus.numberOfMaintenanceTickets();
@@ -534,7 +534,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Mathieu Allaire
      * @param dataTable
      */
-    @Then("the ticket with id {ticketId} shall have the following notes")
+    @Then("the ticket with id {string} shall have the following notes")
     public void the_ticket_with_id_shall_have_the_following_notes(String ticketString,
                                                                   io.cucumber.datatable.DataTable dataTable) {
         int ticketId = Integer.parseInt(ticketString);
@@ -578,7 +578,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @param ticketID ticket ID
      * @param dataTable Contains image URLs of corresponding ticket ID
      */
-    @Then("the ticket with id {ticketID} shall have the following images")
+    @Then("the ticket with id {string} shall have the following images")
     public void the_ticket_with_id_shall_have_the_following_images(String ticketID, io.cucumber.datatable.DataTable dataTable) {
         
         MaintenanceTicket hasTheseImages = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID)); // gets the maintenance ticket using string parameter
@@ -594,7 +594,7 @@ public class MaintenanceTicketsStepDefinitions {
      * @author Jerome Desrosiers
      * @param ticketId This string contains the ticket iD of the ticket that should not have any images.
      */
-    @Then("the ticket with id {ticketId} shall have no images")
+    @Then("the ticket with id {string} shall have no images")
     public void the_ticket_with_id_shall_have_no_images(String ticketId) {
         MaintenanceTicket noImages = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Gets desired maintenance ticket using the ticket iD given in ticketId input.
         assertFalse(noImages.hasTicketImages()); // Verifies that the maintenance ticket has no associated images.
