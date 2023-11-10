@@ -196,6 +196,15 @@ public class AssetPlusAPI {
     return errorMessage;
   }
 
+   /**
+  * <h1>disapproveTicketWork</h1> 
+  * This method is called when a manager wants to disapprove a ticket that requires approval,
+  * 
+  * @param MaintenanceTicket disapproveTicketWork - maintenance ticket to disapprove
+  *
+  * @author Tessa Hason
+  */
+
   public static String disapproveTicketWork(MaintenanceTicket toDisapprove){
     String errorMessage = "";
     if (!MaintenanceTicket.hasWithId(toDisapprove.getId())) {
