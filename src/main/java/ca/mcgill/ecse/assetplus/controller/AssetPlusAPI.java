@@ -211,7 +211,7 @@ public class AssetPlusAPI {
   * @author Tessa Hason
   */
 
-  public static String disapproveTicketWork(Date date, String reason, MaintenanceTicket toDisapprove){
+   public static String disapproveTicketWork(Date date, String reason, MaintenanceTicket toDisapprove){
     String errorMessage = "";
     if (!MaintenanceTicket.hasWithId(toDisapprove.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
