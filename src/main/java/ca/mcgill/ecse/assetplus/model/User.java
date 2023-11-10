@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
@@ -235,10 +235,14 @@ public abstract class User
   }
 
   // line 12 "../../../../../AssetPlusPersistence.ump"
-   public static  void reinitializeUniqueEmail(List<User> users){
+   public static  void reinitializeUniqueEmail(Manager manager, List<Employee> employees, List<Guest> guests){
     usersByEmail.clear();
-        for (var user: users) {
-            usersByEmail.put(user.getEmail(), user);
+        usersByEmail.put(manager.getEmail(), manager);
+        for (var employee: employees) {
+            usersByEmail.put(employee.getEmail(), employee);
+        }
+        for (var guest: guests) {
+            usersByEmail.put(guest.getEmail(), guest);
         }
   }
 

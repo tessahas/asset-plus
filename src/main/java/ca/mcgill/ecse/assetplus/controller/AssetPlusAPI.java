@@ -4,6 +4,7 @@ import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
+import java.sql.Date;
 
 
 public class AssetPlusAPI {
@@ -229,7 +230,7 @@ public class AssetPlusAPI {
       errorMessage += "Cannot disapprove a maintenance ticket which is in progress.";
     }
     try {
-      toDisapprove.disapproveWork();
+      toDisapprove.disapproveWork(date, reason);
       MaintenanceNote note = new MaintenanceNote(date, reason, toDisapprove, toDisapprove.getAssetPlus().getManager());
     }
     catch(Exception e) {
