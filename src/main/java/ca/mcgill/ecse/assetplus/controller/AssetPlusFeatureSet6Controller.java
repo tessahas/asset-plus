@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 
 /**
