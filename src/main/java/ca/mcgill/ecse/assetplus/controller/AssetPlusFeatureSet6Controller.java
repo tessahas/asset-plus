@@ -22,6 +22,7 @@ public class AssetPlusFeatureSet6Controller {
    */
 
   public static void deleteEmployeeOrGuest(String email) {
+
     User userToDelete = User.getWithEmail(email);
     if(email.equals("manager@ap.com")){
     } else if (userToDelete instanceof Employee || userToDelete instanceof Guest){
@@ -30,7 +31,7 @@ public class AssetPlusFeatureSet6Controller {
       AssetPlusPersistence.save();
     }
     catch(Exception e) {
-      errorMessage += "Unknown exception";
+      String errorMessage = "Unknown exception";
      }
     }
   }
@@ -94,14 +95,14 @@ public class AssetPlusFeatureSet6Controller {
       return TOMaintenanceTickets;
 
     }
-    return null;
     
+    AssetPlusPersistence.save();
   }
-      
-      AssetPlusPersistence.save();
-    }
-    catch(Exception e) {
-      errorMessage += "Unknown exception";
-     }
+  
+  catch(Exception e) {
+    String errorMessage = "Unknown exception";
+  }
 
+  return null;
+}
 }
