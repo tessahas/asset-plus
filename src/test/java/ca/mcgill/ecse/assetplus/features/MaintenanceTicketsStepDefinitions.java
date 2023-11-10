@@ -25,6 +25,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusAPI;
+import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 
 public class MaintenanceTicketsStepDefinitions {
     private AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
@@ -326,7 +328,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to disapprove the ticket {ticketID} on date {date} and with reason {reason}")
     public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String ticketID, String date, String reason) {
         MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
-        AssetPlusAPI.disapproveTicketWork(toDisapprove);
+        AssetPlusAPI.disapproveTicketWork(Date.valueOf(date), reason, toDisapprove);
     }
 
     /**
