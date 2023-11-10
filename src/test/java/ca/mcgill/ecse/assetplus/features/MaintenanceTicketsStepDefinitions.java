@@ -17,6 +17,7 @@ import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TicketStatus;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.Assert.assertFalse;
@@ -63,7 +64,7 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Initializes asset types with the given name and expected life span.
      * @author Kevin Li
-     * @param dataTable
+     * @param dataTable The table containing the information on the Asset Types that exist in the system.
      */
     @Given("the following asset types exist in the system")
     public void the_following_asset_types_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
@@ -188,15 +189,37 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This step sets the maintenace ticket with the given ID to the given state.
      * @author Kevin Li
-     * @param string
-     * @param string2
+     * @param ticketID The ticket ID number
+     * @param state The state of the ticket
      */
-    @Given("ticket {string} is marked as {string}")
-    public void ticket_is_marked_as(String string, String string2) {
-        MaintenanceTicket ticket = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
-        ticket.getTicketStatusFullName();
+    @Given("ticket {ticketID} is marked as {state}")
+    public void ticket_is_marked_as(String ticketID, String state) {
+        MaintenanceTicket ticket = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
+        
+        // General values (HotelStaff, PriorityLevel, TimeEstimate)
+        HotelStaff ticketFixer = (HotelStaff) assetPlus.getManager(); // Here we chose the manager as the assigned hotel staff to a ticket as there's always a manager but we are unaware of the existing employees and it is possible that no employees other than the manager exists.
+        PriorityLevel priorityLevel = PriorityLevel.Low; // Initialise at lowest possible value.
+        TimeEstimate timeEstimate = TimeEstimate.LessThanADay; // Initialise at lowest possible value.
+        
+        if (state.equalsIgnoreCase("assigned")) {
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+        }
+        else if (state.equalsIgnoreCase("inprogess")) {
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            ticket.startWork();
+        }
+        else if (state.equalsIgnoreCase("resolved")) {
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            ticket.startWork();
+            ticket.markAsResolved();
+        }
+        else if (state.equalsIgnoreCase("closed")) {
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            ticket.startWork();
+            ticket.markAsResolved();
+        }
     }
 
     /**
@@ -260,14 +283,14 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * This step attempts to disapprove work on a ticket and set its status as InProgress.
      * @author Kevin Li
-     * @param string
-     * @param string2
-     * @param string3
+     * @param ticketID The ticket ID
+     * @param date The date where of the disapproval
+     * @param reason The reason for the disapproval
      */
-    @When("the manager attempts to disapprove the ticket {string} on date {string} and with reason {string}")
-    public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String string, String string2, String string3) {
-        MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
-        toDisapprove.disapproveWork(string2, string3);
+    @When("the manager attempts to disapprove the ticket {ticketID} on date {date} and with reason {reason}")
+    public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String ticketID, String date, String reason) {
+        MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
+        toDisapprove.disapproveWork(Date.valueOf(date), reason);
     }
 
     /**
@@ -351,11 +374,11 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * This step checks that the number of tickets in the system is the expected number.
      * @author Kevin Li
-     * @param string
+     * @param numOfTickets The expected number of tickets in the system
      */
-    @Then("the number of tickets in the system shall be {string}")
-    public void the_number_of_tickets_in_the_system_shall_be(String string) {
-        int expectedNumberOfTickets = Integer.parseInt(string);
+    @Then("the number of tickets in the system shall be {numOfTickets}")
+    public void the_number_of_tickets_in_the_system_shall_be(String numOfTickets) {
+        int expectedNumberOfTickets = Integer.parseInt(numOfTickets);
         int actualNumberOfTickets = assetPlus.numberOfMaintenanceTickets();
         Assertions.assertEquals(expectedNumberOfTickets, actualNumberOfTickets);
     }
