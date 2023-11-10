@@ -98,20 +98,51 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Initializes maintenance tickets with a specific ticket id, raised date, description, asset number, status, ticket fixer, time estimate, priority and
+     * approval requirement
      * @author Mathieu Allaire
      * @param dataTable
      */
     @Given("the following tickets exist in the system")
     public void the_following_tickets_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+        List<Map<String, String>> rows = dataTable.asMaps(); // Getting Data
+        for (var row: rows){
+            int id = Integer.parseInt(row.get("id"));
+            User ticketRaiser = User.getWithEmail(row.get("ticketRaiser"));
+            Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
+            String description = row.get("description");
+            int assetNumber = Integer.parseInt(row.get("assetNumber"));
+            TicketStatus status = TicketStatus.valueOf(row.get("status"));
+            MaintenanceTicket maintenanceTicket = new MaintenanceTicket(id, raisedOnDate, description, assetPlus, ticketRaiser);
+
+            try{
+
+                HotelStaff ticketFixer = (HotelStaff) HotelStaff.getWithEmail(row.get("fixedByEmail"));
+                TimeEstimate timeEstimate = TimeEstimate.valueOf(row.get("timeToResolve"));
+                PriorityLevel priority = PriorityLevel.valueOf(row.get("priority"));
+                Boolean approvalRequired = Boolean.parseBoolean(row.get("approvalRequired"));
+
+                if(status != TicketStatus.Open){
+                    maintenanceTicket.assign(ticketFixer,priority, timeEstimate, approvalRequired);
+
+                    if(status != TicketStatus.Assigned){
+                        maintenanceTicket.startWork();
+
+                        if(status != TicketStatus.InProgress){
+                            maintenanceTicket.markAsResolved();
+                            if(status == TicketStatus.Closed && maintenanceTicket.getTicketStatusFullName().equalsIgnoreCase("Resolved")){  
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch(Exception e) {
+                
+            }
+            maintenanceTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
+        
+        }
     }
 
     /**
@@ -232,19 +263,24 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * Assigns Hotel Staff member to a ticket with a time estimate, a priority and whether it requires manager approval to be closed.
      * @author Mathieu Allaire
-     * @param string
-     * @param string2
-     * @param string3
-     * @param string4
-     * @param string5
+     * @param ticketId
+     * @param employeeEmail
+     * @param timeEstimate
+     * @param priority
+     * @param requiresApproval
      */
-    @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
+    @When("the manager attempts to assign the ticket {ticketId} to {employeeEmail} with estimated time {timeEstimate}, priority {priority}, and requires approval {requiresApproval}")
     public void the_manager_attempts_to_assign_the_ticket_to_with_estimated_time_priority_and_requires_approval(
-            String string, String string2, String string3, String string4, String string5) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+            String ticketId, String employeeEmail, String timeEstimate, String priority, String requiresApproval) {
+                int id = Integer.parseInt(ticketId);
+                TimeEstimate timeEstimate_object = TimeEstimate.valueOf(timeEstimate);
+                PriorityLevel priority_object = PriorityLevel.valueOf(priority);
+                Boolean approvalRequired_bool = Boolean.parseBoolean(requiresApproval);
+
+                AssetPlusAPI.assign(id, employeeEmail, timeEstimate_object, priority_object, approvalRequired_bool);
+        
     }
 
     /**
@@ -255,7 +291,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the hotel staff attempts to start the ticket {ticketID}")
     public void the_hotel_staff_attempts_to_start_the_ticket(String ticketID) {
         MaintenanceTicket toStart = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID)); //getting the maintenance ticket from input
-        toStart.startWork(); //setting the ticket status to inProgress
+         AssetPlusAPI.startTicketWork(toStart); //setting the ticket status to inProgress
     }
 
     /**
@@ -266,7 +302,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to approve the ticket {ticketID}")
     public void the_manager_attempts_to_approve_the_ticket(String ticketID) {
         MaintenanceTicket toApprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
-        toApprove.approveWork();
+        AssetPlusAPI.completeTicketWork(toApprove);
     }
 
     /**
@@ -277,7 +313,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the hotel staff attempts to complete the ticket {ticketId}")
     public void the_hotel_staff_attempts_to_complete_the_ticket(String ticketId) {
         MaintenanceTicket toComplete = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketId)); // Getting the maintenance ticket from the input ticketId.
-        toComplete.markAsResolved(); // Setting the ticket status to Closed.
+        AssetPlusAPI.approveTicketWork(toComplete); // Setting the ticket status to Closed.
     }
 
     /**
@@ -290,7 +326,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to disapprove the ticket {ticketID} on date {date} and with reason {reason}")
     public void the_manager_attempts_to_disapprove_the_ticket_on_date_and_with_reason(String ticketID, String date, String reason) {
         MaintenanceTicket toDisapprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
-        toDisapprove.disapproveWork(Date.valueOf(date), reason, toDisapprove);
+        AssetPlusAPI.disapproveTicketWork(toDisapprove);
     }
 
     /**
@@ -316,16 +352,16 @@ public class MaintenanceTicketsStepDefinitions {
         assertEquals(expectedStatus, ticketInQuestion.getStatus());
     }
 
-    /**
-     * THIS STEP DEF'S DEFINITION
+   /**
+     * Checks if the error message returned from a method is empty
      * @author Mathieu Allaire
      * @param string
      */
     @Then("the system shall raise the error {string}")
     public void the_system_shall_raise_the_error(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertTrue(string.isEmpty());
     }
+
 
     /**
      * Checks if the given ticketID does not exist
@@ -492,21 +528,35 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * THIS STEP DEF'S DEFINITION
+     * This method ensures that information of the notes of the ticket obtained by the controller method is the same as the information in the datatable.
      * @author Mathieu Allaire
      * @param dataTable
      */
-    @Then("the ticket with id {string} shall have the following notes")
-    public void the_ticket_with_id_shall_have_the_following_notes(String string,
+    @Then("the ticket with id {ticketId} shall have the following notes")
+    public void the_ticket_with_id_shall_have_the_following_notes(String ticketString,
                                                                   io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+        int ticketId = Integer.parseInt(ticketString);
+
+        TOMaintenanceTicket currTicket = null;
+        for (var ticket : tickets) {
+            if (ticket.getId() == ticketId) {
+                currTicket = ticket;
+                }
+        }
+        assertNotNull(currTicket);
+        List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();
+        List<Map<String, String>> rows = dataTable.asMaps();
+        int i = 0;
+        for (var row : rows) {
+            TOMaintenanceNote currNote = currTicketNotes.get(i);
+            String noteTaker = row.get("noteTaker");
+            assertEquals(noteTaker, currNote.getNoteTakerEmail());
+            Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
+            assertEquals(addedOnDate, currNote.getDate());
+            String description = row.get("description");
+            assertEquals(description, currNote.getDescription());
+            i++;
+        }
     }
 
     /**
