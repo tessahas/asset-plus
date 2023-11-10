@@ -39,14 +39,14 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Given("the following employees exist in the system")
     public void the_following_employees_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-            List<Map<String, String>> rows = dataTable.asMaps();
-            for (var row: rows) {
-                String email = row.get("email");
-                String name = row.get("name");
-                String password = row.get("password");
-                String phoneNumber = row.get("phoneNumber");
-                new Employee(email, name, password, phoneNumber, assetPlus);
-            }
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (var row: rows) {
+            String email = row.get("email");
+            String name = row.get("name");
+            String password = row.get("password");
+            String phoneNumber = row.get("phoneNumber");
+            new Employee(email, name, password, phoneNumber, assetPlus);
+        }
     }
 
     /**
@@ -113,7 +113,10 @@ public class MaintenanceTicketsStepDefinitions {
             User ticketRaiser = User.getWithEmail(row.get("ticketRaiser"));
             Date raisedOnDate = Date.valueOf(row.get("raisedOnDate"));
             String description = row.get("description");
-            int assetNumber = Integer.parseInt(row.get("assetNumber"));
+            int assetNumber = -1;
+            if (row.get("assetNumber")!=null){
+                assetNumber = Integer.parseInt(row.get("assetNumber"));
+            }
             TicketStatus status = TicketStatus.valueOf(row.get("status"));
             MaintenanceTicket maintenanceTicket = new MaintenanceTicket(id, raisedOnDate, description, assetPlus, ticketRaiser);
 
@@ -132,7 +135,7 @@ public class MaintenanceTicketsStepDefinitions {
 
                         if(status != TicketStatus.InProgress){
                             maintenanceTicket.markAsResolved();
-                            if(status == TicketStatus.Closed && maintenanceTicket.getTicketStatusFullName().equalsIgnoreCase("Resolved")){  
+                            if(status == TicketStatus.Closed && maintenanceTicket.getTicketStatusFullName().equalsIgnoreCase("Resolved")){
                             }
 
                         }
@@ -140,10 +143,10 @@ public class MaintenanceTicketsStepDefinitions {
                 }
             }
             catch(Exception e) {
-                
+
             }
             maintenanceTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
-        
+
         }
     }
 
@@ -157,10 +160,10 @@ public class MaintenanceTicketsStepDefinitions {
         List<Map<String, String>> rows = dataTable.asMaps(); // Getting Data
 
         for (var row : rows) {
-          MaintenanceTicket noteAdd = MaintenanceTicket.getWithId(Integer.parseInt(row.get("ticketId")));
-          noteAdd.addTicketNote(Date.valueOf(row.get("addedOnDate")),
-                                String.format(row.get("description")),
-                                (HotelStaff) HotelStaff.getWithEmail(row.get("noteTaker")));
+            MaintenanceTicket noteAdd = MaintenanceTicket.getWithId(Integer.parseInt(row.get("ticketId")));
+            noteAdd.addTicketNote(Date.valueOf(row.get("addedOnDate")),
+                    String.format(row.get("description")),
+                    (HotelStaff) HotelStaff.getWithEmail(row.get("noteTaker")));
         }
     }
 
@@ -230,12 +233,12 @@ public class MaintenanceTicketsStepDefinitions {
     @Given("ticket {string} is marked as {string}")
     public void ticket_is_marked_as(String ticketID, String state) {
         MaintenanceTicket ticket = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
-        
+
         // General values (HotelStaff, PriorityLevel, TimeEstimate)
         HotelStaff ticketFixer = (HotelStaff) assetPlus.getManager(); // Here we chose the manager as the assigned hotel staff to a ticket as there's always a manager but we are unaware of the existing employees and it is possible that no employees other than the manager exists.
         PriorityLevel priorityLevel = PriorityLevel.Low; // Initialise at lowest possible value.
         TimeEstimate timeEstimate = TimeEstimate.LessThanADay; // Initialise at lowest possible value.
-        
+
         if (state.equalsIgnoreCase("assigned")) {
             ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
         }
@@ -276,13 +279,13 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
     public void the_manager_attempts_to_assign_the_ticket_to_with_estimated_time_priority_and_requires_approval(
             String ticketId, String employeeEmail, String timeEstimate, String priority, String requiresApproval) {
-                int id = Integer.parseInt(ticketId);
-                TimeEstimate timeEstimate_object = TimeEstimate.valueOf(timeEstimate);
-                PriorityLevel priority_object = PriorityLevel.valueOf(priority);
-                Boolean approvalRequired_bool = Boolean.parseBoolean(requiresApproval);
+        int id = Integer.parseInt(ticketId);
+        TimeEstimate timeEstimate_object = TimeEstimate.valueOf(timeEstimate);
+        PriorityLevel priority_object = PriorityLevel.valueOf(priority);
+        Boolean approvalRequired_bool = Boolean.parseBoolean(requiresApproval);
 
-                AssetPlusAPI.assign(id, employeeEmail, timeEstimate_object, priority_object, approvalRequired_bool);
-        
+        AssetPlusAPI.assign(id, employeeEmail, timeEstimate_object, priority_object, approvalRequired_bool);
+
     }
 
     /**
@@ -293,7 +296,7 @@ public class MaintenanceTicketsStepDefinitions {
     @When("the hotel staff attempts to start the ticket {string}")
     public void the_hotel_staff_attempts_to_start_the_ticket(String ticketID) {
         MaintenanceTicket toStart = MaintenanceTicket.getWithId(Integer.parseInt(ticketID)); //getting the maintenance ticket from input
-         AssetPlusAPI.startTicketWork(toStart); //setting the ticket status to inProgress
+        AssetPlusAPI.startTicketWork(toStart); //setting the ticket status to inProgress
     }
 
     /**
@@ -344,7 +347,7 @@ public class MaintenanceTicketsStepDefinitions {
         assertEquals(expectedStatus, ticket.getTicketStatusFullName());
     }
 
-   /**
+    /**
      * Checks if the error message returned from a method is empty
      * @author Mathieu Allaire
      * @param string
@@ -362,8 +365,8 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket {string} shall not exist in the system")
     public void the_ticket_shall_not_exist_in_the_system(String ticketID) {
-      Assert.assertNull(MaintenanceTicket.getWithId(Integer.parseInt(ticketID))); 
-      //Asserts that when trying to retrieve the nonexisting ticket, nothing is returned
+        Assert.assertNull(MaintenanceTicket.getWithId(Integer.parseInt(ticketID)));
+        //Asserts that when trying to retrieve the nonexisting ticket, nothing is returned
     }
 
     /**
@@ -376,7 +379,7 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket {string} shall have estimated time {string}, priority {string}, and requires approval {string}")
     public void the_ticket_shall_have_estimated_time_priority_and_requires_approval(String ticketID,
-    String estimatedTime, String priorityLevel, String requiresApproval) {
+                                                                                    String estimatedTime, String priorityLevel, String requiresApproval) {
         MaintenanceTicket timePriorityApprovalTicket = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
         Assert.assertEquals(estimatedTime, timePriorityApprovalTicket.getTimeToResolve().toString());
         Assert.assertEquals(priorityLevel, timePriorityApprovalTicket.getPriority().toString());
@@ -395,7 +398,7 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket {string} shall be assigned to {string}")
     public void the_ticket_shall_be_assigned_to(String ticketId, String employeeEmail) {
-        MaintenanceTicket isAssigned = MaintenanceTicket.getWithId(Integer.parseInt(ticketId)); // Gets the desired ticket using the ticket iD stored in ticketId string. 
+        MaintenanceTicket isAssigned = MaintenanceTicket.getWithId(Integer.parseInt(ticketId)); // Gets the desired ticket using the ticket iD stored in ticketId string.
         assertEquals(employeeEmail, isAssigned.getTicketFixer().getEmail());
     }
 
@@ -412,7 +415,7 @@ public class MaintenanceTicketsStepDefinitions {
     }
 
     /**
-     * Checks if the maintenance tickets are present in the system. Checks if they have all of the same features (ie ticketID, raisedByEmail, etc). 
+     * Checks if the maintenance tickets are present in the system. Checks if they have all of the same features (ie ticketID, raisedByEmail, etc).
      * @author Tessa Hason
      * @param dataTable
      */
@@ -446,7 +449,7 @@ public class MaintenanceTicketsStepDefinitions {
             Assert.assertEquals(description, currentTicket.getDescription());
 
             //check if ticket asset is the same
-            String asset = row.get("asset");
+            String asset = row.get("assetName");
             Assert.assertEquals(asset, currentTicket.getAssetName());
 
             //check if ticket expected lifespan is the same
@@ -503,17 +506,17 @@ public class MaintenanceTicketsStepDefinitions {
             Assert.assertEquals(priority, currentTicket.getPriority());
 
             String approvalRequiredString = row.get("approvalRequired");
-            boolean approvalRequired;
-            if (approvalRequiredString.equals("true")){
-                approvalRequired = (currentTicket.getApprovalRequired() == true);
-                Assert.assertTrue(approvalRequired);
-            } else if (approvalRequiredString.equals("false")){
-                approvalRequired = (currentTicket.getApprovalRequired() == false);
-                Assert.assertTrue(approvalRequired);
-            } else{
-                Assert.assertNull(currentTicket.getApprovalRequired());
+
+            if (approvalRequiredString!=null){
+                if (approvalRequiredString.equalsIgnoreCase("true")){
+                    Assert.assertTrue(currentTicket.getApprovalRequired());
+                } else if (approvalRequiredString.equalsIgnoreCase("false")){
+                    Assert.assertFalse(currentTicket.getApprovalRequired());
+                }
+                else {
+                    Assert.assertNull(currentTicket.getApprovalRequired());
+                }
             }
-            
             //increment i
             i++;
         }
@@ -533,7 +536,7 @@ public class MaintenanceTicketsStepDefinitions {
         for (var ticket : tickets) {
             if (ticket.getId() == ticketId) {
                 currTicket = ticket;
-                }
+            }
         }
         assertNotNull(currTicket);
         List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();
@@ -558,8 +561,8 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket with id {string} shall have no notes")
     public void the_ticket_with_id_shall_have_no_notes(String ticketID) {
-      MaintenanceTicket noNotes = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
-      Assert.assertEquals(0, noNotes.numberOfTicketNotes());
+        MaintenanceTicket noNotes = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
+        Assert.assertEquals(0, noNotes.numberOfTicketNotes());
     }
 
     /**
@@ -570,11 +573,21 @@ public class MaintenanceTicketsStepDefinitions {
      */
     @Then("the ticket with id {string} shall have the following images")
     public void the_ticket_with_id_shall_have_the_following_images(String ticketID, io.cucumber.datatable.DataTable dataTable) {
-        
+
         MaintenanceTicket hasTheseImages = MaintenanceTicket.getWithId(Integer.parseInt(ticketID)); // gets the maintenance ticket using string parameter
-        List<Map<String, String>> rows = dataTable.asMaps();
-        for (var row : rows){
-            assertTrue(hasTheseImages.getTicketImages().contains(row.get("imageUrl")));
+
+        if (hasTheseImages.hasTicketImages()){
+            List<Map<String, String>> rows = dataTable.asMaps();
+            int count=0;
+            for (var row : rows){
+                count++;
+                for(int i=0; i<hasTheseImages.numberOfTicketImages(); i++) {
+                    if (hasTheseImages.getTicketImage(i).equals(row.get("imageUrl"))) {
+                        Assert.assertEquals(row.get("imageUrl"), hasTheseImages.getTicketImage(i));
+                    }
+                }
+            }
+            Assert.assertEquals(count, hasTheseImages.numberOfTicketImages());
         }
 
     }
