@@ -24,7 +24,13 @@ public class AssetPlusFeatureSet6Controller {
     User userToDelete = User.getWithEmail(email);
     if(email.equals("manager@ap.com")){
     } else if (userToDelete instanceof Employee || userToDelete instanceof Guest){
+      try {
       userToDelete.delete();
+      AssetPlusPersistence.save();
+    }
+    catch(Exception e) {
+      errorMessage += "Unknown exception";
+     }
     }
   }
 
@@ -38,17 +44,17 @@ public class AssetPlusFeatureSet6Controller {
   
   public static List<TOMaintenanceTicket> getTickets() {
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-
-    if (assetPlus.hasMaintenanceTickets()){
-      List<MaintenanceTicket> maintenanceTickets = assetPlus.getMaintenanceTickets();
-      List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
-
-      for (MaintenanceTicket ticket : maintenanceTickets) {
-        List<String> urls = new ArrayList<String>();
-        List<TicketImage> images = ticket.getTicketImages();
+    try {
+      if (assetPlus.hasMaintenanceTickets()){
+        List<MaintenanceTicket> maintenanceTickets = assetPlus.getMaintenanceTickets();
+        List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
+        
+        for (MaintenanceTicket ticket : maintenanceTickets) {
+          List<String> urls = new ArrayList<String>();
+          List<TicketImage> images = ticket.getTicketImages();
           for (TicketImage TicketImage : images) {
             urls.add(TicketImage.getImageURL());
-          }
+        }
 
         TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.numberOfTicketNotes()];
         int i = 0;
@@ -90,5 +96,11 @@ public class AssetPlusFeatureSet6Controller {
     return null;
     
   }
+      
+      AssetPlusPersistence.save();
+    }
+    catch(Exception e) {
+      errorMessage += "Unknown exception";
+     }
 
 }
