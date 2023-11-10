@@ -238,11 +238,11 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Sets the ticket status to approved
      * @author Luis Jarquin
-     * @param string ticket ID of desired ticket
+     * @param ticketID ticket ID of desired ticket
      */
-    @When("the manager attempts to approve the ticket {string}")
-    public void the_manager_attempts_to_approve_the_ticket(String string) {
-        MaintenanceTicket toApprove = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
+    @When("the manager attempts to approve the ticket {ticketID}")
+    public void the_manager_attempts_to_approve_the_ticket(String ticketID) {
+        MaintenanceTicket toApprove = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
         toApprove.approveWork();
     }
 
@@ -318,21 +318,21 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Verifies that the ticket in question has the appropriate estimated time, priority, and approval requirement
      * @author Luis Jarquin
-     * @param string Ticket ID
-     * @param string2 Estimated time for ticket resolution
-     * @param string3 Priority level of the ticket
-     * @param string4 Approval is or is not required (boolean)
+     * @param ticketID Ticket ID
+     * @param estimatedTime Estimated time for ticket resolution
+     * @param priorityLevel Priority level of the ticket
+     * @param requiresApproval Approval is or is not required (boolean)
      */
-    @Then("the ticket {string} shall have estimated time {string}, priority {string}, and requires approval {string}")
-    public void the_ticket_shall_have_estimated_time_priority_and_requires_approval(String string,
-    String string2, String string3, String string4) {
-        MaintenanceTicket timePriorityApprovalTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(string));
-        Assert.assertEquals(string2, timePriorityApprovalTicket.getTimeToResolve().toString());
-        Assert.assertEquals(string3, timePriorityApprovalTicket.getPriority().toString());
+    @Then("the ticket {ticketID} shall have estimated time {estimatedTime}, priority {priorityLevel}, and requires approval {requiresApproval}")
+    public void the_ticket_shall_have_estimated_time_priority_and_requires_approval(String ticketID,
+    String estimatedTime, String priorityLevel, String requiresApproval) {
+        MaintenanceTicket timePriorityApprovalTicket = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID));
+        Assert.assertEquals(estimatedTime, timePriorityApprovalTicket.getTimeToResolve().toString());
+        Assert.assertEquals(priorityLevel, timePriorityApprovalTicket.getPriority().toString());
         if (timePriorityApprovalTicket.getTicketStatusFullName().equalsIgnoreCase("open")){
             assertNull(timePriorityApprovalTicket.getFixApprover());
         } else {
-            Assert.assertEquals(Boolean.parseBoolean(string4), timePriorityApprovalTicket.hasFixApprover());
+            Assert.assertEquals(Boolean.parseBoolean(requiresApproval), timePriorityApprovalTicket.hasFixApprover());
         }
     }
 
@@ -500,13 +500,13 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Verifies that the ticket has the following images
      * @author Luis Jarquin, Jerome Desrosiers
-     * @param string ticket ID
+     * @param ticketID ticket ID
      * @param dataTable Contains image URLs of corresponding ticket ID
      */
-    @Then("the ticket with id {string} shall have the following images")
-    public void the_ticket_with_id_shall_have_the_following_images(String string, io.cucumber.datatable.DataTable dataTable) {
+    @Then("the ticket with id {ticketID} shall have the following images")
+    public void the_ticket_with_id_shall_have_the_following_images(String ticketID, io.cucumber.datatable.DataTable dataTable) {
         
-        MaintenanceTicket hasTheseImages = assetPlus.getMaintenanceTicket(Integer.parseInt(string)); // gets the maintenance ticket using string parameter
+        MaintenanceTicket hasTheseImages = assetPlus.getMaintenanceTicket(Integer.parseInt(ticketID)); // gets the maintenance ticket using string parameter
         List<Map<String, String>> rows = dataTable.asMaps();
         for (var row : rows){
             assertTrue(hasTheseImages.getTicketImages().contains(row.get("imageUrl")));
