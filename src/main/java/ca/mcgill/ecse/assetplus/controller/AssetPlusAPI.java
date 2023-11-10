@@ -211,7 +211,7 @@ public class AssetPlusAPI {
   * @author Tessa Hason
   */
 
-  public static String disapproveTicketWork(MaintenanceTicket toDisapprove){
+  public static String disapproveTicketWork(Date date, String reason, MaintenanceTicket toDisapprove){
     String errorMessage = "";
     if (!MaintenanceTicket.hasWithId(toDisapprove.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
@@ -230,6 +230,7 @@ public class AssetPlusAPI {
     }
     try {
       toDisapprove.disapproveWork();
+      MaintenanceNote note = new MaintenanceNote(date, reason, toDisapprove, toDisapprove.getAssetPlus().getManager());
     }
     catch(Exception e) {
       errorMessage += "Some unknown error.";
