@@ -46,16 +46,15 @@ public class AssetPlusFeatureSet6Controller {
   
   public static List<TOMaintenanceTicket> getTickets() {
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-    try {
-      if (assetPlus.hasMaintenanceTickets()){
-        List<MaintenanceTicket> maintenanceTickets = assetPlus.getMaintenanceTickets();
-        List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
+    if (assetPlus.hasMaintenanceTickets()){
+      List<MaintenanceTicket> maintenanceTickets = assetPlus.getMaintenanceTickets();
+      List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
         
-        for (MaintenanceTicket ticket : maintenanceTickets) {
-          List<String> urls = new ArrayList<String>();
-          List<TicketImage> images = ticket.getTicketImages();
-          for (TicketImage TicketImage : images) {
-            urls.add(TicketImage.getImageURL());
+      for (MaintenanceTicket ticket : maintenanceTickets) {
+        List<String> urls = new ArrayList<String>();
+        List<TicketImage> images = ticket.getTicketImages();
+        for (TicketImage TicketImage : images) {
+          urls.add(TicketImage.getImageURL());
         }
 
         TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.numberOfTicketNotes()];
@@ -73,36 +72,49 @@ public class AssetPlusFeatureSet6Controller {
         int lifespan = -1;
         Date purchaseDate;
         int floorNumber = -1;
-        int roomNumber =-1;
+        int roomNumber = -1;
 
-        if (ticket.hasAsset()){
+        if (ticket.hasAsset()) {
           assetName = ticket.getAsset().getAssetType().getName();
           lifespan = ticket.getAsset().getAssetType().getExpectedLifeSpan();
           purchaseDate = ticket.getAsset().getPurchaseDate();
           floorNumber = ticket.getAsset().getFloorNumber();
           roomNumber = ticket.getAsset().getRoomNumber();
-        }else{
+        } else {
           assetName = null;
           purchaseDate = null;
         }
+        //ticketFixercheck
+
+        String fixer = null;
+        if (ticket.hasTicketFixer()) {
+          fixer = ticket.getTicketFixer().getEmail();
+        }
 
 
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getTicketStatusFullName(), ticket.getTicketFixer().getEmail(), ticket.getTimeToResolve().toString(), ticket.getPriority().toString(), ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
+        //timetoresolve check
+
+        String timetores = null;
+        if (ticket.getTimeToResolve() !=null){
+          timetores = ticket.getTimeToResolve().toString();
+        }
+
+        //priority check
+
+        String prioritycheck = null;
+        if (ticket.getPriority()!=null){
+          prioritycheck = ticket.getPriority().toString();
+        }
+
+
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getTicketStatusFullName(), fixer, timetores, prioritycheck, ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
-
+      AssetPlusPersistence.save();
       return TOMaintenanceTickets;
 
     }
-    
-    AssetPlusPersistence.save();
+    return null;
   }
-  
-  catch(Exception e) {
-    String errorMessage = "Unknown exception";
-  }
-
-  return null;
-}
 }
