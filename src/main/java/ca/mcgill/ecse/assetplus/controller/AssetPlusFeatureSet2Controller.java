@@ -126,9 +126,9 @@ public class AssetPlusFeatureSet2Controller {
     try {
       if (AssetType.hasWithName(name)) {
         AssetType.getWithName(name).delete();
-        AssetPlusPersistence.save();
       }
-    catch (RuntimeException e);
+      AssetPlusPersistence.save();
     }
+    catch (RuntimeException e){}
   }
 }
