@@ -71,9 +71,17 @@ public class AssetPlusAPI {
   		}
   		if(assetPlus.getManager().getEmail().equals(employeeEmail)){
   			HotelStaff manager = assetPlus.getManager();
-  			right_ticket.setFixApprover(assetPlus.getManager());
-  			right_ticket.assign(manager, priority, timeEstimate, requiresApproval);
-  			AssetPlusPersistence.save();
+  			
+        try {
+          right_ticket.setFixApprover(assetPlus.getManager());
+    right_ticket.assign(manager, priority, timeEstimate, requiresApproval);
+  		
+      AssetPlusPersistence.save();
+    }
+    catch(Exception e) {
+      errorMessage += "Unknown exception";
+    }
+  			
   			return errorMessage;
   		}
   		Boolean foundEmployee = false;
@@ -89,9 +97,16 @@ public class AssetPlusAPI {
   		errorMessage += "Staff to assign does not exist.";
   		return errorMessage;
   		}
-  		right_ticket.setFixApprover(assetPlus.getManager());
-  		right_ticket.assign(right_employee, priority, timeEstimate, requiresApproval);
-  		AssetPlusPersistence.save();
+  		try {
+    right_ticket.setFixApprover(assetPlus.getManager());
+    right_ticket.assign(right_employee, priority, timeEstimate, requiresApproval);
+      AssetPlusPersistence.save();
+    }
+    catch(Exception e) {
+      errorMessage += "Unknown exception";
+    }
+    
+  		
   		return errorMessage;
   	}
 
