@@ -169,7 +169,12 @@ public class AssetPlusAPI {
 
     return errorMessage;
   }
-  
+  /**
+   * <1>approveTicketWork</1>
+   * This method is called when the manager attempts to approve work on a ticket, checking if the given ticket has the right status.
+   * @author Yuri Sorice
+   * @param toApprove The ticket that the manager wants to approve.
+   */
   public static String approveTicketWork(MaintenanceTicket toApprove){
     String errorMessage = "";
     if (!MaintenanceTicket.hasWithId(toApprove.getId())) {
