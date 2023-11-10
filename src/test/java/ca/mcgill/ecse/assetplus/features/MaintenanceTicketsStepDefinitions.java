@@ -239,16 +239,18 @@ public class MaintenanceTicketsStepDefinitions {
         HotelStaff ticketFixer = (HotelStaff) assetPlus.getManager(); // Here we chose the manager as the assigned hotel staff to a ticket as there's always a manager but we are unaware of the existing employees and it is possible that no employees other than the manager exists.
         PriorityLevel priorityLevel = PriorityLevel.Low; // Initialise at lowest possible value.
         TimeEstimate timeEstimate = TimeEstimate.LessThanADay; // Initialise at lowest possible value.
+        Boolean requiresApproval = ticket.hasFixApprover();
 
         if (state.equalsIgnoreCase("assigned")) {
-            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
         }
         else if (state.equalsIgnoreCase("inprogess")) {
-            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
             ticket.startWork();
         }
         else if (state.equalsIgnoreCase("resolved")) {
-            ticket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            requiresApproval = true;
+            ticket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
             ticket.startWork();
             ticket.markAsResolved();
         }
