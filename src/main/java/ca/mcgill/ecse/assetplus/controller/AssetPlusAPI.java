@@ -8,19 +8,19 @@ import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 
 public class AssetPlusAPI {
 
-  /**
- 	* <h1>assign</h1> 
- 	* This method is called when a Hotel Staff member is assigned to a ticket
- 	* 
- 	* @param int ticketId - Id of the ticket that a Hotel Staff member is assigned to.
- 	* @param String employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
- 	* @param TimeEstimate timeEstimate - Time Estimate of the ticket.
- 	* @param PriorityLevel priority - Priority of the ticket.
- 	* @param Boolean requiresApproval - Whether the ticket requires approval from the manager to be closed.
- 	* @return String - This returns a string with an error message gathered during execution. If it is empty, the Employee or Guest's account registration was successful.
- 	*
- 	* @author Mathieu Allaire
- 	*/
+/**
+* <h1>assign</h1> 
+* This method is called when a Hotel Staff member is assigned to a ticket
+* 
+* @param int ticketId - Id of the ticket that a Hotel Staff member is assigned to.
+* @param String employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
+* @param TimeEstimate timeEstimate - Time Estimate of the ticket.
+* @param PriorityLevel priority - Priority of the ticket.
+* @param Boolean requiresApproval - Whether the ticket requires approval from the manager to be closed.
+* @return String - This returns a string with an error message gathered during execution. If it is empty, the Employee or Guest's account registration was successful.
+*
+* @author Mathieu Allaire
+*/
 
   public static String assign(int ticketId, String employeeEmail, TimeEstimate timeEstimate, PriorityLevel priority, Boolean requiresApproval){
   		String errorMessage = "";
