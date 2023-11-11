@@ -13,11 +13,11 @@ public class AssetPlusAPI {
   /**
   * <h1>assign</h1> 
   * This method is called when a Hotel Staff member is assigned to a ticket
-  * @param int ticketId - Id of the ticket that a Hotel Staff member is assigned to.
-  * @param String employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
-  * @param TimeEstimate timeEstimate - Time Estimate of the ticket.
-  * @param PriorityLevel priority - Priority of the ticket.
-  * @param Boolean requiresApproval - Whether the ticket requires approval from the manager to be closed.
+  * @param ticketId - Id of the ticket that a Hotel Staff member is assigned to.
+  * @param employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
+  * @param timeEstimate - Time Estimate of the ticket.
+  * @param priority - Priority of the ticket.
+  * @param requiresApproval - Whether the ticket requires approval from the manager to be closed.
   * @return String - This returns a string with an error message gathered during execution. If it is empty, the Employee or Guest's account registration was successful.
   *
   * @author Mathieu Allaire
@@ -114,7 +114,7 @@ public class AssetPlusAPI {
    * <h1>startTicketWork</h1>
    * This method is called whenever the hotel staff tries to start work on the maintenance ticket toStart.
    *
-   * @param MaintenanceTicket toStart - This is the MaintenanceTicket object which's status will be changed to "InProgress" if the method is successful.
+   * @param  toStart - This is the MaintenanceTicket object which's status will be changed to "InProgress" if the method is successful.
    * @return String - This method returns a string containing an error message gathered during execution, if this returned string is empty, the status of toStart maintenance ticket was successfully changed to "InProgress".
    * 
    * @author Jerome Desrosiers
@@ -189,6 +189,7 @@ public class AssetPlusAPI {
    * This method is called when the manager attempts to approve work on a ticket, checking if the given ticket has the right status.
    * @author Yuri Sorice
    * @param toApprove The ticket that the manager wants to approve.
+   * @return String - Returns a string with an error message gathered during execution, if this returned string is empty, the status of toApprove maintenance ticket was succesfully changed to "Closed".
    */
   public static String approveTicketWork(MaintenanceTicket toApprove){
     String errorMessage = "";
@@ -223,7 +224,7 @@ public class AssetPlusAPI {
   * <h1>disapproveTicketWork</h1> 
   * This method is called when a manager wants to disapprove a ticket that requires approval,
   * 
-  * @param MaintenanceTicket disapproveTicketWork - maintenance ticket to disapprove
+  * @param  disapproveTicketWork - maintenance ticket to disapprove
   * @return String - error message
   *
   * @author Tessa Hason
