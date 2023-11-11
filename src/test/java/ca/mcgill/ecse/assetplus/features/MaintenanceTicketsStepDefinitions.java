@@ -526,6 +526,7 @@ public class MaintenanceTicketsStepDefinitions {
         }
     }
 
+
     /**
      * This method ensures that information of the notes of the ticket obtained by the controller method is the same as the information in the datatable.
      * @author Mathieu Allaire
