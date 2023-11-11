@@ -36,6 +36,9 @@ class MaintenanceTicket {
         if (isRequired) {
             setFixApprover(getAssetPlus().getManager());
         }
+        else {
+          setFixApprover(null);
+        }
     }
   	private boolean requiresManagerApproval() {
         return hasFixApprover();

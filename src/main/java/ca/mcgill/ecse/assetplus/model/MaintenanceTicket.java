@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
@@ -691,9 +691,12 @@ public class MaintenanceTicket
     if (isRequired) {
             setFixApprover(getAssetPlus().getManager());
         }
+        else {
+          setFixApprover(null);
+        }
   }
 
-  // line 41 "../../../../../AssetPlusStates.ump"
+  // line 44 "../../../../../AssetPlusStates.ump"
    private boolean requiresManagerApproval(){
     return hasFixApprover();
   }
