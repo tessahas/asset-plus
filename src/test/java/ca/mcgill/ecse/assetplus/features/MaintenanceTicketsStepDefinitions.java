@@ -83,7 +83,7 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Initializes assets each with a specific assetNumber, floorNumber, roomNumber, purchaseDate, and type for future testing.
      * @author Tessa Hason
-     * @param dataTable
+     * @param dataTable The table contains the specific asset number, floor number, room number, purchase date, and type of assets in the system.
      */
 
     @Given("the following assets exist in the system")
@@ -104,7 +104,8 @@ public class MaintenanceTicketsStepDefinitions {
      * Initializes maintenance tickets with a specific ticket id, raised date, description, asset number, status, ticket fixer, time estimate, priority and
      * approval requirement
      * @author Mathieu Allaire
-     * @param dataTable
+     * @param dataTable The table contains the ticket id, who raised the ticket, the date it was raised, the description, the asset number, ticket status, 
+     * ticket fixer, time estimate, priority and approval requirement
      */
     @Given("the following tickets exist in the system")
     public void the_following_tickets_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
@@ -155,7 +156,7 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Initializes the notes with the date they were added and the description, then adds them to the corresponding notes.
      * @author Yuri Sorice
-     * @param dataTable
+     * @param dataTable This table contains the date the notes were added and their descriptions.
      */
     @Given("the following notes exist in the system")
     public void the_following_notes_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
@@ -275,11 +276,11 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Assigns Hotel Staff member to a ticket with a time estimate, a priority and whether it requires manager approval to be closed.
      * @author Mathieu Allaire
-     * @param ticketId
-     * @param employeeEmail
-     * @param timeEstimate
-     * @param priority
-     * @param requiresApproval
+     * @param ticketId id of the maintenance ticket
+     * @param employeeEmail email of the employee the manager is trying to assign to a given ticket
+     * @param timeEstimate time estimate of a given ticket, desired by the manager
+     * @param priority priority of the given ticket, desired by the manager
+     * @param requiresApproval whether or not the ticket that will be assigned need manager approval, desired by the manager
      */
     @When("the manager attempts to assign the ticket {string} to {string} with estimated time {string}, priority {string}, and requires approval {string}")
     public void the_manager_attempts_to_assign_the_ticket_to_with_estimated_time_priority_and_requires_approval(
@@ -344,8 +345,8 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Checks if the ticket in question has expected status expectedStatus.
      * @author Tessa Hason
-     * @param givenTicketID
-     * @param expectedStatus
+     * @param givenTicketID Id of the desired ticket.
+     * @param expectedStatus The state the ticket should be in.
      */
     @Then("the ticket {string} shall be marked as {string}")
     public void the_ticket_shall_be_marked_as(String givenTicketID, String expectedStatus) {
@@ -357,11 +358,11 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Checks if the error message returned from a method is empty
      * @author Mathieu Allaire
-     * @param string
+     * @param errorString a string containing the desired error message.
      */
     @Then("the system shall raise the error {string}")
-    public void the_system_shall_raise_the_error(String string) {
-        Assert.assertFalse(string.isEmpty());
+    public void the_system_shall_raise_the_error(String errorString) {
+        Assert.assertFalse(errorString.isEmpty());
     }
 
 
@@ -421,7 +422,7 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * Checks if the maintenance tickets are present in the system. Checks if they have all of the same features (ie ticketID, raisedByEmail, etc).
      * @author Tessa Hason
-     * @param dataTable
+     * @param dataTable containing all the tickets present in the system.
      */
     @Then("the following maintenance tickets shall be presented")
     public void the_following_maintenance_tickets_shall_be_presented(
@@ -530,8 +531,8 @@ public class MaintenanceTicketsStepDefinitions {
     /**
      * This method ensures that information of the notes of the ticket obtained by the controller method is the same as the information in the datatable.
      * @author Mathieu Allaire
-     * @param ticketID
-     * @param dataTable
+     * @param ticketID Id of the desired ticket.
+     * @param dataTable containing all of the ticket notes, with their information: noteTaker, date, description.
      */
     @Then("the ticket with id {string} shall have the following notes")
     public void the_ticket_with_id_shall_have_the_following_notes(String ticketID,
