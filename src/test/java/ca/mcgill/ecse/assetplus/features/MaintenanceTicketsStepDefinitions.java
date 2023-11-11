@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.sl.In;
+import io.cucumber.messages.internal.com.google.protobuf.Internal.BooleanList;
 import java.util.Map;
 import java.util.PrimitiveIterator;
 import java.util.ArrayList;
@@ -206,20 +207,21 @@ public class MaintenanceTicketsStepDefinitions {
 
         // Set the state of the maintenance ticket according to the ticketState input.
         // Note, if ticketState is "Open", nothing happens.
+        Boolean requiresApproval = Boolean.parseBoolean(needsManagerApproval);
         if (ticketState.equalsIgnoreCase("assigned")) {
-            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
         }
         else if (ticketState.equalsIgnoreCase("inprogress")) {
-            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
             markedTicket.startWork();
         }
         else if (ticketState.equalsIgnoreCase("resolved")) {
-            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, true);
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
             markedTicket.startWork();
             markedTicket.markAsResolved();
         }
         else if (ticketState.equalsIgnoreCase("closed")) {
-            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, false);
+            markedTicket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
             markedTicket.startWork();
             markedTicket.markAsResolved();
         }
@@ -244,7 +246,7 @@ public class MaintenanceTicketsStepDefinitions {
         if (state.equalsIgnoreCase("assigned")) {
             ticket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
         }
-        else if (state.equalsIgnoreCase("inprogess")) {
+        else if (state.equalsIgnoreCase("inprogress")) {
             ticket.assign(ticketFixer, priorityLevel, timeEstimate, requiresApproval);
             ticket.startWork();
         }

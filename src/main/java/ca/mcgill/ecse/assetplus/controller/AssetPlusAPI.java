@@ -73,7 +73,7 @@ public class AssetPlusAPI {
   			
         try {
           right_ticket.setFixApprover(assetPlus.getManager());
-    right_ticket.assign(manager, priority, timeEstimate, requiresApproval);
+          right_ticket.assign(manager, priority, timeEstimate, requiresApproval);
   		
       AssetPlusPersistence.save();
     }
