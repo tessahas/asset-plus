@@ -114,7 +114,7 @@ public class AssetPlusAPI {
    * <h1>startTicketWork</h1>
    * This method is called whenever the hotel staff tries to start work on the maintenance ticket toStart.
    *
-   * @param MaintenanceTicket - toStart This is the MaintenanceTicket object which's status will be changed to "InProgress" if the method is successful.
+   * @param MaintenanceTicket toStart - This is the MaintenanceTicket object which's status will be changed to "InProgress" if the method is successful.
    * @return String - This method returns a string containing an error message gathered during execution, if this returned string is empty, the status of toStart maintenance ticket was successfully changed to "InProgress".
    * 
    * @author Jerome Desrosiers
