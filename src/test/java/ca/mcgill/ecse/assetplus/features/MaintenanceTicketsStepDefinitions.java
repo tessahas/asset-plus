@@ -526,32 +526,31 @@ public class MaintenanceTicketsStepDefinitions {
         }
     }
 
+
     /**
      * This method ensures that information of the notes of the ticket obtained by the controller method is the same as the information in the datatable.
      * @author Mathieu Allaire
+     * @param ticketID
      * @param dataTable
      */
     @Then("the ticket with id {string} shall have the following notes")
-    public void the_ticket_with_id_shall_have_the_following_notes(String ticketString,
+    public void the_ticket_with_id_shall_have_the_following_notes(String ticketID,
                                                                   io.cucumber.datatable.DataTable dataTable) {
-        int ticketId = Integer.parseInt(ticketString);
 
-        TOMaintenanceTicket currTicket = null;
-        for (var ticket : tickets) {
-            if (ticket.getId() == ticketId) {
-                currTicket = ticket;
-            }
-        }
-        assertNotNull(currTicket);
-        List<TOMaintenanceNote> currTicketNotes = currTicket.getNotes();
+        MaintenanceTicket ticket = MaintenanceTicket.getWithId(Integer.parseInt(ticketID));
+        List<MaintenanceNote> ticketNotes = ticket.getTicketNotes();
+        
         List<Map<String, String>> rows = dataTable.asMaps();
         int i = 0;
         for (var row : rows) {
-            TOMaintenanceNote currNote = currTicketNotes.get(i);
+            MaintenanceNote currNote = ticketNotes.get(i);
+
             String noteTaker = row.get("noteTaker");
-            assertEquals(noteTaker, currNote.getNoteTakerEmail());
+            assertEquals(noteTaker, currNote.getNoteTaker().getEmail());
+
             Date addedOnDate = Date.valueOf(row.get("addedOnDate"));
             assertEquals(addedOnDate, currNote.getDate());
+            
             String description = row.get("description");
             assertEquals(description, currNote.getDescription());
             i++;
