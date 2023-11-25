@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="222.0" layoutY="58.0" prefHeight="36.0" prefWidth="157.0" text="Maintenance" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="221.0">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <MenuBar layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="AssetPlus">
+               <items>
+                  <CheckMenuItem mnemonicParsing="false" text="Assets" />
+                  <CheckMenuItem mnemonicParsing="false" text="Back to Main Menu" />
+               </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TextField layoutX="193.0" layoutY="149.0" prefHeight="25.0" prefWidth="273.0" promptText="Enter ID" />
+      <Button layoutX="307.0" layoutY="174.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Update" />
+      <Button layoutX="193.0" layoutY="174.0" mnemonicParsing="false" text="Track Ticket Status" />
+      <Button layoutX="379.0" layoutY="174.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Create New" />
+      <MenuButton layoutX="129.0" layoutY="149.0" mnemonicParsing="false" text="Select">
+        <items>
+            <CheckMenuItem mnemonicParsing="false" text="Ticket" />
+            <CheckMenuItem mnemonicParsing="false" text="Note" />
+        </items>
+      </MenuButton>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>
