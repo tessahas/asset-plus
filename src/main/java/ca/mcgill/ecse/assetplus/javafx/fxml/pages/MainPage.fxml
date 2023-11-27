@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Users">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="600.0" />
+            </content>
+          </Tab>
+          <Tab text="Assets">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Maintenance">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="136.79998779296875" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="119.19998168945312" minHeight="0.0" prefHeight="32.60000228881836" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="174.8000030517578" minHeight="10.0" prefHeight="68.19999771118165" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="174.8000030517578" minHeight="10.0" prefHeight="67.19998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="174.8000030517578" minHeight="10.0" prefHeight="64.80001220703124" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="174.8000030517578" minHeight="10.0" prefHeight="78.20004882812503" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="174.8000030517578" minHeight="10.0" prefHeight="44.19999999999999" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Ticket" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label text="Note" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <TextField promptText="Date MM/DD/YYYY" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label text="Priority:" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <ToggleButtonGroup selectionType="SINGLE" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                            <toggles>
+                                <ToggleButton text="Low" />
+                                <ToggleButton selected="true" text="Normal" />
+                                <ToggleButton text="Urgent" />
+                            </toggles>
+                           <GridPane.margin>
+                              <Insets bottom="25.0" left="70.0" right="40.0" top="25.0" />
+                           </GridPane.margin>
+                        </ToggleButtonGroup>
+                        <Label text="Time Estimate:" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <ToggleButtonGroup prefHeight="54.0" prefWidth="200.0" selectionType="SINGLE" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <toggles>
+                              <ToggleButton text="&lt;1 day" />
+                              <ToggleButton selected="true" text="1-3 days" />
+                              <ToggleButton text="3-7 days" />
+                              <ToggleButton mnemonicParsing="false" text="1-3  weeks" translateX="-175.0" translateY="25.0" />
+                              <ToggleButton mnemonicParsing="false" text="3+ weeks" translateX="-175.0" translateY="25.0" />
+                           </toggles>
+                           <GridPane.margin>
+                              <Insets bottom="15.0" left="115.0" right="40.0" top="25.0" />
+                           </GridPane.margin>
+                        </ToggleButtonGroup>
+                        <Label text="Status:" GridPane.rowIndex="5">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <ToggleButtonGroup prefHeight="54.0" prefWidth="200.0" selectionType="SINGLE" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <toggles>
+                              <ToggleButton text="Open" />
+                              <ToggleButton selected="true" text="Assigned" />
+                              <ToggleButton text="InProgress" />
+                              <ToggleButton mnemonicParsing="false" text="Resolved" translateX="-181.0" translateY="25.0" />
+                              <ToggleButton mnemonicParsing="false" text="Closed" translateX="-181.0" translateY="25.0" />
+                           </toggles>
+                           <GridPane.margin>
+                              <Insets bottom="20.0" left="60.0" top="20.0" />
+                           </GridPane.margin>
+                        </ToggleButtonGroup>
+                        <Label text="Label" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab text="Assignments">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <ListView prefHeight="470.0" prefWidth="600.0" />
+   </children>
+</VBox>
