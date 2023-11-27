@@ -1,5 +1,5 @@
 class MaintenanceTicket {
-	ticketStatus {
+	status {
       Open {
       	assign(HotelStaff ticketFixer, PriorityLevel priorityLevel, TimeEstimate timeEstimate, boolean isRequired) / {
             assignTo(ticketFixer);
