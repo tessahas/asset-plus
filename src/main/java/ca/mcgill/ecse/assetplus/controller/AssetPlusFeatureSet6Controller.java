@@ -117,4 +117,16 @@ public class AssetPlusFeatureSet6Controller {
     }
     return null;
   }
+
+  public static List<TOMaintenanceTicket> getTicketForSpecificDay(Date date) {
+    List<TOMaintenanceTicket> allTickets = getTickets();
+    var ticketsForSpecificDay = new ArrayList<TOMaintenanceTicket>();
+
+    for (var singleTicket : allTickets) {
+      if (singleTicket.getRaisedOnDate().equals(date)) {
+        ticketsForSpecificDay.add(singleTicket);
+      }
+    }
+    return ticketsForSpecificDay;
+  }
 }
