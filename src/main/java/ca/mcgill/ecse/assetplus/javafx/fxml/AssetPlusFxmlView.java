@@ -1,4 +1,4 @@
-package ca.mcgill.ecse.assetplus.javafx.fxml.pages;
+package ca.mcgill.ecse.assetplus.javafx.fxml;
 
 import java.io.IOException;
 import java.util.ArrayList;

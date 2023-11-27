@@ -2,7 +2,7 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import java.util.List;
 import ca.mcgill.ecse.assetplus.controller.*;
-import ca.mcgill.ecse.assetplus.javafx.fxml.pages.AssetPlusFxmlView;
+import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

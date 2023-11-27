@@ -7,6 +7,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 import ca.mcgill.ecse.assetplus.controller.*;
+import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import javafx.event.ActionEvent;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import java.time.LocalDate;
-import ca.mcgill.ecse.assetplus.javafx.fxml.pages.AssetPlusFxmlView;
 
 public class ListViewController {
     @FXML // ResourceBundle that was given to the FXMLLoader
