@@ -10,6 +10,8 @@ import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 public class AssetPlusAPI {
 
+private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
+
   /**
   * <h1>assign</h1> 
   * This method is called when a Hotel Staff member is assigned to a ticket
@@ -25,7 +27,6 @@ public class AssetPlusAPI {
   
   public static String assign(int ticketId, String employeeEmail, TimeEstimate timeEstimate, PriorityLevel priority, Boolean requiresApproval){
   		String errorMessage = "";
-  		AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
   		if(!(assetPlus.hasMaintenanceTickets())){
   			errorMessage+="There are no maintenance tickets in the system.";
   			return errorMessage;
