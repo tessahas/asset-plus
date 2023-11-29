@@ -4,7 +4,6 @@ import ca.mcgill.ecse.assetplus.model.AssetPlus;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import javafx.application.Application;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
-import ca.mcgill.ecse.assetplus.javafx.fxml.pages.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -37,5 +36,4 @@ public class AssetPlusApplication {
   public static void setCurrentDate(Date date) {
     currentDate = date;
   }
-
 }

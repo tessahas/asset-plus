@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import java.time.LocalDate;
@@ -53,7 +54,8 @@ public class ListViewController {
         overviewTable.getColumns().add(createTableColumn("Ticket ID", "number"));
 
         //STATUS COLUMN (string)
-        overviewTable.getColumns().add(createTableColumn("Status", "status"));
+        var statusColumn = createTableColumn("Status", "status");
+        overviewTable.getColumns().add(statusColumn);
     
         //RAISED BY EMAIL COLUMN (customizable string)
         var raisedColumn = new TableColumn<TOMaintenanceTicket, String>("Ticket Raiser");
@@ -117,7 +119,43 @@ public class ListViewController {
         notesColumn.setCellValueFactory(data -> Bindings.createStringBinding(
             () -> data.getValue().getNotes().toString()));
         overviewTable.getColumns().add(notesColumn);
+
+
+        //Set colors 
+        overviewTable.setRowFactory(tv -> new TableRow<TOMaintenanceTicket>() {
+            @Override
+            protected void updateItem(TOMaintenanceTicket item, boolean empty) {
+                super.updateItem(item, empty);
     
+                if (item == null || item.getStatus() == null) {
+                    // If the status is null, set the default row color
+                    setStyle("");
+                } else {
+                    // Set row color based on the value of the "Status" column
+                    switch (item.getStatus()) {
+                        case "Open":
+                            setStyle("-fx-background-color: lightgreen;");
+                            break;
+                        case "InProgress":
+                            setStyle("-fx-background-color: #FFFFE0;"); //Light yellow
+                            break;
+                        case "Assigned":
+                            setStyle("-fx-background-color: #FFDAB9;");  //light orange
+                            break;
+                        case "Closed":
+                            setStyle("-fx-background-color: ##FFB6C1"); //light red 
+                        case "Resolved":
+                            setStyle("-fx-background-color: #E6E6FA"); //light purple
+                        default:
+                            // Set the default row color for other statuses
+                            setStyle("");
+                            break;
+                    }
+                }
+            }
+        });
+
+
         // configure data picker
         // set editable to false so that the user cannot choose from the calendar
         datePicker.setEditable(false);
