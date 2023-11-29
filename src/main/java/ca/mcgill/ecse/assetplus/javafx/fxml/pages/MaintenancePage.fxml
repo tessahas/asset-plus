@@ -35,12 +35,12 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TextField promptText="Date MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="updateTicketDateTextField" promptText="Date MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+      <TextField fx:id="updateTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -66,22 +66,22 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TextField promptText="Add Image URL" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <TextField fx:id="addImageUrlTextField" promptText="Add Image URL" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField promptText="Delete Image URL" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <TextField fx:id="deleteImageUrlTextField" promptText="Delete Image URL" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button fx:id="addImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Button fx:id="deleteImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -102,12 +102,12 @@
             <Insets />
          </GridPane.margin>
       </Label>
-      <TextField promptText="Date MM/DD/YYYY" GridPane.rowIndex="2">
+      <TextField fx:id="createTicketDateTextfield" promptText="Date MM/DD/YYYY" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.rowIndex="3">
+      <TextField fx:id="createTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -139,57 +139,57 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox prefWidth="150.0" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="createTicketTimeEstimateChoiceBox" prefWidth="150.0" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="120.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="updateTicketTimeEstimateChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="120.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <Button mnemonicParsing="false" text="Create" GridPane.rowIndex="7">
+      <Button fx:id="createTicketButton" mnemonicParsing="false" text="Create" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+      <Button fx:id="updateTicketButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+      <Button fx:id="deleteTicketButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets right="40.0" />
          </GridPane.margin>
       </Button>
-      <TextField promptText="Ticket ID" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="updateTicketIdTextfield" promptText="Ticket ID" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField layoutX="315.0" layoutY="50.0" promptText="Ticket ID" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <TextField fx:id="imageTicketIdTextField" layoutX="315.0" layoutY="50.0" promptText="Ticket ID" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <ChoiceBox prefWidth="150.0" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="createTicketPriorityChoiceBox" prefWidth="150.0" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="75.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="updateTicketPriorityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="75.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <ChoiceBox prefWidth="150.0" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="createTicketApprovalRequiredChoiceBox" prefWidth="150.0" GridPane.rowIndex="6" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="150.0" right="30.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="updateTicketApprovalRequiredChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="150.0" right="30.0" />
          </GridPane.margin>
