@@ -316,6 +316,16 @@
             "specificAssets": [
               ""
             ]
+          },
+          {
+            "name": "jerome",
+            "expectedLifeSpan": 5,
+            "assetPlus": {
+              "@reference": "../../.."
+            },
+            "specificAssets": [
+              ""
+            ]
           }
         ]
       }

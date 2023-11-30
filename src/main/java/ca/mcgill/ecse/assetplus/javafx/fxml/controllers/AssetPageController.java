@@ -24,6 +24,7 @@ public class AssetPageController {
   @FXML private Button addButton;
   @FXML private Button updateButton;
   @FXML private Button deleteButton;
+  @FXML private Button refreshButton;
   @FXML private ChoiceBox<String> addAssetTypeChoiceBox;
   @FXML private ChoiceBox<String> updateAssetTypeChoiceBox;
 
@@ -43,6 +44,11 @@ public class AssetPageController {
     // register the refreshable nodes
     AssetPlusFxmlView.getInstance().registerRefreshEvent(addAssetTypeChoiceBox);
     AssetPlusFxmlView.getInstance().registerRefreshEvent(updateAssetTypeChoiceBox);
+  }
+
+  @FXML
+  public void refreshButtonClicked(ActionEvent event) {
+    AssetPlusFxmlView.getInstance().refresh();
   }
 
   @FXML
