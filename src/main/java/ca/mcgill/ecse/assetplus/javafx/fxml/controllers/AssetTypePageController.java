@@ -29,9 +29,9 @@ public class AssetTypePageController {
     String createNewAssetTypeString = createNewAssetTypeTextField.getText();
     String createExpectedLifespanString = createExpectedLifespanTextField.getText();
 
-    if (createNewAssetTypeString != null || createNewAssetTypeString.trim().isEmpty()){
+    if (createNewAssetTypeString == null || createNewAssetTypeString.trim().isEmpty()){
       ViewUtils.showError("The New Asset Type field cannot be empty");
-    } else if (createExpectedLifespanString != null || createExpectedLifespanString.trim().isEmpty()){
+    } else if (createExpectedLifespanString == null || createExpectedLifespanString.trim().isEmpty()){
       ViewUtils.showError("The Expected Lifespan field cannot be empty");
     } else {
       int expectedLifeSpanInDays = Integer.parseInt(createExpectedLifespanString);
