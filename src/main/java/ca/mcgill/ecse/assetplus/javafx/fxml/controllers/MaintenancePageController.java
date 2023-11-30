@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.sql.Date;
 // making/updating maintenance tickets do not require any of the choiceboxes, need to remove them from scenebuilder and here
+// send the choiceboxes to assignment page and its controller
 public class MaintenancePageController {
   @FXML private TextField createTicketIdTextField, createTicketDateTextField, createTicketDescriptionTextField, createTicketAssetNumberTextField,
         updateTicketIdTextField, updateTicketDateTextField, updateTicketDescriptionTextField,

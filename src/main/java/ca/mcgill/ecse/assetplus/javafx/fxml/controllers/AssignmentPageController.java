@@ -7,6 +7,8 @@ import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,11 +18,30 @@ import javafx.scene.control.TextField;
 public class AssignmentPageController {
 
   @FXML private TextField ticketIdTextField, noteTextField, dateTextField;
-  @FXML private ChoiceBox<String> employeeEmailChoiceBox;
+  @FXML private ChoiceBox<String> employeeEmailChoiceBox, priorityChoiceBox, timeEstimateChoiceBox, approvalChoiceBox;
   @FXML private Button assignButton, startWorkButton, completeWorkButton, approveButton, disapproveButton;
   
   @FXML
   public void initialize() {
+    // non refrechable choice boxese (always the same list to choose from)
+    ObservableList<String> priorities =
+      FXCollections.observableArrayList("Low", "Normal", "Urgent");
+    
+    ObservableList<String> timeEstimate =
+      FXCollections.observableArrayList("LessThanADay", "OneToThreeDays", "ThreeToSevenDays", "OneToThreeWeeks", "ThreeOrMoreWeeks");
+    
+    ObservableList<String> approvalRequired =
+      FXCollections.observableArrayList("Yes", "No");
+
+      priorityChoiceBox.setItems(priorities);
+      priorityChoiceBox.setValue(null);
+
+      timeEstimateChoiceBox.setItems(timeEstimate);
+      timeEstimateChoiceBox.setValue(null);
+
+      approvalChoiceBox.setItems(approvalRequired);
+      approvalChoiceBox.setValue("No");
+
     // the combo boxes are refreshable
     employeeEmailChoiceBox.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> {
       employeeEmailChoiceBox.setItems(AssetPlusFeatureSet1Controller.getEmployees());
@@ -36,6 +57,9 @@ public class AssignmentPageController {
   public void assignClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     String employeeEmail = employeeEmailChoiceBox.getValue();
+    String priority = priorityChoiceBox.getValue();
+    String timeEstimate = timeEstimateChoiceBox.getValue();
+    String approval = approvalChoiceBox.getValue();
 
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
       ViewUtils.showError("The ticket number cannot be empty");
