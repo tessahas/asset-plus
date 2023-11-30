@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Separator?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -46,24 +47,7 @@
          </Tab>
         </tabs>
       </TabPane>
-      <GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="801.0" vgap="5.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="425.0" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="175.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="385.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="358.0" text="Date for Overview: " />
-            <DatePicker fx:id="searchByDate" maxWidth="1.7976931348623157E308" onAction="#selectedDateChanged" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-            <TableView fx:id="overviewTable" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="367.0" prefWidth="801.0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-         </children>
-      </GridPane>
+      <Separator prefWidth="200.0" />
+      <fx:include maxWidth="1.79E308" source="page/ListView.fxml" />
    </children>
 </VBox>
