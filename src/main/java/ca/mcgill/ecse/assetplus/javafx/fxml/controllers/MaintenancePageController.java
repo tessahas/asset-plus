@@ -185,6 +185,20 @@ public class MaintenancePageController {
   @FXML
   public void deleteTicket(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
+    if (idString == null || idString.trim().isEmpty()) {
+      ViewUtils.showError("Please input a ticket id");
+    }
+    else {
+      int id = Integer.parseInt(idString);
+      String errorMessage = AssetPlusFeatureSet4Controller.deleteMaintenanceTicket(id);
+      
+      if (errorMessage.isEmpty()) {
+        updateTicketIdTextField.setText(null);
+      }
+      else {
+        ViewUtils.showError(errorMessage);
+      }
+    }
 
   }
 }
