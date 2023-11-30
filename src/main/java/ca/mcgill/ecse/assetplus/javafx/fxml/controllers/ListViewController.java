@@ -31,21 +31,14 @@ public class ListViewController {
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 
-    @FXML // fx:id="SearchById"
-    private TextField SearchById; // Value injected by FXMLLoader
-
-    @FXML // fx:id="backButton"
-    private Button backButton; // Value injected by FXMLLoader
-
     @FXML // fx:id="searchByDate"
     private DatePicker searchByDate; // Value injected by FXMLLoader
 
-    @FXML // fx:id="viewTicketDetailsButton"
-    private Button viewTicketDetailsButton; // Value injected by FXMLLoader
-
     @FXML private TableView<TOMaintenanceTicket> overviewTable;
 
-    @FXML private DatePicker datePicker;
+    @FXML private Button searchButton;
+
+    @FXML private TextField searchTicketTextField;
 
     public void initialize() {
         // initialize the overview table by adding new columns
@@ -158,13 +151,12 @@ public class ListViewController {
 
         // configure data picker
         // set editable to false so that the user cannot choose from the calendar
-        // we changed this yuri/kev
         searchByDate.setEditable(false);
         // set default value to today
         searchByDate.setValue(LocalDate.now());
     
         // overview table if a refreshable element
-        overviewTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> overviewTable.setItems(getOverviewItems()));
+        overviewTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> overviewTable.setItems(getTicketItems()));
     
         // register refreshable nodes
         AssetPlusFxmlView.getInstance().registerRefreshEvent(overviewTable);
@@ -175,15 +167,42 @@ public class ListViewController {
         AssetPlusFxmlView.getInstance().refresh();
     }
 
+
     // the table column will automatically display the string value of the property for each instance in the table
     public static TableColumn<TOMaintenanceTicket, String> createTableColumn(String header, String propertyName) {
         TableColumn<TOMaintenanceTicket, String> column = new TableColumn<>(header);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return column;
     }
+  
+    @FXML 
+    void searchButtonClicked(ActionEvent event) {
+        String stringid = searchTicketTextField.getText().trim();
+        if (stringid.isEmpty()) {
+            ViewUtils.showError("Please input a valid ticket ID");
+        } else {
+            int id = Integer.parseInt(stringid);
+            // Search tickets by ID and update the table
+            ObservableList<TOMaintenanceTicket> filteredTickets = getAllTickets().filtered(ticket -> ticket.getId() ==id);
 
-    public ObservableList<TOMaintenanceTicket> getOverviewItems() {
-        LocalDate selectedDate = searchByDate.getValue(); // datePicker changed to searchByDate
+            if (filteredTickets.isEmpty()) {
+                ViewUtils.showError("No tickets found with the specified ID");
+            } else {
+                overviewTable.setItems(filteredTickets);
+            }
+        }
+    }
+
+    public ObservableList<TOMaintenanceTicket> getAllTickets() {
+        return FXCollections.observableList(AssetPlusFeatureSet6Controller.getTickets());
+    }
+
+
+
+
+    public ObservableList<TOMaintenanceTicket> getTicketItems() {
+        LocalDate selectedDate = searchByDate.getValue();
+      
         if (selectedDate == null) {
           ViewUtils.showError("Please select a valid date");
           return FXCollections.emptyObservableList();
