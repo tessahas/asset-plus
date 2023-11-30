@@ -154,7 +154,7 @@ public class MaintenancePageController {
    }
   // Event Listener on Button[#deleteButton].onAction
   @FXML
-  public void deleteTicket(ActionEvent event) {
+  public void deleteTicketClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     if (idString == null || idString.trim().isEmpty()) {
       ViewUtils.showError("Please input a ticket id");

@@ -58,12 +58,12 @@
             <Insets right="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="addImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+      <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#addImageClicked" prefHeight="55.0" prefWidth="200.0" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="deleteImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImageClicked" prefHeight="55.0" prefWidth="200.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -86,17 +86,17 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="createTicketButton" mnemonicParsing="false" text="Create" GridPane.rowIndex="6">
+      <Button fx:id="createTicketButton" mnemonicParsing="false" onAction="#createTicketClicked" text="Create" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="updateTicketButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+      <Button fx:id="updateTicketButton" mnemonicParsing="false" onAction="#updateTicketClicked" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="deleteTicketButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+      <Button fx:id="deleteTicketButton" mnemonicParsing="false" onAction="#deleteTicketClicked" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets right="40.0" />
          </GridPane.margin>
