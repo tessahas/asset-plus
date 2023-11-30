@@ -47,7 +47,7 @@ public class AssetPageController {
 
   @FXML
   // Event Listener on Button[#addButton].onAction
-  public void addClicked(ActionEvent event) {
+  public void addButtonClicked(ActionEvent event) {
     String assetNumberString = addAssetNumberTextField.getText();
     String purchaseDateString = addPurchaseDateTextField.getText();
     String floorNumberString = addFloorNumberTextField.getText();
@@ -86,7 +86,7 @@ public class AssetPageController {
   
   @FXML
   // Event Listener on Button[#updateButton].onAction
-  public void updateClicked(ActionEvent event) {
+  public void updateButtonClicked(ActionEvent event) {
     String assetNumberString = updateAssetNumberTextField.getText();
     String purchaseDateString = updatePurchaseDateTextField.getText();
     String floorNumberString = updateFloorNumberTextField.getText();
@@ -125,7 +125,7 @@ public class AssetPageController {
 
   @FXML
   // Event Listener on Button[#deleteButton].onAction
-  public void deleteClicked(ActionEvent event) {
+  public void deleteButtonClicked(ActionEvent event) {
     String assetNumberString = updateAssetNumberTextField.getText();
     if (assetNumberString == null || assetNumberString.trim().isEmpty()) {
       ViewUtils.showError("The asset number cannot be empty");

@@ -56,7 +56,7 @@ public class AssignmentPageController {
 
   // Event Listener on Button[#assignButton].onAction
   @FXML
-  public void assignClicked(ActionEvent event) {
+  public void assignButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     String employeeEmail = employeeEmailChoiceBox.getValue();
     String priorityString = priorityChoiceBox.getValue();
@@ -89,7 +89,7 @@ public class AssignmentPageController {
   }
 
   @FXML
-  public void startWorkClicked(ActionEvent event) {
+  public void startWorkButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
       ViewUtils.showError("The ticket number cannot be empty");
@@ -106,7 +106,7 @@ public class AssignmentPageController {
   }
 
   @FXML
-  public void completeWorkClicked(ActionEvent event) {
+  public void completeWorkButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
       ViewUtils.showError("The ticket number cannot be empty");
@@ -123,7 +123,7 @@ public class AssignmentPageController {
   }
 
   @FXML
-  public void approveClicked(ActionEvent event) {
+  public void approveButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
       ViewUtils.showError("The ticket number cannot be empty");
@@ -140,7 +140,7 @@ public class AssignmentPageController {
   }
 
   @FXML
-  public void disapproveClicked(ActionEvent event) {
+  public void disapproveButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     String note = noteTextField.getText();
     String dateString = dateTextField.getText();

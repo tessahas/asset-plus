@@ -32,7 +32,7 @@
             <Insets />
          </GridPane.margin>
       </Label>
-      <Button fx:id="createButton" mnemonicParsing="false" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createButtonClicked" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
       <TextField fx:id="createNewAssetTypeTextField" promptText="New asset type" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
@@ -43,12 +43,12 @@
             <Insets left="5.0" right="20.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="updateButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButtonClicked" text="Update" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>

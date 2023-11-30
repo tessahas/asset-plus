@@ -296,6 +296,26 @@
           },
           {
             "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketRaiser/maintenanceNotes/MaintenanceNote/ticket/asset/assetType"
+          },
+          {
+            "name": "chair",
+            "expectedLifeSpan": 8,
+            "assetPlus": {
+              "@reference": "../../.."
+            },
+            "specificAssets": [
+              ""
+            ]
+          },
+          {
+            "name": "broom",
+            "expectedLifeSpan": 1000,
+            "assetPlus": {
+              "@reference": "../../.."
+            },
+            "specificAssets": [
+              ""
+            ]
           }
         ]
       }

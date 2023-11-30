@@ -37,18 +37,18 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="assignButton" mnemonicParsing="false" prefWidth="100.0" text="Assign" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-      <Button fx:id="startWorkButton" mnemonicParsing="false" prefWidth="100.0" text="Start Work" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+      <Button fx:id="assignButton" mnemonicParsing="false" onAction="#assignButtonClicked" prefWidth="100.0" text="Assign" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Button fx:id="startWorkButton" mnemonicParsing="false" onAction="#startWorkButtonClicked" prefWidth="100.0" text="Start Work" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="completeWorkButton" minWidth="100.0" mnemonicParsing="false" text="Complete Work" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
+      <Button fx:id="completeWorkButton" minWidth="100.0" mnemonicParsing="false" onAction="#completeWorkButtonClicked" text="Complete Work" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="approveButton" minWidth="65.0" mnemonicParsing="false" prefWidth="100.0" text="Approve" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
+      <Button fx:id="approveButton" minWidth="65.0" mnemonicParsing="false" onAction="#approveButtonClicked" prefWidth="100.0" text="Approve" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -63,7 +63,7 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="disapproveButton" mnemonicParsing="false" prefWidth="100.0" text="Disapprove" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="TOP" />
+      <Button fx:id="disapproveButton" mnemonicParsing="false" onAction="#disapproveButtonClicked" prefWidth="100.0" text="Disapprove" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="TOP" />
       <ChoiceBox fx:id="employeeEmailChoiceBox" prefHeight="25.0" prefWidth="215.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
