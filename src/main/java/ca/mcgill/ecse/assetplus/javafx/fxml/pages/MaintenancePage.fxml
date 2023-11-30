@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane prefHeight="360.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="136.79998779296875" minHeight="40.0" prefHeight="54.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="136.79998779296875" minHeight="25.0" prefHeight="32.5999755859375" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="119.19998168945312" minHeight="25.0" prefHeight="44.2000244140625" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="68.19999771118165" vgrow="ALWAYS" />
+      <RowConstraints fx:id="createTicketAssetNumberTextField" maxHeight="50.0" minHeight="30.0" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="50.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="50.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="50.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="50.0" vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+      <Label text="Update Ticket" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="updateTicketDateTextField" promptText="Date MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="updateTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Priority:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Time Estimate:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <Label text="Images" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="addImageUrlTextField" promptText="Add Image URL" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="deleteImageUrlTextField" promptText="Delete Image URL" GridPane.columnIndex="2" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <Button fx:id="addImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="deleteImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Label text="Manager Approval:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label text="Create Ticket" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="createTicketDateTextfield" promptText="Date MM/DD/YYYY" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="createTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Priority:" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Time Estimate:" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Label>
+      <Label text="Manager Approval:" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <ChoiceBox fx:id="createTicketTimeEstimateChoiceBox" prefWidth="150.0" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="120.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="updateTicketTimeEstimateChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="120.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <Button fx:id="createTicketButton" mnemonicParsing="false" text="Create" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="updateTicketButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets left="40.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="deleteTicketButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets right="40.0" />
+         </GridPane.margin>
+      </Button>
+      <TextField fx:id="updateTicketIdTextfield" promptText="Ticket ID" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="imageTicketIdTextField" layoutX="315.0" layoutY="50.0" promptText="Ticket ID" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <ChoiceBox fx:id="createTicketPriorityChoiceBox" prefWidth="150.0" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="75.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="updateTicketPriorityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="75.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="createTicketApprovalRequiredChoiceBox" prefWidth="150.0" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="150.0" right="30.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="updateTicketApprovalRequiredChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="150.0" right="30.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <TextField fx:id="createTicketIdTextField" promptText="Ticket ID" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="createTicketAssetNumberTextField" promptText="Asset Number" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+   </children>
+</GridPane>

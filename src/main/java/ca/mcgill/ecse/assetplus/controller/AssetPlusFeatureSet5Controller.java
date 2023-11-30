@@ -2,6 +2,7 @@ package ca.mcgill.ecse.assetplus.controller;
 
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import ca.mcgill.ecse.assetplus.model.TicketImage;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 public class AssetPlusFeatureSet5Controller {
 
@@ -16,23 +17,29 @@ public class AssetPlusFeatureSet5Controller {
   public static String addImageToMaintenanceTicket(String imageURL, int ticketID) {
     String errorMessage = "";
 
-    if (!imageURL.startsWith("http://") || !imageURL.startsWith("https://")) {
+    if (!imageURL.startsWith("http://") && !imageURL.startsWith("https://")) {
       errorMessage+="Image URL must start with http:// or https://. ";
+      return errorMessage;
     }
 
     if (imageURL.isEmpty()) {
       errorMessage+="Image URL cannot be empty. ";
+      return errorMessage;
     }
 
     if (!MaintenanceTicket.hasWithId(ticketID)) {
       errorMessage+="Ticket does not exist. ";
+      return errorMessage;
     }
 
     MaintenanceTicket maintenanceTicket = MaintenanceTicket.getWithId(ticketID);
 
-    for (TicketImage ticketImage: maintenanceTicket.getTicketImages()) {
-      if (ticketImage.getImageURL().equals(imageURL)) {
-        errorMessage+="Image already exists for the ticket. ";
+    if (maintenanceTicket != null) {
+      for (TicketImage ticketImage: maintenanceTicket.getTicketImages()) {
+        if (ticketImage.getImageURL().equals(imageURL)) {
+          errorMessage+="Image already exists for the ticket. ";
+          return errorMessage;
+        }
       }
     }
 
@@ -42,6 +49,7 @@ public class AssetPlusFeatureSet5Controller {
 
     try {
       maintenanceTicket.addTicketImage(imageURL);
+      AssetPlusPersistence.save();
     } catch (RuntimeException e) {
       errorMessage+=e.getMessage();
     }
@@ -54,18 +62,26 @@ public class AssetPlusFeatureSet5Controller {
    * @author Kevin Li
    * @param imageURL This corresponds to the URL of the image to be deleted.
    * @param ticketID This corresponds to the ticket ID of the ticket from which the image is to be deleted.
-   * @return This method does not return anything.
+   * @return This method returns an empty string if the image was added successfully. If the image was not
+   * added successfully, then a string containing the corresponding error messages is returned.
    */
-  public static void deleteImageFromMaintenanceTicket(String imageURL, int ticketID) {
+  public static String deleteImageFromMaintenanceTicket(String imageURL, int ticketID) {
+    String errorMessage = "";
     MaintenanceTicket maintenanceTicket = MaintenanceTicket.getWithId(ticketID);
     
-    if (maintenanceTicket != null) {
+    if (maintenanceTicket == null) {
+      errorMessage+="Invalid ticket ID";
+    }
+    else {
       for (TicketImage ticketImage: maintenanceTicket.getTicketImages()) {
         if (ticketImage.getImageURL().equals(imageURL)) {
-        maintenanceTicket.removeTicketImage(ticketImage);
+          ticketImage.delete();
+          break;
         }
       }
+      AssetPlusPersistence.save();
     }
+    return errorMessage;
   }
 
 }

@@ -1,6 +1,11 @@
 package ca.mcgill.ecse.assetplus.controller;
+import java.util.List;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.AssetType;
+import ca.mcgill.ecse.assetplus.model.AssetPlus;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * <h1>AssetPlusFeatureSet2Controller</h1>
@@ -15,6 +20,8 @@ import ca.mcgill.ecse.assetplus.model.AssetType;
  * @since 2023-10-18
  */
 public class AssetPlusFeatureSet2Controller {
+
+  private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
   /**
    * <h1>addAssetType</h1>
@@ -46,6 +53,7 @@ public class AssetPlusFeatureSet2Controller {
     /* Try creating a new asset type is no error has been encontered yet. */
     try {
       AssetType newAssetType = new AssetType(name, expectedLifeSpanInDays, AssetPlusApplication.getAssetPlus());
+      AssetPlusPersistence.save();
     }
  
      /* Catch any exceptions thrown by the creation of a new asset type. */
@@ -89,7 +97,7 @@ public class AssetPlusFeatureSet2Controller {
     }
 
     /* Check if the new name differs from the old name and there already exists an asset type with the new name, return coressponding error message. */
-    if (AssetType.hasWithName(newName) && (newName != oldName)) {
+    if (AssetType.hasWithName(newName) && !(newName.equals(oldName))) {
       return "The asset type already exists";
     }
 
@@ -97,6 +105,7 @@ public class AssetPlusFeatureSet2Controller {
       AssetType someAssetType = AssetType.getWithName(oldName);
       someAssetType.setName(newName);
       someAssetType.setExpectedLifeSpan(newExpectedLifeSpanInDays);
+      AssetPlusPersistence.save();
     }
     // This is here just in case there is an error I have not thought about yet.
     catch(Exception e) {
@@ -121,8 +130,17 @@ public class AssetPlusFeatureSet2Controller {
   public static void deleteAssetType(String name) {
 
     // Delete the asset type that has the specified asset type name if it exists.
-    if (AssetType.hasWithName(name)) {
-      AssetType.getWithName(name).delete();
+    try {
+      if (AssetType.hasWithName(name)) {
+        AssetType.getWithName(name).delete();
+      }
+      AssetPlusPersistence.save();
     }
+    catch (RuntimeException e){}
+  }
+
+  public static ObservableList<String> getAssetTypes() {
+    List<String> assetTypeStrings = assetPlus.getAssetTypes().stream().map(AssetType::getName).toList();
+    return FXCollections.observableList(assetTypeStrings);
   }
 }

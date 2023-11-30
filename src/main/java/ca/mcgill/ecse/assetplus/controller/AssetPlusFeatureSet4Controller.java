@@ -1,7 +1,7 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import java.sql.Date;
 
 /** <h1>AssetPlusFeature4Controller</h1>
@@ -25,35 +25,41 @@ public class AssetPlusFeatureSet4Controller {
   public static String addMaintenanceTicket(int id, Date raisedOnDate, String description,
       String email, int assetNumber) {
         String errorMessage = "";
-        if (!MaintenanceTicket.hasWithId(id)) {
-          errorMessage += "Ticket id already exists. ";
+        if (MaintenanceTicket.hasWithId(id)) {
+          errorMessage += "Ticket id already exists";
         }
-        if (!SpecificAsset.hasWithAssetNumber(assetNumber)) {
-          errorMessage += "The asset does not exist. ";
+        if (!SpecificAsset.hasWithAssetNumber(assetNumber) && assetNumber != -1) {
+          errorMessage += "The asset does not exist";
         }
-        if (!HotelStaff.hasWithEmail(email)) {
-          errorMessage += "The ticket raiser does not exist. ";
+        if (!User.hasWithEmail(email)) {
+          errorMessage += "The ticket raiser does not exist";
         }
-        if (description == null) {
-          errorMessage += "The description cannot be empty. ";
+        if (description == null || description.isEmpty()) {
+          errorMessage += "Ticket description cannot be empty";
         }
-        if (!errorMessage.isEmpty()) return errorMessage;
+        if (!errorMessage.isEmpty()) {
+          return errorMessage;
+        }
       try {
           MaintenanceTicket newTicket = new MaintenanceTicket(id, raisedOnDate, description, AssetPlusApplication.getAssetPlus(), User.getWithEmail(email));
-          if (assetNumber != -1 && assetNumber > 0){
+          if (assetNumber == -1) {
+            newTicket.setAsset(null);
+          }
+          else if (assetNumber > 0){
             newTicket.setAsset(SpecificAsset.getWithAssetNumber(assetNumber));
         }
+        AssetPlusPersistence.save();
       
       }
       catch (Exception e){
         if (e.getMessage().contains("duplicate")){
-          errorMessage += "Cannot create due to duplicate id.";
+          errorMessage += "Cannot create due to duplicate id";
         }
         if (e.getMessage().contains("assetPlus")){
-          errorMessage += "Unable to create maintenanceTicket due to assetPlus.";
+          errorMessage += "Unable to create maintenanceTicket due to assetPlus";
         }
         if (e.getMessage().contains("raisedTicket")){
-          errorMessage += "Unable to create raisedTicket due to ticketRaiser.";
+          errorMessage += "Unable to create raisedTicket due to ticketRaiser";
         }
       }
 
@@ -76,23 +82,33 @@ public class AssetPlusFeatureSet4Controller {
       String newEmail, int newAssetNumber) {
         String errorMessage = "";
         if (!HotelStaff.hasWithEmail(newEmail)) {
-          errorMessage += "The ticket raiser does not exist.";
+          errorMessage += "The ticket raiser does not exist";
         }
-        if (newDescription == null) {
-          errorMessage += "The Description cannot be empty.";
+        if (newDescription == null || newDescription.isEmpty()) {
+          errorMessage += "Ticket description cannot be empty";
         }
-        if (!SpecificAsset.hasWithAssetNumber(newAssetNumber)) {
-          errorMessage += "The asset does not exist.";
+        if (!SpecificAsset.hasWithAssetNumber(newAssetNumber) && newAssetNumber != -1) {
+          errorMessage += "The asset does not exist";
         }
-        if (!errorMessage.isEmpty()) return errorMessage;
-        MaintenanceTicket ticketToEdit = MaintenanceTicket.getWithId(id);
-        ticketToEdit.setRaisedOnDate(newRaisedOnDate);
-        ticketToEdit.setDescription(newDescription);
-        ticketToEdit.setTicketRaiser(User.getWithEmail(newEmail));
-        if (newAssetNumber != -1 && newAssetNumber > 0){
-        ticketToEdit.setAsset(SpecificAsset.getWithAssetNumber(newAssetNumber));
+        if (!errorMessage.isEmpty()) {
+          return errorMessage;
         }
-
+        try {
+          MaintenanceTicket ticketToEdit = MaintenanceTicket.getWithId(id);
+          ticketToEdit.setRaisedOnDate(newRaisedOnDate);
+          ticketToEdit.setDescription(newDescription);
+          ticketToEdit.setTicketRaiser(User.getWithEmail(newEmail));
+          if (newAssetNumber > 0){
+          ticketToEdit.setAsset(SpecificAsset.getWithAssetNumber(newAssetNumber));
+          }
+          else if (newAssetNumber == -1) {
+            ticketToEdit.setAsset(null);
+          }
+          AssetPlusPersistence.save();
+        }
+        catch (RuntimeException e) {
+          return e.getMessage();
+        }
 
         return errorMessage;
     }
@@ -103,10 +119,16 @@ public class AssetPlusFeatureSet4Controller {
    * @param id The number of the ticket that is to be deleted
    * If the id given does not have a corresponding ticket, then nothing happens.
    */
-  public static void deleteMaintenanceTicket(int id) {
-
-    if (MaintenanceTicket.hasWithId(id)) {
-        MaintenanceTicket.getWithId(id).delete();
+  public static String deleteMaintenanceTicket(int id) {
+    String errorMessage = "";
+    try {
+      if (MaintenanceTicket.hasWithId(id)) {
+          MaintenanceTicket.getWithId(id).delete(); 
+      }
+      else errorMessage += "Ticket does not exist";
+      AssetPlusPersistence.save();
     }
+    catch (RuntimeException e) {}
+    return errorMessage;
   }
 }

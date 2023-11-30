@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 public class DeleteEmployeeStepDefinitions {
   
   private AssetPlus assetPlus = ca.mcgill.ecse.assetplus.application.AssetPlusApplication.getAssetPlus();
+
   /**
    * This step checks if the following employees exist in the system.
    * @author Kevin Li

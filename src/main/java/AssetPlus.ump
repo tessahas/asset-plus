@@ -1,5 +1,8 @@
 namespace ca.mcgill.ecse.assetplus.model;
 
+use AssetPlusStates.ump;
+use AssetPlusPersistence.ump;
+
 class AssetPlus
 {
   1 <@>- * Employee employees;
@@ -110,3 +113,5 @@ association
 {
   0..1 Manager fixApprover -- * MaintenanceTicket ticketsForApproval;
 }
+
+use AssetPlusTransferObjects.ump;

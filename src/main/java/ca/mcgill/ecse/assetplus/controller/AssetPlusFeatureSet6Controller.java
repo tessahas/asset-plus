@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.model.*;
+import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 
 /**
@@ -21,11 +22,18 @@ public class AssetPlusFeatureSet6Controller {
    */
 
   public static void deleteEmployeeOrGuest(String email) {
-    User userToDelete = User.getWithEmail(email);
-    if(userToDelete instanceof Guest || userToDelete instanceof Employee){
-      userToDelete.delete();
-    }
 
+    User userToDelete = User.getWithEmail(email);
+    if(email.equals("manager@ap.com")){
+    } else if (userToDelete instanceof Employee || userToDelete instanceof Guest){
+      try {
+      userToDelete.delete();
+      AssetPlusPersistence.save();
+    }
+    catch(Exception e) {
+      String errorMessage = "Unknown exception";
+     }
+    }
   }
 
   /**
@@ -35,19 +43,19 @@ public class AssetPlusFeatureSet6Controller {
    * in the AssetPlus System.
    */
 
+  
   public static List<TOMaintenanceTicket> getTickets() {
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
-
     if (assetPlus.hasMaintenanceTickets()){
       List<MaintenanceTicket> maintenanceTickets = assetPlus.getMaintenanceTickets();
       List<TOMaintenanceTicket> TOMaintenanceTickets = new ArrayList<TOMaintenanceTicket>();
-
+        
       for (MaintenanceTicket ticket : maintenanceTickets) {
         List<String> urls = new ArrayList<String>();
         List<TicketImage> images = ticket.getTicketImages();
-          for (TicketImage TicketImage : images) {
-            urls.add(TicketImage.getImageURL());
-          }
+        for (TicketImage TicketImage : images) {
+          urls.add(TicketImage.getImageURL());
+        }
 
         TOMaintenanceNote[] notes = new TOMaintenanceNote[ticket.numberOfTicketNotes()];
         int i = 0;
@@ -60,16 +68,65 @@ public class AssetPlusFeatureSet6Controller {
           i++;
         }
 
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getAsset().getAssetType().getName(), ticket.getAsset().getAssetType().getExpectedLifeSpan(), ticket.getAsset().getPurchaseDate(), ticket.getAsset().getFloorNumber(), ticket.getAsset().getRoomNumber(), urls, notes);
+        String assetName;
+        int lifespan = -1;
+        Date purchaseDate;
+        int floorNumber = -1;
+        int roomNumber = -1;
+
+        if (ticket.hasAsset()) {
+          assetName = ticket.getAsset().getAssetType().getName();
+          lifespan = ticket.getAsset().getAssetType().getExpectedLifeSpan();
+          purchaseDate = ticket.getAsset().getPurchaseDate();
+          floorNumber = ticket.getAsset().getFloorNumber();
+          roomNumber = ticket.getAsset().getRoomNumber();
+        } else {
+          assetName = null;
+          purchaseDate = null;
+        }
+        //ticketFixercheck
+
+        String fixer = null;
+        if (ticket.hasTicketFixer()) {
+          fixer = ticket.getTicketFixer().getEmail();
+        }
+
+
+        //timetoresolve check
+
+        String timetores = null;
+        if (ticket.getTimeToResolve() !=null){
+          timetores = ticket.getTimeToResolve().toString();
+        }
+
+        //priority check
+
+        String prioritycheck = null;
+        if (ticket.getPriority()!=null){
+          prioritycheck = ticket.getPriority().toString();
+        }
+
+
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getTicketStatusFullName(), fixer, timetores, prioritycheck, ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
-
+      AssetPlusPersistence.save();
       return TOMaintenanceTickets;
 
     }
     return null;
-    
   }
 
+  public static List<TOMaintenanceTicket> getTicketForSpecificDay(Date date) {
+    List<TOMaintenanceTicket> allTickets = getTickets();
+    var ticketsForSpecificDay = new ArrayList<TOMaintenanceTicket>();
+
+    for (var singleTicket : allTickets) {
+      if (singleTicket.getRaisedOnDate().equals(date)) {
+        ticketsForSpecificDay.add(singleTicket);
+      }
+    }
+    return ticketsForSpecificDay;
+  }
 }
