@@ -19,9 +19,14 @@
    <children>
       <TabPane prefHeight="435.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Users">
+          <Tab text="Create Users">
             <content>
-              <fx:include source="pages/UsersPage.fxml" />
+              <fx:include source="pages/CreateUsersPage.fxml" />
+            </content>
+          </Tab>
+          <Tab text="Update Users">
+            <content>
+              <fx:include source="pages/UpdateUsersPage.fxml" />
             </content>
           </Tab>
           <Tab text="Assets">
