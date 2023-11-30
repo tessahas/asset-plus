@@ -19,14 +19,9 @@
    <children>
       <TabPane prefHeight="435.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Create Users">
+          <Tab text="Users">
             <content>
-              <fx:include source="pages/CreateUsersPage.fxml" />
-            </content>
-          </Tab>
-          <Tab text="Update Users">
-            <content>
-              <fx:include source="pages/UpdateUsersPage.fxml" />
+              <fx:include source="pages/UsersPage.fxml" />
             </content>
           </Tab>
           <Tab text="Assets">
@@ -34,16 +29,21 @@
               <fx:include source="pages/AssetsPage.fxml" />
             </content>
           </Tab>
-            <Tab text="Maintenance">
-               <content>
-                  <fx:include source="pages/MaintenancePage.fxml" />
-               </content>
-            </Tab>
-            <Tab text="Assignments">
-               <content>
-                  <fx:include source="pages/AssignmentPage.fxml" />
-               </content>
-            </Tab>
+          <Tab text="Asset Types">
+            <content>
+              <fx:include source="pages/AssetTypePage.fxml" />
+            </content>
+          </Tab>
+         <Tab text="Maintenance">
+            <content>
+               <fx:include source="pages/MaintenancePage.fxml" />
+            </content>
+         </Tab>
+         <Tab text="Assignments">
+            <content>
+               <fx:include source="pages/AssignmentPage.fxml" />
+            </content>
+         </Tab>
         </tabs>
       </TabPane>
       <GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="801.0" vgap="5.0">
