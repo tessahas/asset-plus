@@ -71,12 +71,25 @@ public class AssetPageController {
       int floorNumber = Integer.parseInt(floorNumberString);
       int roomNumber = Integer.parseInt(roomNumberString);
       Date purchaseDate = Date.valueOf(dateString);
-      if (ViewUtils.successful(AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType))) {
+      String errorMessage = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType);
+      if (errorMessage.isEmpty()) {
         addAssetNumberTextField.setText("");
         addPurchaseDateTextField.setText("");
         addFloorNumberTextField.setText("");
         addRoomNumberTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
       }
     }
+  }
+  
+  @FXML
+  public void updateClicked(ActionEvent event) {
+    // TO DO
+  }
+
+  @FXML
+  public void deleteClicked(ActionEvent event) {
+    // TO DO
   }
 }

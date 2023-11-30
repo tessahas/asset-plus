@@ -3,61 +3,129 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 import static ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils.callController;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusAPI;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class AssignmentPageController {
 
-  @FXML private ChoiceBox<TOMaintenanceTicket> ticketChoiceBox;
-  @FXML private ChoiceBox<String> staffChoiceBox;
-  @FXML private ChoiceBox<String> timeEstimateChoiceBox;
-  @FXML private ChoiceBox<String> priorityLevelChoiceBox;
-  @FXML private ChoiceBox<String> requiresApprovalChoiceBox;
+  @FXML private TextField ticketIdTextField, noteTextField, dateTextField;
+  @FXML private ChoiceBox<String> employeeEmailChoiceBox;
+  @FXML private Button assignButton, startWorkButton, completeWorkButton, approveButton, disapproveButton;
   
   @FXML
   public void initialize() {
     // the combo boxes are refreshable
-    ticketChoiceBox.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> {
-      ticketChoiceBox.setItems(ViewUtils.getTickets());
-      ticketChoiceBox.setValue(null);
-    });
-
-    staffChoiceBox.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> {
-      staffChoiceBox.setItems(ViewUtils.getEmployees());
-      staffChoiceBox.setValue(null);
+    employeeEmailChoiceBox.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> {
+      employeeEmailChoiceBox.setItems(AssetPlusFeatureSet1Controller.getEmployees());
+      employeeEmailChoiceBox.setValue(null);
     });
 
     // register the refreshable nodes
-    AssetPlusFxmlView.getInstance().registerRefreshEvent(ticketChoiceBox, staffChoiceBox);
+    AssetPlusFxmlView.getInstance().registerRefreshEvent(employeeEmailChoiceBox);
   }
 
   // Event Listener on Button[#assignButton].onAction
   @FXML
   public void assignClicked(ActionEvent event) {
-    var bus = ticketChoiceBox.getValue();
-    var route = staffChoiceBox.getValue();
-    var selectedDate = datePicker.getValue();
+    String ticketIdString = ticketIdTextField.getText();
+    String employeeEmail = employeeEmailChoiceBox.getValue();
 
-    var error = "";
-    if (bus == null) {
-      error += "Invalid bus vehicle! ";
+    if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
+      ViewUtils.showError("The ticket number cannot be empty");
     }
-    if (route == null) {
-      error += "Invalid route! ";
+    else if (employeeEmail == null) {
+      ViewUtils.showError("An employee must be specified");
     }
-    if (selectedDate == null) {
-      error += "Invalid date! ";
+    else {
+      int ticketId = Integer.parseInt(ticketIdString);
+      String errorMessage = AssetPlusAPI.assign(ticketId, employeeEmail, AssetPlusAPI.getTimeEstimate(ticketId),
+         AssetPlusAPI.getPriorityLevel(ticketId), AssetPlusAPI.getRequiresApproval(ticketId));
+      if (errorMessage.isEmpty()) {
+        ticketIdTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
+      }
     }
+  }
 
-    if (!error.isEmpty()) {
-      ViewUtils.showError(error);
-    } else {
-      var date = Date.valueOf(selectedDate);
-      callController(assetplusController.assign(bus, route, date));
+  @FXML
+  public void startWorkClicked(ActionEvent event) {
+    String ticketIdString = ticketIdTextField.getText();
+    if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
+      ViewUtils.showError("The ticket number cannot be empty");
+    }
+    else {
+      int ticketId = Integer.parseInt(ticketIdString);
+      String errorMessage = AssetPlusAPI.startTicketWork(null);
+      if (errorMessage.isEmpty()) {
+        ticketIdTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
+      }
+    }
+  }
+
+  @FXML
+  public void completeWorkClicked(ActionEvent event) {
+    String ticketIdString = ticketIdTextField.getText();
+    if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
+      ViewUtils.showError("The ticket number cannot be empty");
+    }
+    else {
+      int ticketId = Integer.parseInt(ticketIdString);
+      String errorMessage = AssetPlusAPI.completeTicketWork(null);
+      if (errorMessage.isEmpty()) {
+        ticketIdTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
+      }
+    }
+  }
+
+  @FXML
+  public void approveClicked(ActionEvent event) {
+    String ticketIdString = ticketIdTextField.getText();
+    if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
+      ViewUtils.showError("The ticket number cannot be empty");
+    }
+    else {
+      int ticketId = Integer.parseInt(ticketIdString);
+      String errorMessage = AssetPlusAPI.approveTicketWork(null);
+      if (errorMessage.isEmpty()) {
+        ticketIdTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
+      }
+    }
+  }
+
+  @FXML
+  public void disapproveClicked(ActionEvent event) {
+    String ticketIdString = ticketIdTextField.getText();
+    String note = noteTextField.getText();
+    String dateString = dateTextField.getText();
+
+    if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
+      ViewUtils.showError("The ticket number cannot be empty");
+    }
+    else {
+      int ticketId = Integer.parseInt(ticketIdString);
+      Date date = Date.valueOf(dateString);
+      String errorMessage = AssetPlusAPI.disapproveTicketWork(date, note, null);
+      if (errorMessage.isEmpty()) {
+        ticketIdTextField.setText("");
+        noteTextField.setText("");
+        dateTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
+      }
     }
   }
 }

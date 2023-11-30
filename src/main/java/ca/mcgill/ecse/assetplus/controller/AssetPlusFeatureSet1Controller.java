@@ -1,8 +1,10 @@
 package ca.mcgill.ecse.assetplus.controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
+import java.util.List;
 
 /**
  * <h1>AssetPlusFeatureSet1Controller</h1>
@@ -19,6 +21,9 @@ import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 
 
 public class AssetPlusFeatureSet1Controller {
+
+	private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
+
 	/**
    	* <h3>onlyOneLowerChar</h3>
    	* This method is a private helper method contained inside the updateManager 
@@ -323,6 +328,11 @@ catch(Exception e) {
 	  } 
 	    
 	  return errorMessage;
+  }
+
+	public static ObservableList<String> getEmployees() {
+    List<String> employeeEmails = assetPlus.getEmployees().stream().map(Employee::getEmail).toList();
+    return FXCollections.observableList(employeeEmails);
   }
 
 }

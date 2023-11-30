@@ -260,4 +260,22 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     }
     return errorMessage;
   }
+
+  public static TimeEstimate getTimeEstimate(int ticketId) {
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    TimeEstimate timeEstimate = ticket.getTimeToResolve();
+    return timeEstimate;
+  }
+
+  public static PriorityLevel getPriorityLevel(int ticketId) {
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    PriorityLevel priorityLevel = ticket.getPriority();
+    return priorityLevel;
+  }
+
+  public static Boolean getRequiresApproval(int ticketId) {
+    MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
+    Boolean requiresApproval = ticket.hasFixApprover();
+    return requiresApproval;
+  }
 }
