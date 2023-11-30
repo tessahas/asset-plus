@@ -189,6 +189,7 @@ public class ListViewController {
                 ViewUtils.showError("No tickets found with the specified ID");
             } else {
                 overviewTable.setItems(filteredTickets);
+                AssetPlusFxmlView.getInstance().registerRefreshEvent(overviewTable);
             }
         }
     }
