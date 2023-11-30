@@ -1,7 +1,12 @@
 package ca.mcgill.ecse.assetplus.controller;
+import java.util.List;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.AssetType;
+import ca.mcgill.ecse.assetplus.model.AssetPlus;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * <h1>AssetPlusFeatureSet2Controller</h1>
  * 
@@ -15,6 +20,8 @@ import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
  * @since 2023-10-18
  */
 public class AssetPlusFeatureSet2Controller {
+
+  private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
   /**
    * <h1>addAssetType</h1>
@@ -130,5 +137,10 @@ public class AssetPlusFeatureSet2Controller {
       AssetPlusPersistence.save();
     }
     catch (RuntimeException e){}
+  }
+
+  public static ObservableList<String> getAssetTypes() {
+    List<String> assetTypeStrings = assetPlus.getAssetTypes().stream().map(AssetType::getName).toList();
+    return FXCollections.observableList(assetTypeStrings);
   }
 }

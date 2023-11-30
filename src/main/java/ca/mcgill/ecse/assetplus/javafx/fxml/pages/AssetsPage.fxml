@@ -43,7 +43,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <ChoiceBox prefHeight="25.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ChoiceBox fx:id="addAssetTypeChoiceBox" prefHeight="25.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" right="5.0" />
          </GridPane.margin>
@@ -66,14 +66,14 @@
             <Insets left="70.0" />
          </GridPane.margin>
       </Label>
-      <TextField promptText="Purchase Date" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField promptText="Room Number" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField promptText="Floor Number" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField promptText="Purchase Date" GridPane.columnIndex="3" GridPane.rowIndex="3">
+      <TextField fx:id="addPurchaseDateTextField" promptText="Purchase Date" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="addRoomNumberTextField" promptText="Room Number" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="addFloorNumberTextField" promptText="Floor Number" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="updatePurchaseDateTextField" promptText="Purchase Date" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin></TextField>
-      <TextField promptText="Room Number" GridPane.columnIndex="3" GridPane.rowIndex="5">
+      <TextField fx:id="updateRoomNumberTextField" promptText="Room Number" GridPane.columnIndex="3" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin></TextField>
@@ -92,7 +92,7 @@
             <Insets left="70.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox layoutX="30.0" layoutY="91.0" prefHeight="25.0" prefWidth="241.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <ChoiceBox fx:id="updateAssetTypeChoiceBox" layoutX="30.0" layoutY="91.0" prefHeight="25.0" prefWidth="241.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <padding>
             <Insets left="5.0" />
          </padding>
@@ -100,8 +100,8 @@
             <Insets left="20.0" right="10.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Button mnemonicParsing="false" text="Update" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Button fx:id="addButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button fx:id="updateButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="3" GridPane.rowIndex="6" />
       <Label text="(optional)" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="70.0" top="30.0" />
@@ -117,16 +117,16 @@
             <Insets left="70.0" />
          </GridPane.margin>
       </Label>
-      <TextField promptText="Asset Number" GridPane.columnIndex="3" GridPane.rowIndex="1">
+      <TextField fx:id="updateAssetNumberTextField" promptText="Asset Number" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin></TextField>
-      <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+      <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="120.0" right="15.0" />
          </GridPane.margin>
       </Button>
-      <TextField promptText="Floor Number" GridPane.columnIndex="3" GridPane.rowIndex="4">
+      <TextField fx:id="updateFloorNumberTextField" promptText="Floor Number" GridPane.columnIndex="3" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin></TextField>
@@ -140,5 +140,11 @@
             <Insets left="70.0" />
          </GridPane.margin>
       </Label>
+      <Label text="Asset Number:" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="70.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="addAssetNumberTextField" promptText="Asset Number" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
