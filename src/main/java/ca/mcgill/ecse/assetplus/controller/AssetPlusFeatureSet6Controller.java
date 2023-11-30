@@ -31,7 +31,7 @@ public class AssetPlusFeatureSet6Controller {
       AssetPlusPersistence.save();
     }
     catch(Exception e) {
-      String errorMessage = "Unknown exception";
+    
      }
     }
   }
@@ -131,5 +131,8 @@ public class AssetPlusFeatureSet6Controller {
       }
     }
     return ticketsForSpecificDay;
+  }
+  public static boolean hasUser(String email){
+    return User.hasWithEmail(email);
   }
 }
