@@ -84,7 +84,7 @@ public class AssetTypePageController {
           return;
         }
       }
-      ViewUtils.showError("The asset type you tried to delete does not exist")
+      ViewUtils.showError("The asset type you tried to delete does not exist");
     }
   }
 }
