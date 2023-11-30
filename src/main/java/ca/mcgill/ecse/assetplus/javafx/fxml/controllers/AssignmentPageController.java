@@ -94,7 +94,7 @@ public class AssignmentPageController {
     }
     else {
       int ticketId = Integer.parseInt(ticketIdString);
-      String errorMessage = AssetPlusAPI.startTicketWork(null);
+      String errorMessage = AssetPlusAPI.startTicketWork(AssetPlusAPI.getTicketwithId(ticketId));
       if (errorMessage.isEmpty()) {
         ticketIdTextField.setText("");
       } else {
@@ -111,7 +111,7 @@ public class AssignmentPageController {
     }
     else {
       int ticketId = Integer.parseInt(ticketIdString);
-      String errorMessage = AssetPlusAPI.completeTicketWork(null);
+      String errorMessage = AssetPlusAPI.completeTicketWork(AssetPlusAPI.getTicketwithId(ticketId));
       if (errorMessage.isEmpty()) {
         ticketIdTextField.setText("");
       } else {
@@ -128,7 +128,7 @@ public class AssignmentPageController {
     }
     else {
       int ticketId = Integer.parseInt(ticketIdString);
-      String errorMessage = AssetPlusAPI.approveTicketWork(null);
+      String errorMessage = AssetPlusAPI.approveTicketWork(AssetPlusAPI.getTicketwithId(ticketId));
       if (errorMessage.isEmpty()) {
         ticketIdTextField.setText("");
       } else {
@@ -149,7 +149,7 @@ public class AssignmentPageController {
     else {
       int ticketId = Integer.parseInt(ticketIdString);
       Date date = Date.valueOf(dateString);
-      String errorMessage = AssetPlusAPI.disapproveTicketWork(date, note, null);
+      String errorMessage = AssetPlusAPI.disapproveTicketWork(date, note, AssetPlusAPI.getTicketwithId(ticketId));
       if (errorMessage.isEmpty()) {
         ticketIdTextField.setText("");
         noteTextField.setText("");
