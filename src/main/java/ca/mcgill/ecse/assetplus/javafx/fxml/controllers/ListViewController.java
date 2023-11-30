@@ -34,17 +34,44 @@ public class ListViewController {
     @FXML // fx:id="searchByDate"
     private DatePicker searchByDate; // Value injected by FXMLLoader
 
+    @FXML private Button searchByDateButton;
+
+    @FXML private Button seeAllTicketsButton;
+
     @FXML private TableView<TOMaintenanceTicket> overviewTable;
 
     @FXML private Button searchButton;
+
+    @FXML private Button searchByRaiserButton;
+    
+    @FXML private TextField searchRaiserTextField;
 
     @FXML private TextField searchTicketTextField;
 
     public void initialize() {
         // initialize the overview table by adding new columns
+
+        /*  id = aId;
+     private int id; GOOD
+  private Date raisedOnDate; GOOD
+  private String description; GOOD
+  private String raisedByEmail;
+  private String status;
+  private String fixedByEmail;
+  private String timeToResolve;
+  private String priority; GOOD
+  private boolean approvalRequired;
+  private String assetName;
+  private int expectLifeSpanInDays;
+  private Date purchaseDate;
+  private int floorNumber;
+  private int roomNumber;
+  private List<String> imageURLs;*/
         
         //TICKET ID COLUMN (int)
-        overviewTable.getColumns().add(createTableColumn("Ticket ID", "number"));
+        var idcolumn = createTableColumn("Ticket ID", "id");
+        overviewTable.getColumns().add(idcolumn);
+
 
         //STATUS COLUMN (string)
         var statusColumn = createTableColumn("Status", "status");
@@ -75,7 +102,7 @@ public class ListViewController {
         overviewTable.getColumns().add(timeResColumn);
 
         //PRIORITY COLUMN (string)
-        overviewTable.getColumns().add(createTableColumn("Priority", "prioritylevel"));
+        overviewTable.getColumns().add(createTableColumn("Priority", "priority"));
 
         //APPROVAL REQUIRED (Boolean)
         overviewTable.getColumns().add(createTableColumn("Approval Required", "approvalRequired"));
@@ -87,7 +114,13 @@ public class ListViewController {
         overviewTable.getColumns().add(assetNameColumn);
 
         //LIFESPAN COLUMN (string)
-        overviewTable.getColumns().add(createTableColumn("Lifespan", "lifespan"));
+        overviewTable.getColumns().add(createTableColumn("Lifespan", "expectLifeSpanInDays"));
+
+        //raised on date (Date)
+        var raisedOnDateColumn = new TableColumn<TOMaintenanceTicket, String>("Raised On");
+        raisedOnDateColumn.setCellValueFactory(data -> Bindings.createStringBinding(
+            () -> data.getValue().getRaisedOnDate().toString()));
+        overviewTable.getColumns().add(raisedOnDateColumn);
 
         //Purchase date (Date)
         var purchaseDateColumn = new TableColumn<TOMaintenanceTicket, String>("Purchase Date");
@@ -96,10 +129,10 @@ public class ListViewController {
         overviewTable.getColumns().add(purchaseDateColumn);
 
         //FloorNumber int
-        overviewTable.getColumns().add(createTableColumn("Floor Number", "floornumber"));
+        overviewTable.getColumns().add(createTableColumn("Floor Number", "floorNumber"));
 
         //RoomNumber int
-        overviewTable.getColumns().add(createTableColumn("Room Number", "roomnumber"));
+        overviewTable.getColumns().add(createTableColumn("Room Number", "roomNumber"));
 
         //Image URLS 
         var imageColumn = new TableColumn<TOMaintenanceTicket, String>("Images");
@@ -151,15 +184,17 @@ public class ListViewController {
 
         // configure data picker
         // set editable to false so that the user cannot choose from the calendar
-        searchByDate.setEditable(false);
+        //searchByDate.setEditable(false);
         // set default value to today
         searchByDate.setValue(LocalDate.now());
     
-        // overview table if a refreshable element
-        overviewTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> overviewTable.setItems(getTicketItems()));
+        overviewTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> overviewTable.setItems(getAllTickets()));
     
         // register refreshable nodes
         AssetPlusFxmlView.getInstance().registerRefreshEvent(overviewTable);
+
+        assert overviewTable != null : "fx:id=\"overviewTable\" was not injected: check your FXML file 'ListView.fxml'.";
+        assert searchByDate != null : "fx:id=\"searchByDate\" was not injected: check your FXML file 'ListView.fxml'.";
       }
 
     @FXML
@@ -174,9 +209,36 @@ public class ListViewController {
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return column;
     }
+
+
+
+    @FXML
+    void seeAllTicketsButtonClicked(ActionEvent event) {
+        overviewTable.setItems(FXCollections.observableList(getAllTickets()));
+        AssetPlusFxmlView.getInstance().registerRefreshEvent(overviewTable);
+        AssetPlusFxmlView.getInstance().refresh();
+    }
+
+    @FXML
+    void searchRaiserButtonClicked(ActionEvent event) {
+        String selectedRaiser = searchRaiserTextField.getText().trim();
+        if (selectedRaiser == null) {
+            ViewUtils.showError("Please input a valid user email");
+        }else{
+            ObservableList<TOMaintenanceTicket> filteredTickets =  getAllTickets().filtered(ticket -> ticket.getRaisedByEmail().equalsIgnoreCase(selectedRaiser));
+
+            if (filteredTickets.isEmpty()) {
+                ViewUtils.showError("No tickets found with the specified Raiser");
+            } else {
+                overviewTable.setItems(FXCollections.observableList(filteredTickets));
+                AssetPlusFxmlView.getInstance().registerRefreshEvent(overviewTable);
+            }
+        }
+
+    }
   
     @FXML 
-    void searchButtonClicked(ActionEvent event) {
+    void searchButtonClicked(ActionEvent event) { //FOR TICKET ID
         String stringid = searchTicketTextField.getText().trim();
         if (stringid.isEmpty()) {
             ViewUtils.showError("Please input a valid ticket ID");
@@ -195,36 +257,27 @@ public class ListViewController {
     }
 
     public ObservableList<TOMaintenanceTicket> getAllTickets() {
-        if (AssetPlusFeatureSet6Controller.getTickets() == null){
-            return FXCollections.emptyObservableList();
-        }
         return FXCollections.observableList(AssetPlusFeatureSet6Controller.getTickets());
     }
 
-
-
-
-    public ObservableList<TOMaintenanceTicket> getTicketItems() {
+    @FXML
+    void searchByDateButtonClicked(ActionEvent event) { //FOR SEARCHING BY A SPECIFIC DAY 
         LocalDate selectedDate = searchByDate.getValue();
-      
         if (selectedDate == null) {
-          ViewUtils.showError("Please select a valid date");
-          return FXCollections.emptyObservableList();
+            ViewUtils.showError("Please select a valid date");
+        }else{
+            var date = Date.valueOf(selectedDate);
+            ObservableList<TOMaintenanceTicket> filteredTickets = getAllTickets().filtered(ticket -> 0==ticket.getRaisedOnDate().compareTo(date));
+
+            if (filteredTickets.isEmpty()) {
+                ViewUtils.showError("No tickets found with the specified date");
+            } else {
+                overviewTable.setItems(filteredTickets);
+                AssetPlusFxmlView.getInstance().registerRefreshEvent(overviewTable);
+            }
         }
-        var date = Date.valueOf(selectedDate);
-        if (AssetPlusFeatureSet6Controller.getTicketForSpecificDay(date) == null) {
-            return FXCollections.emptyObservableList();
-        }
-        return FXCollections.observableList(AssetPlusFeatureSet6Controller.getTicketForSpecificDay(date));
+
     }
 
-    
-    /*@FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-        assert SearchById != null : "fx:id=\"SearchById\" was not injected: check your FXML file 'ListView.fxml'.";
-        assert overviewTable != null : "fx:id=\"overviewTable\" was not injected: check your FXML file 'ListView.fxml'.";
-        assert searchByDate != null : "fx:id=\"searchByDate\" was not injected: check your FXML file 'ListView.fxml'.";
-
-    }*/
 
 }
