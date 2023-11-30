@@ -31,7 +31,7 @@ public class AssetPlusFeatureSet6Controller {
       AssetPlusPersistence.save();
     }
     catch(Exception e) {
-    
+      String errorMessage = "Unknown exception";
      }
     }
   }
@@ -107,7 +107,7 @@ public class AssetPlusFeatureSet6Controller {
         }
 
 
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getStatusFullName(), fixer, timetores, prioritycheck, ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getTicketStatusFullName(), fixer, timetores, prioritycheck, ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
@@ -118,21 +118,5 @@ public class AssetPlusFeatureSet6Controller {
     return null;
   }
 
-  public static List<TOMaintenanceTicket> getTicketForSpecificDay(Date date) {
-    List<TOMaintenanceTicket> allTickets = getTickets();
-    var ticketsForSpecificDay = new ArrayList<TOMaintenanceTicket>();
-    // getting nullpointer exception when trying to view 
-    if (allTickets == null) {
-      return null;
-    }
-    for (var singleTicket : allTickets) {
-      if (singleTicket.getRaisedOnDate().equals(date)) {
-        ticketsForSpecificDay.add(singleTicket);
-      }
-    }
-    return ticketsForSpecificDay;
-  }
-  public static boolean hasUser(String email){
-    return User.hasWithEmail(email);
-  }
+
 }
