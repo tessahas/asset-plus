@@ -64,4 +64,12 @@ public class MaintenancePageController {
     }
   }
 
+  // Event Listener on Button[#createButton].onAction
+  @FXML
+  public void createTicket(ActionEvent event) {
+    String date = createTicketDateTextField.getText();
+    String description = createTicketDescriptionTextField.getText();
+    
+  } 
 }
+

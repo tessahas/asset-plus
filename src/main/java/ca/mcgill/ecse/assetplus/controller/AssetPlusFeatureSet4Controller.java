@@ -119,13 +119,16 @@ public class AssetPlusFeatureSet4Controller {
    * @param id The number of the ticket that is to be deleted
    * If the id given does not have a corresponding ticket, then nothing happens.
    */
-  public static void deleteMaintenanceTicket(int id) {
+  public static String deleteMaintenanceTicket(int id) {
+    String errorMessage = "";
     try {
       if (MaintenanceTicket.hasWithId(id)) {
           MaintenanceTicket.getWithId(id).delete(); 
       }
+      else errorMessage += "Ticket does not exist";
       AssetPlusPersistence.save();
     }
     catch (RuntimeException e) {}
+    return errorMessage;
   }
 }
