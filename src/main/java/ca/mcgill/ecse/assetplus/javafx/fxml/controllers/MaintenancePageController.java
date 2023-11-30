@@ -1,11 +1,14 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
+import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 public class MaintenancePageController {
   @FXML private TextField createTicketDateTextField;
@@ -28,6 +31,32 @@ public class MaintenancePageController {
   @FXML private ChoiceBox<String> updateTicketTimeEstimateChoiceBox;
   @FXML private ChoiceBox<String> updateTicketApprovalChoiceBox;
 
+
+  @FXML void initialize() {
+    ObservableList<String> priorities =
+      FXCollections.observableArrayList("Low", "Normal", "Urgent");
+    
+    ObservableList<String> timeEstimate =
+      FXCollections.observableArrayList("LessThanADay", "OneToThreeDays", "ThreeToSevenDays", "OneToThreeWeeks", "ThreeOrMoreWeeks");
+    
+    ObservableList<String> approvalRequired =
+      FXCollections.observableArrayList("Yes", "No");
+
+    createTicketPriorityChoiceBox.setItems(priorities);
+    createTicketPriorityChoiceBox.setValue(null);
+    updateTicketPriorityChoiceBox.setItems(priorities);
+    updateTicketApprovalChoiceBox.setValue(null);
+
+    createTicketTimeEstimateChoiceBox.setItems(timeEstimate);
+    createTicketTimeEstimateChoiceBox.setValue(null);
+    updateTicketTimeEstimateChoiceBox.setItems(timeEstimate);
+    updateTicketTimeEstimateChoiceBox.setValue(null);
+
+    createTicketApprovalChoiceBox.setItems(approvalRequired);
+    createTicketApprovalChoiceBox.setValue("No");
+    updateTicketApprovalChoiceBox.setItems(approvalRequired);
+    updateTicketApprovalChoiceBox.setValue("No");
+  }
   // Event Listener on Button[#addImageButton].onAction
   @FXML
   public void addImageClicked(ActionEvent event) {
