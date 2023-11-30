@@ -107,7 +107,7 @@ public class AssetPlusFeatureSet6Controller {
         }
 
 
-        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getTicketStatusFullName(), fixer, timetores, prioritycheck, ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
+        TOMaintenanceTicket TOticket = new TOMaintenanceTicket(ticket.getId(), ticket.getRaisedOnDate(), ticket.getDescription(), ticket.getTicketRaiser().getEmail(), ticket.getStatusFullName(), fixer, timetores, prioritycheck, ticket.hasFixApprover(), assetName, lifespan, purchaseDate, floorNumber, roomNumber, urls, notes);
         TOMaintenanceTickets.add(TOticket);
 
       }
@@ -117,6 +117,8 @@ public class AssetPlusFeatureSet6Controller {
     }
     return null;
   }
-
+  public static boolean hasUser(String email){
+    return User.hasWithEmail(email);
+  }
 
 }

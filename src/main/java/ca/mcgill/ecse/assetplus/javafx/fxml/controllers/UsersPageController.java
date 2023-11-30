@@ -21,6 +21,22 @@ public class UsersPageController {
   @FXML private Button createGuestButton;
   @FXML private Button createEmployeeButton;
 
+  @FXML private TextField findEmailTextField;
+  @FXML private TextField updateNameTextField;
+  @FXML private TextField updatePhoneNumberTextField;
+  @FXML private TextField confirmOldUserPasswordTextField;
+  @FXML private TextField updateUserPasswordTextField;
+  @FXML private TextField confirmNewUserPasswordTextField;
+  @FXML private Button updateGuestButton;
+  @FXML private Button updateEmployeeButton;
+  @FXML private Button deleteGuestButton;
+  @FXML private Button deleteEmployeeButton;
+
+  @FXML private TextField confirmOldManagerPasswordTextField;
+  @FXML private TextField updateManagerPasswordTextField;
+  @FXML private TextField confirmNewManagerPasswordTextField;
+  @FXML private Button updateManagerButton;
+
   @FXML
   // Event Listener on Button[#createGuestButton].onAction
   public void createGuestClicked(ActionEvent event) {
@@ -113,16 +129,7 @@ public class UsersPageController {
     }
   }
 
-  @FXML private TextField findEmailTextField;
-  @FXML private TextField updateNameTextField;
-  @FXML private TextField updatePhoneNumberTextField;
-  @FXML private TextField confirmOldUserPasswordTextField;
-  @FXML private TextField updateUserPasswordTextField;
-  @FXML private TextField confirmNewUserPasswordTextField;
-  @FXML private Button updateGuestButton;
-  @FXML private Button updateEmployeeButton;
-  @FXML private Button deleteGuestButton;
-  @FXML private Button deleteEmployeeButton;
+
 
   @FXML
   // Event Listener on Button[#updateGuestOrEmployeeButton].onAction
@@ -191,13 +198,9 @@ public class UsersPageController {
     }
   }
 
-  @FXML private TextField confirmOldManagerPasswordTextField;
-  @FXML private TextField updateManagerPasswordTextField;
-  @FXML private TextField confirmNewManagerPasswordTextField;
-  @FXML private Button updateManagerButton;
 
   @FXML
-    // Event Listener on Button[#updateManagereButton].onAction
+    // Event Listener on Button[#updateManagerButton].onAction
     public void updateManagerClicked(ActionEvent event){
       String confirmOldManagerPasswordTextString = confirmOldManagerPasswordTextField.getText();
       String updateManagerPasswordString = updateManagerPasswordTextField.getText();
