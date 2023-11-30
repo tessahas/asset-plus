@@ -57,9 +57,9 @@ public class AssignmentPageController {
   public void assignClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     String employeeEmail = employeeEmailChoiceBox.getValue();
-    String priority = priorityChoiceBox.getValue();
-    String timeEstimate = timeEstimateChoiceBox.getValue();
-    String approval = approvalChoiceBox.getValue();
+    String priorityString = priorityChoiceBox.getValue();
+    String timeEstimateString = timeEstimateChoiceBox.getValue();
+    String approvalString = approvalChoiceBox.getValue();
 
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
       ViewUtils.showError("The ticket number cannot be empty");
@@ -67,10 +67,17 @@ public class AssignmentPageController {
     else if (employeeEmail == null) {
       ViewUtils.showError("An employee must be specified");
     }
+    else if (priorityString == null || priorityString.trim().isEmpty()) {
+      ViewUtils.showError("Please select a priority");
+    }
+    else if (timeEstimateString == null || timeEstimateString.trim().isEmpty()) {
+      ViewUtils.showError("Please select a time estimate");
+    }
     else {
+      boolean approval = ("Yes".compareToIgnoreCase(approvalString)==0);
       int ticketId = Integer.parseInt(ticketIdString);
-      String errorMessage = AssetPlusAPI.assign(ticketId, employeeEmail, AssetPlusAPI.getTimeEstimate(ticketId),
-         AssetPlusAPI.getPriorityLevel(ticketId), AssetPlusAPI.getRequiresApproval(ticketId));
+      String errorMessage = AssetPlusAPI.assign(ticketId, employeeEmail, AssetPlusAPI.getTimeEstimateEnum(timeEstimateString), 
+      AssetPlusAPI.getPriorityEnum(priorityString), approval);
       if (errorMessage.isEmpty()) {
         ticketIdTextField.setText("");
       } else {

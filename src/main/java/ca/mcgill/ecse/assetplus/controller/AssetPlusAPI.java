@@ -13,6 +13,31 @@ public class AssetPlusAPI {
 private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
   /**
+   * <h2>getEstimateEnum<h2>
+   * @param timeEstimate - Time estimate of the ticket as a string
+   * @return TimeEstimate, Priority - Returns the input as their enum counterpart
+   * 
+   * @author Yuri Sorice
+   */
+  public static MaintenanceTicket.TimeEstimate getTimeEstimateEnum(String timeEstimateString) {
+    MaintenanceTicket.TimeEstimate timeEstimate = TimeEstimate.valueOf(timeEstimateString);
+    return timeEstimate;
+  }
+
+  /**
+   * <h2>getPriorityEnum<h2>
+   * @param priority - priority of the ticket as a string
+   * @return Priority - Returns the input as their enum counterpart
+   * 
+   * @author Yuri Sorice
+   */
+  public static MaintenanceTicket.PriorityLevel getPriorityEnum(String priorityString) {
+    MaintenanceTicket.PriorityLevel priority = PriorityLevel.valueOf(priorityString);
+    return priority;
+  }
+
+
+  /**
   * <h1>assign</h1> 
   * This method is called when a Hotel Staff member is assigned to a ticket
   * @param ticketId - Id of the ticket that a Hotel Staff member is assigned to.
