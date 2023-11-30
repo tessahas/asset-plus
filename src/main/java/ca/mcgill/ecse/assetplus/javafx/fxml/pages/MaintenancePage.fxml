@@ -48,12 +48,12 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="addImageUrlTextField" promptText="Add Image URL" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <TextField fx:id="addImageURLTextField" promptText="Add Image URL" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="deleteImageUrlTextField" promptText="Delete Image URL" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <TextField fx:id="deleteImageURLTextField" promptText="Delete Image URL" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets right="5.0" />
          </GridPane.margin>
@@ -76,7 +76,7 @@
             <Insets />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="createTicketDateTextfield" promptText="Date MM/DD/YYYY" GridPane.rowIndex="3">
+      <TextField fx:id="createTicketDateTextField" promptText="Date MM/DD/YYYY" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -101,7 +101,7 @@
             <Insets right="40.0" />
          </GridPane.margin>
       </Button>
-      <TextField fx:id="updateTicketIdTextfield" promptText="Ticket ID" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="updateTicketIdTextField" promptText="Ticket ID" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
