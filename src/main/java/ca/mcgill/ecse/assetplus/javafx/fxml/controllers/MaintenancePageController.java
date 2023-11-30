@@ -26,9 +26,9 @@ public class MaintenancePageController {
     String url = addImageURLTextField.getText().trim();
     String idString = imageTicketIdTextField.getText().trim();
     if (url == null || url.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid image URL");
+      ViewUtils.showError("Please input a valid image URL. ");
     } else if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid ticket ID");
+      ViewUtils.showError("Please input a valid ticket ID. ");
     } else {
       // reset the text field if success
       int id = Integer.parseInt(idString);
@@ -45,10 +45,10 @@ public class MaintenancePageController {
     String idString = imageTicketIdTextField.getText().trim();
 
     if (name == null || name.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid image URL");
+      ViewUtils.showError("Please input a valid image URL. ");
     } 
     else if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid ticket ID");
+      ViewUtils.showError("Please input a valid ticket ID. ");
     } 
     else {
       // reset the text field if success
@@ -71,19 +71,19 @@ public class MaintenancePageController {
 
     // Checking for null or empty strings
     if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid ticket id");
+      ViewUtils.showError("Please input a valid ticket id. ");
     }
     else if (dateString == null || dateString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid date");
+      ViewUtils.showError("Please input a valid date. ");
     }
     else if (description == null || description.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid description");
+      ViewUtils.showError("Please input a valid description. ");
     }
     else if (assetString == null || assetString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid asset number");
+      ViewUtils.showError("Please input a valid asset number. ");
     }
     else if (emailString == null || emailString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid user email");
+      ViewUtils.showError("Please input a valid user email. ");
     }
     else {
       int id = Integer.parseInt(idString);
@@ -117,19 +117,19 @@ public class MaintenancePageController {
 
     // Checking for null or empty strings
     if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid ticket id");
+      ViewUtils.showError("Please input a valid ticket id. ");
     }
     else if (dateString == null || dateString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid date");
+      ViewUtils.showError("Please input a valid date. ");
     }
     else if (description == null || description.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid description");
+      ViewUtils.showError("Please input a valid description. ");
     }
     else if (assetString == null || assetString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid asset number");
+      ViewUtils.showError("Please input a valid asset number. ");
     }
     else if (email == null || email.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid user email");
+      ViewUtils.showError("Please input a valid user email. ");
     }
     else {
       int id = Integer.parseInt(idString);
@@ -156,7 +156,7 @@ public class MaintenancePageController {
   void deleteButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a ticket id");
+      ViewUtils.showError("Please input a ticket id. ");
     }
     else {
       int id = Integer.parseInt(idString);

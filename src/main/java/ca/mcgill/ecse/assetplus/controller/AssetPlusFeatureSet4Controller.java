@@ -26,16 +26,16 @@ public class AssetPlusFeatureSet4Controller {
       String email, int assetNumber) {
         String errorMessage = "";
         if (MaintenanceTicket.hasWithId(id)) {
-          errorMessage += "Ticket id already exists";
+          errorMessage += "Ticket id already exists. ";
         }
         if (!SpecificAsset.hasWithAssetNumber(assetNumber) && assetNumber != -1) {
-          errorMessage += "The asset does not exist";
+          errorMessage += "The asset does not exist. ";
         }
         if (!User.hasWithEmail(email)) {
-          errorMessage += "The ticket raiser does not exist";
+          errorMessage += "The ticket raiser does not exist. ";
         }
         if (description == null || description.isEmpty()) {
-          errorMessage += "Ticket description cannot be empty";
+          errorMessage += "Ticket description cannot be empty. ";
         }
         if (!errorMessage.isEmpty()) {
           return errorMessage;
@@ -53,13 +53,13 @@ public class AssetPlusFeatureSet4Controller {
       }
       catch (Exception e){
         if (e.getMessage().contains("duplicate")){
-          errorMessage += "Cannot create due to duplicate id";
+          errorMessage += "Cannot create due to duplicate id. ";
         }
         if (e.getMessage().contains("assetPlus")){
-          errorMessage += "Unable to create maintenanceTicket due to assetPlus";
+          errorMessage += "Unable to create maintenanceTicket due to assetPlus. ";
         }
         if (e.getMessage().contains("raisedTicket")){
-          errorMessage += "Unable to create raisedTicket due to ticketRaiser";
+          errorMessage += "Unable to create raisedTicket due to ticketRaiser. ";
         }
       }
 
@@ -82,13 +82,13 @@ public class AssetPlusFeatureSet4Controller {
       String newEmail, int newAssetNumber) {
         String errorMessage = "";
         if (!HotelStaff.hasWithEmail(newEmail)) {
-          errorMessage += "The ticket raiser does not exist";
+          errorMessage += "The ticket raiser does not exist. ";
         }
         if (newDescription == null || newDescription.isEmpty()) {
-          errorMessage += "Ticket description cannot be empty";
+          errorMessage += "Ticket description cannot be empty. ";
         }
         if (!SpecificAsset.hasWithAssetNumber(newAssetNumber) && newAssetNumber != -1) {
-          errorMessage += "The asset does not exist";
+          errorMessage += "The asset does not exist. ";
         }
         if (!errorMessage.isEmpty()) {
           return errorMessage;
@@ -125,7 +125,7 @@ public class AssetPlusFeatureSet4Controller {
       if (MaintenanceTicket.hasWithId(id)) {
           MaintenanceTicket.getWithId(id).delete(); 
       }
-      else errorMessage += "Ticket does not exist";
+      else errorMessage += "Ticket does not exist. ";
       AssetPlusPersistence.save();
     }
     catch (RuntimeException e) {}
