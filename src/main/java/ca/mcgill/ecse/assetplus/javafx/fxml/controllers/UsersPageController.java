@@ -119,8 +119,10 @@ public class UsersPageController {
   @FXML private TextField confirmOldUserPasswordTextField;
   @FXML private TextField updateUserPasswordTextField;
   @FXML private TextField confirmNewUserPasswordTextField;
-  @FXML private Button updateGuestOrEmployeeButton;
-  @FXML private Button deleteGuestOrEmployeeButton;
+  @FXML private Button updateGuestButton;
+  @FXML private Button updateEmployeeButton;
+  @FXML private Button deleteGuestButton;
+  @FXML private Button deleteEmployeeButton;
 
   @FXML
   // Event Listener on Button[#updateGuestOrEmployeeButton].onAction
