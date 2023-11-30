@@ -91,36 +91,31 @@ public class MaintenancePageController {
     String dateString = createTicketDateTextField.getText();
     String description = createTicketDescriptionTextField.getText();
     String assetString = createTicketAssetNumberTextField.getText();
-    String priority = createTicketPriorityChoiceBox.getValue();
-    String timeEstimate = createTicketTimeEstimateChoiceBox.getValue();
-    String approval = createTicketApprovalChoiceBox.getValue();
 
     // Checking for null or empty strings
     if (idString == null || idString.trim().isEmpty()) {
       ViewUtils.showError("Please input a valid ticket id");
     }
-    if (dateString == null || dateString.trim().isEmpty()) {
+    else if (dateString == null || dateString.trim().isEmpty()) {
       ViewUtils.showError("Please input a valid date");
     }
-    if (description == null || description.trim().isEmpty()) {
+    else if (description == null || description.trim().isEmpty()) {
       ViewUtils.showError("Please input a valid description");
     }
-    if (assetString == null || assetString.trim().isEmpty()) {
+    else if (assetString == null || assetString.trim().isEmpty()) {
       ViewUtils.showError("Please input a valid asset number");
     }
-    if (priority == null || priority.trim().isEmpty()) {
-      ViewUtils.showError("Please select a priority");
-    }
-    if (timeEstimate == null || timeEstimate.trim().isEmpty()) {
-      ViewUtils.showError("Please select a time estimate");
-    }
-
-    int id = Integer.parseInt(idString);
-    Date date = Date.valueOf(dateString);
-    int assetNumber = Integer.parseInt(assetString);
-    // TODO user email may not always be the manager
-    if(ViewUtils.successful(AssetPlusFeatureSet4Controller.addMaintenanceTicket(id, date, description,"manager@ap.com", assetNumber))) {
-      // clear textfields
+    else {
+      int id = Integer.parseInt(idString);
+      Date date = Date.valueOf(dateString);
+      int assetNumber = Integer.parseInt(assetString);
+      // TODO user email may not always be the manager
+      if(ViewUtils.successful(AssetPlusFeatureSet4Controller.addMaintenanceTicket(id, date, description,"manager@ap.com", assetNumber))) {
+        // clear textfields
+        createTicketIdTextField.setText(null);
+        createTicketDateTextField.setText(null);
+        createTicketDescriptionTextField.setText(null);
+      }
     }
 
 
