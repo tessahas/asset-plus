@@ -5,8 +5,8 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 1 "../../../../../AssetPlusPersistence.ump"
-// line 6 "../../../../../AssetPlus.ump"
+// line 1 "../../../../../../AssetPlusPersistence.ump"
+// line 6 "../../../../../../AssetPlus.ump"
 public class AssetPlus
 {
 
@@ -633,7 +633,7 @@ public class AssetPlus
     
   }
 
-  // line 3 "../../../../../AssetPlusPersistence.ump"
+  // line 3 "../../../../../../AssetPlusPersistence.ump"
    public void reinitialize(){
     User.reinitializeUniqueEmail(getManager(), getEmployees(), getGuests());
         MaintenanceTicket.reinitializeUniqueId(getMaintenanceTickets());

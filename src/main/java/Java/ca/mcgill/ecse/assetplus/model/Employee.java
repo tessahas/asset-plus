@@ -4,28 +4,28 @@
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 
-// line 31 "../../../../../AssetPlus.ump"
-public class Guest extends User
+// line 36 "../../../../../../AssetPlus.ump"
+public class Employee extends HotelStaff
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //Guest Associations
+  //Employee Associations
   private AssetPlus assetPlus;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Guest(String aEmail, String aName, String aPassword, String aPhoneNumber, AssetPlus aAssetPlus)
+  public Employee(String aEmail, String aName, String aPassword, String aPhoneNumber, AssetPlus aAssetPlus)
   {
     super(aEmail, aName, aPassword, aPhoneNumber);
     boolean didAddAssetPlus = setAssetPlus(aAssetPlus);
     if (!didAddAssetPlus)
     {
-      throw new RuntimeException("Unable to create guest due to assetPlus. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create employee due to assetPlus. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
 
@@ -50,9 +50,9 @@ public class Guest extends User
     assetPlus = aAssetPlus;
     if (existingAssetPlus != null && !existingAssetPlus.equals(aAssetPlus))
     {
-      existingAssetPlus.removeGuest(this);
+      existingAssetPlus.removeEmployee(this);
     }
-    assetPlus.addGuest(this);
+    assetPlus.addEmployee(this);
     wasSet = true;
     return wasSet;
   }
@@ -63,7 +63,7 @@ public class Guest extends User
     this.assetPlus = null;
     if(placeholderAssetPlus != null)
     {
-      placeholderAssetPlus.removeGuest(this);
+      placeholderAssetPlus.removeEmployee(this);
     }
     super.delete();
   }

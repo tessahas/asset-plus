@@ -5,9 +5,9 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 1 "../../../../../AssetPlusStates.ump"
-// line 23 "../../../../../AssetPlusPersistence.ump"
-// line 46 "../../../../../AssetPlus.ump"
+// line 1 "../../../../../../AssetPlusStates.ump"
+// line 23 "../../../../../../AssetPlusPersistence.ump"
+// line 46 "../../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
 
@@ -184,7 +184,7 @@ public class MaintenanceTicket
     switch (aStatus)
     {
       case Open:
-        // line 4 "../../../../../AssetPlusStates.ump"
+        // line 4 "../../../../../../AssetPlusStates.ump"
         assignTo(ticketFixer);
             setPriorityLevel(priorityLevel);
             setTimeEstimate(timeEstimate);
@@ -671,22 +671,22 @@ public class MaintenanceTicket
     }
   }
 
-  // line 27 "../../../../../AssetPlusStates.ump"
+  // line 27 "../../../../../../AssetPlusStates.ump"
    private void assignTo(HotelStaff hotelStaff){
     setTicketFixer(hotelStaff);
   }
 
-  // line 30 "../../../../../AssetPlusStates.ump"
+  // line 30 "../../../../../../AssetPlusStates.ump"
    private void setPriorityLevel(PriorityLevel priorityLevel){
     setPriority(priorityLevel);
   }
 
-  // line 33 "../../../../../AssetPlusStates.ump"
+  // line 33 "../../../../../../AssetPlusStates.ump"
    private void setTimeEstimate(TimeEstimate timeEstimate){
     setTimeToResolve(timeEstimate);
   }
 
-  // line 36 "../../../../../AssetPlusStates.ump"
+  // line 36 "../../../../../../AssetPlusStates.ump"
    private void setRequiresManagerApproval(boolean isRequired){
     if (isRequired) {
             setFixApprover(getAssetPlus().getManager());
@@ -696,12 +696,12 @@ public class MaintenanceTicket
         }
   }
 
-  // line 44 "../../../../../AssetPlusStates.ump"
+  // line 44 "../../../../../../AssetPlusStates.ump"
    private boolean requiresManagerApproval(){
     return hasFixApprover();
   }
 
-  // line 25 "../../../../../AssetPlusPersistence.ump"
+  // line 25 "../../../../../../AssetPlusPersistence.ump"
    public static  void reinitializeUniqueId(List<MaintenanceTicket> tickets){
     maintenanceticketsById.clear();
         for (var ticket: tickets) {

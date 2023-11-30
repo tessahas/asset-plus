@@ -5,8 +5,8 @@ package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 10 "../../../../../AssetPlusPersistence.ump"
-// line 16 "../../../../../AssetPlus.ump"
+// line 10 "../../../../../../AssetPlusPersistence.ump"
+// line 16 "../../../../../../AssetPlus.ump"
 public abstract class User
 {
 
@@ -234,7 +234,7 @@ public abstract class User
     }
   }
 
-  // line 12 "../../../../../AssetPlusPersistence.ump"
+  // line 12 "../../../../../../AssetPlusPersistence.ump"
    public static  void reinitializeUniqueEmail(Manager manager, List<Employee> employees, List<Guest> guests){
     usersByEmail.clear();
         usersByEmail.put(manager.getEmail(), manager);
