@@ -24,8 +24,8 @@ public class MaintenancePageController {
   // Event Listener on Button[#addImageButton].onAction
   @FXML
   void addImageClicked(ActionEvent event) {
-    String url = addImageURLTextField.getText();
-    String idString = imageTicketIdTextField.getText();
+    String url = addImageURLTextField.getText().trim();
+    String idString = imageTicketIdTextField.getText().trim();
     if (url == null || url.trim().isEmpty()) {
       ViewUtils.showError("Please input a valid image URL");
     } else if (idString == null || idString.trim().isEmpty()) {
@@ -42,8 +42,8 @@ public class MaintenancePageController {
   // Event Listener on Button[#deleteImageButton].onAction
   @FXML
   void deleteImageClicked(ActionEvent event) {
-    String name = deleteImageURLTextField.getText();
-    String idString = imageTicketIdTextField.getText();
+    String name = deleteImageURLTextField.getText().trim();
+    String idString = imageTicketIdTextField.getText().trim();
 
     if (name == null || name.trim().isEmpty()) {
       ViewUtils.showError("Please input a valid image URL");
@@ -63,12 +63,12 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#createButton].onAction
   @FXML
-  void createTicketClicked(ActionEvent event) {
-    String idString = createTicketIdTextField.getText();
-    String dateString = createTicketDateTextField.getText();
-    String description = createTicketDescriptionTextField.getText();
-    String assetString = createTicketAssetNumberTextField.getText();
-    String emailString = createTicketRaiserEmailTextField.getText();
+  void createButtonClicked(ActionEvent event) {
+    String idString = createTicketIdTextField.getText().trim();
+    String dateString = createTicketDateTextField.getText().trim();
+    String description = createTicketDescriptionTextField.getText().trim();
+    String assetString = createTicketAssetNumberTextField.getText().trim();
+    String emailString = createTicketRaiserEmailTextField.getText().trim();
 
     // Checking for null or empty strings
     if (idString == null || idString.trim().isEmpty()) {
@@ -109,7 +109,7 @@ public class MaintenancePageController {
   }
   // Event Listener on Button[#updateButton].onAction
   @FXML
-  void updateTicketClicked(ActionEvent event) {
+  void updateButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     String dateString = updateTicketDateTextField.getText();
     String description = updateTicketDescriptionTextField.getText();
@@ -154,7 +154,7 @@ public class MaintenancePageController {
    }
   // Event Listener on Button[#deleteButton].onAction
   @FXML
-  void deleteTicketClicked(ActionEvent event) {
+  void deleteButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     if (idString == null || idString.trim().isEmpty()) {
       ViewUtils.showError("Please input a ticket id");
