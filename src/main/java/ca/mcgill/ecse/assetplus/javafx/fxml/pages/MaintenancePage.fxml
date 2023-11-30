@@ -19,6 +19,7 @@
       <RowConstraints maxHeight="136.79998779296875" minHeight="40.0" prefHeight="54.0" vgrow="ALWAYS" />
       <RowConstraints maxHeight="136.79998779296875" minHeight="25.0" prefHeight="32.5999755859375" vgrow="ALWAYS" />
       <RowConstraints maxHeight="119.19998168945312" minHeight="25.0" prefHeight="44.2000244140625" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="119.19998168945312" minHeight="25.0" prefHeight="44.2000244140625" vgrow="ALWAYS" />
       <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="68.19999771118165" vgrow="ALWAYS" />
       <RowConstraints fx:id="createTicketAssetNumberTextField" maxHeight="50.0" minHeight="30.0" prefHeight="40.0" vgrow="ALWAYS" />
       <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="50.0" vgrow="ALWAYS" />
@@ -32,12 +33,12 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="updateTicketDateTextField" promptText="Date MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="updateTicketDateTextField" promptText="Date MM/DD/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="updateTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+      <TextField fx:id="updateTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -54,7 +55,7 @@
       </TextField>
       <TextField fx:id="deleteImageUrlTextField" promptText="Delete Image URL" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <GridPane.margin>
-            <Insets left="5.0" right="5.0" top="5.0" />
+            <Insets right="5.0" />
          </GridPane.margin>
       </TextField>
       <Button fx:id="addImageButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -75,27 +76,27 @@
             <Insets />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="createTicketDateTextfield" promptText="Date MM/DD/YYYY" GridPane.rowIndex="2">
+      <TextField fx:id="createTicketDateTextfield" promptText="Date MM/DD/YYYY" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="createTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.rowIndex="3">
+      <TextField fx:id="createTicketDescriptionTextField" alignment="TOP_LEFT" prefHeight="116.0" prefWidth="300.0" promptText="Describe the problem or maintenance needed" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="createTicketButton" mnemonicParsing="false" text="Create" GridPane.rowIndex="5">
+      <Button fx:id="createTicketButton" mnemonicParsing="false" text="Create" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="updateTicketButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <Button fx:id="updateTicketButton" mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="deleteTicketButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button fx:id="deleteTicketButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets right="40.0" />
          </GridPane.margin>
@@ -115,9 +116,24 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="createTicketAssetNumberTextField" promptText="Asset Number" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <TextField fx:id="createTicketAssetNumberTextField" promptText="Asset Number" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="5.0" right="5.0" top="5.0" />
+            <Insets right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="createTicketRaiserEmailTextField" promptText="User email" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="updateTicketRaiserEmailTextField" promptText="User email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="updateTicketAssetNumberTextField" layoutX="15.0" layoutY="286.0" promptText="Asset Number" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
    </children>
