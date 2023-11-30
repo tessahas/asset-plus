@@ -63,7 +63,7 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#createButton].onAction
   @FXML
-  public void createTicket(ActionEvent event) {
+  public void createTicketClicked(ActionEvent event) {
     String idString = createTicketIdTextField.getText();
     String dateString = createTicketDateTextField.getText();
     String description = createTicketDescriptionTextField.getText();
@@ -109,7 +109,7 @@ public class MaintenancePageController {
   }
   // Event Listener on Button[#updateButton].onAction
   @FXML
-  public void updateTicket(ActionEvent event) {
+  public void updateTicketClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     String dateString = updateTicketDateTextField.getText();
     String description = updateTicketDescriptionTextField.getText();

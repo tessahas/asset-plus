@@ -158,9 +158,10 @@ public class ListViewController {
 
         // configure data picker
         // set editable to false so that the user cannot choose from the calendar
-        datePicker.setEditable(false);
+        // we changed this yuri/kev
+        searchByDate.setEditable(false);
         // set default value to today
-        datePicker.setValue(LocalDate.now());
+        searchByDate.setValue(LocalDate.now());
     
         // overview table if a refreshable element
         overviewTable.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> overviewTable.setItems(getOverviewItems()));
@@ -182,7 +183,7 @@ public class ListViewController {
     }
 
     public ObservableList<TOMaintenanceTicket> getOverviewItems() {
-        LocalDate selectedDate = datePicker.getValue();
+        LocalDate selectedDate = searchByDate.getValue(); // datePicker changed to searchByDate
         if (selectedDate == null) {
           ViewUtils.showError("Please select a valid date");
           return FXCollections.emptyObservableList();
