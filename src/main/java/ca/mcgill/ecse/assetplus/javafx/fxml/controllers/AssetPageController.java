@@ -46,10 +46,10 @@ public class AssetPageController {
     AssetPlusFxmlView.getInstance().registerRefreshEvent(updateAssetTypeChoiceBox);
   }
 
-  @FXML
-  public void refreshButtonClicked(ActionEvent event) {
-    AssetPlusFxmlView.getInstance().refresh();
-  }
+  // @FXML
+  // public void refreshButtonClicked(ActionEvent event) {
+  //   AssetPlusFxmlView.getInstance().refresh();
+  // }
 
   @FXML
   // Event Listener on Button[#addButton].onAction

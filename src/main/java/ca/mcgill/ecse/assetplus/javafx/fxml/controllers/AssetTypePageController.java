@@ -40,6 +40,7 @@ public class AssetTypePageController {
       if (errorMessage.isEmpty()){
         createNewAssetTypeTextField.setText("");
         createExpectedLifespanTextField.setText("");
+        AssetPlusFxmlView.getInstance().refresh();
       } else {
         ViewUtils.showError(errorMessage);
       }
@@ -67,6 +68,7 @@ public class AssetTypePageController {
         updateOldAssetTypeTextField.setText("");
         updateNewAssetTypeTextField.setText("");
         updateExpectedLifespanTextField.setText("");
+        AssetPlusFxmlView.getInstance().refresh();
       } else {
         ViewUtils.showError(errorMessage);
       }
@@ -86,6 +88,7 @@ public class AssetTypePageController {
         if (assetType.equalsIgnoreCase(updateOldAssetTypeString)){
           AssetPlusFeatureSet2Controller.deleteAssetType(updateOldAssetTypeString);
           updateOldAssetTypeTextField.setText("");
+          AssetPlusFxmlView.getInstance().refresh();
           return;
         }
       }
