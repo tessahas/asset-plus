@@ -23,7 +23,7 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#addImageButton].onAction
   @FXML
-  public void addImageClicked(ActionEvent event) {
+  void addImageClicked(ActionEvent event) {
     String url = addImageURLTextField.getText();
     String idString = imageTicketIdTextField.getText();
     if (url == null || url.trim().isEmpty()) {
@@ -41,7 +41,7 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#deleteImageButton].onAction
   @FXML
-  public void deleteImageClicked(ActionEvent event) {
+  void deleteImageClicked(ActionEvent event) {
     String name = deleteImageURLTextField.getText();
     String idString = imageTicketIdTextField.getText();
 
@@ -63,7 +63,7 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#createButton].onAction
   @FXML
-  public void createTicketClicked(ActionEvent event) {
+  void createTicketClicked(ActionEvent event) {
     String idString = createTicketIdTextField.getText();
     String dateString = createTicketDateTextField.getText();
     String description = createTicketDescriptionTextField.getText();
@@ -109,7 +109,7 @@ public class MaintenancePageController {
   }
   // Event Listener on Button[#updateButton].onAction
   @FXML
-  public void updateTicketClicked(ActionEvent event) {
+  void updateTicketClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     String dateString = updateTicketDateTextField.getText();
     String description = updateTicketDescriptionTextField.getText();
@@ -154,7 +154,7 @@ public class MaintenancePageController {
    }
   // Event Listener on Button[#deleteButton].onAction
   @FXML
-  public void deleteTicketClicked(ActionEvent event) {
+  void deleteTicketClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     if (idString == null || idString.trim().isEmpty()) {
       ViewUtils.showError("Please input a ticket id");

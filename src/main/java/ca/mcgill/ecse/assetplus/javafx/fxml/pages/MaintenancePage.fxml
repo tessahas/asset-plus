@@ -86,17 +86,17 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="createTicketButton" mnemonicParsing="false" onAction="#createTicketClicked" text="Create" GridPane.rowIndex="6">
+      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createTicketClicked" text="Create" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="updateTicketButton" mnemonicParsing="false" onAction="#updateTicketClicked" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+      <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateTicketClicked" text="Update" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="deleteTicketButton" mnemonicParsing="false" onAction="#deleteTicketClicked" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteTicketClicked" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets right="40.0" />
          </GridPane.margin>
