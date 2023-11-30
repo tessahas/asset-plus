@@ -51,7 +51,6 @@ public class AssetPageController {
     String purchaseDateString = addPurchaseDateTextField.getText();
     String floorNumberString = addFloorNumberTextField.getText();
     String roomNumberString = addRoomNumberTextField.getText();
-    String dateString = addPurchaseDateTextField.getText();
 
     if (assetNumberString == null || assetNumberString.trim().isEmpty()) {
       ViewUtils.showError("The asset number cannot be empty");
@@ -62,7 +61,7 @@ public class AssetPageController {
     else if (floorNumberString == null || floorNumberString.trim().isEmpty()) {
       ViewUtils.showError("The floor number cannot be empty");
     }
-    else if (dateString == null || dateString.trim().isEmpty()) {
+    else if (purchaseDateString == null || purchaseDateString.trim().isEmpty()) {
       ViewUtils.showError("The date cannot be empty");
     }
     else {
@@ -70,7 +69,7 @@ public class AssetPageController {
       int assetNumber = Integer.parseInt(assetNumberString);
       int floorNumber = Integer.parseInt(floorNumberString);
       int roomNumber = Integer.parseInt(roomNumberString);
-      Date purchaseDate = Date.valueOf(dateString);
+      Date purchaseDate = Date.valueOf(purchaseDateString);
       String errorMessage = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType);
       if (errorMessage.isEmpty()) {
         addAssetNumberTextField.setText("");
