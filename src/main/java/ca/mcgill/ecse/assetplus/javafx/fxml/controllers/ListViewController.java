@@ -195,6 +195,9 @@ public class ListViewController {
     }
 
     public ObservableList<TOMaintenanceTicket> getAllTickets() {
+        if (AssetPlusFeatureSet6Controller.getTickets() == null){
+            return FXCollections.emptyObservableList();
+        }
         return FXCollections.observableList(AssetPlusFeatureSet6Controller.getTickets());
     }
 
@@ -209,6 +212,9 @@ public class ListViewController {
           return FXCollections.emptyObservableList();
         }
         var date = Date.valueOf(selectedDate);
+        if (AssetPlusFeatureSet6Controller.getTicketForSpecificDay(date) == null) {
+            return FXCollections.emptyObservableList();
+        }
         return FXCollections.observableList(AssetPlusFeatureSet6Controller.getTicketForSpecificDay(date));
     }
 

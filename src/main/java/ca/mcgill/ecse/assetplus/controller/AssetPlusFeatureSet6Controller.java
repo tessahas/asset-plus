@@ -121,7 +121,10 @@ public class AssetPlusFeatureSet6Controller {
   public static List<TOMaintenanceTicket> getTicketForSpecificDay(Date date) {
     List<TOMaintenanceTicket> allTickets = getTickets();
     var ticketsForSpecificDay = new ArrayList<TOMaintenanceTicket>();
-
+    // getting nullpointer exception when trying to view 
+    if (allTickets == null) {
+      return null;
+    }
     for (var singleTicket : allTickets) {
       if (singleTicket.getRaisedOnDate().equals(date)) {
         ticketsForSpecificDay.add(singleTicket);
