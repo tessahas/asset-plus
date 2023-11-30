@@ -143,4 +143,9 @@ public class AssetPlusFeatureSet2Controller {
     List<String> assetTypeStrings = assetPlus.getAssetTypes().stream().map(AssetType::getName).toList();
     return FXCollections.observableList(assetTypeStrings);
   }
+
+  public static List<String> getAssetTypesAsList() {
+    List<String> assetTypeStrings = assetPlus.getAssetTypes().stream().map(AssetType::getName).toList();
+    return assetTypeStrings;
+  }
 }
