@@ -2,6 +2,7 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFxmlView;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet5Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,27 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
+import java.sql.Date;
+// making/updating maintenance tickets do not require any of the choiceboxes, need to remove them from scenebuilder and here
 public class MaintenancePageController {
-  @FXML private TextField createTicketDateTextField;
-  @FXML private TextField createTicketDescriptionTextField;
-  @FXML private TextField updateTicketIdTextField;
-  @FXML private TextField updateTicketDateTextField;
-  @FXML private TextField updateTicketDescriptionTextField;
-  @FXML private TextField imageTicketIdTextField;
-  @FXML private TextField addImageURLTextField;
-  @FXML private TextField deleteImageURLTextField;
-  @FXML private Button createButton;
-  @FXML private Button updateButton;
-  @FXML private Button deleteButton;
-  @FXML private Button addImageButton;
-  @FXML private Button deleteImageButton;
-  @FXML private ChoiceBox<String> createTicketPriorityChoiceBox;
-  @FXML private ChoiceBox<String> createTicketTimeEstimateChoiceBox;
-  @FXML private ChoiceBox<String> createTicketApprovalChoiceBox;
-  @FXML private ChoiceBox<String> updateTicketPriorityChoiceBox;
-  @FXML private ChoiceBox<String> updateTicketTimeEstimateChoiceBox;
-  @FXML private ChoiceBox<String> updateTicketApprovalChoiceBox;
+  @FXML private TextField createTicketIdTextField, createTicketDateTextField, createTicketDescriptionTextField, createTicketAssetNumberTextField,
+        updateTicketIdTextField, updateTicketDateTextField, updateTicketDescriptionTextField,
+        imageTicketIdTextField, addImageURLTextField, deleteImageURLTextField;
+@FXML private Button createButton, updateButton, deleteButton, addImageButton, deleteImageButton;
+@FXML private ChoiceBox<String> createTicketPriorityChoiceBox, createTicketTimeEstimateChoiceBox, createTicketApprovalChoiceBox,
+        updateTicketPriorityChoiceBox, updateTicketTimeEstimateChoiceBox, updateTicketApprovalChoiceBox;
+
 
 
   @FXML void initialize() {
@@ -96,9 +86,43 @@ public class MaintenancePageController {
   // Event Listener on Button[#createButton].onAction
   @FXML
   public void createTicket(ActionEvent event) {
-    String date = createTicketDateTextField.getText();
+    String idString = createTicketIdTextField.getText();
+    String dateString = createTicketDateTextField.getText();
     String description = createTicketDescriptionTextField.getText();
-    
+    String assetString = createTicketAssetNumberTextField.getText();
+    String priority = createTicketPriorityChoiceBox.getValue();
+    String timeEstimate = createTicketTimeEstimateChoiceBox.getValue();
+    String approval = createTicketApprovalChoiceBox.getValue();
+
+    // Checking for null or empty strings
+    if (idString == null || idString.trim().isEmpty()) {
+      ViewUtils.showError("Please input a valid ticket id");
+    }
+    if (dateString == null || dateString.trim().isEmpty()) {
+      ViewUtils.showError("Please input a valid date");
+    }
+    if (description == null || description.trim().isEmpty()) {
+      ViewUtils.showError("Please input a valid description");
+    }
+    if (assetString == null || assetString.trim().isEmpty()) {
+      ViewUtils.showError("Please input a valid asset number");
+    }
+    if (priority == null || priority.trim().isEmpty()) {
+      ViewUtils.showError("Please select a priority");
+    }
+    if (timeEstimate == null || timeEstimate.trim().isEmpty()) {
+      ViewUtils.showError("Please select a time estimate");
+    }
+
+    int id = Integer.parseInt(idString);
+    Date date = Date.valueOf(dateString);
+    int assetNumber = Integer.parseInt(assetString);
+    // TODO user email may not always be the manager
+    if(ViewUtils.successful(AssetPlusFeatureSet4Controller.addMaintenanceTicket(id, date, description,"manager@ap.com", assetNumber))) {
+      // clear textfields
+    }
+
+
   } 
 }
 
