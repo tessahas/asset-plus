@@ -19,8 +19,8 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
    * 
    * @author Yuri Sorice
    */
-  public static MaintenanceTicket.TimeEstimate getTimeEstimateEnum(String timeEstimateString) {
-    MaintenanceTicket.TimeEstimate timeEstimate = TimeEstimate.valueOf(timeEstimateString);
+  public static TimeEstimate getTimeEstimateEnum(String timeEstimateString) {
+    TimeEstimate timeEstimate = TimeEstimate.valueOf(timeEstimateString);
     return timeEstimate;
   }
 
@@ -31,9 +31,13 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
    * 
    * @author Yuri Sorice
    */
-  public static MaintenanceTicket.PriorityLevel getPriorityEnum(String priorityString) {
-    MaintenanceTicket.PriorityLevel priority = PriorityLevel.valueOf(priorityString);
+  public static PriorityLevel getPriorityEnum(String priorityString) {
+    PriorityLevel priority = PriorityLevel.valueOf(priorityString);
     return priority;
+  }
+
+  public static MaintenanceTicket getTicketwithId(int ticketId) {
+    return MaintenanceTicket.getWithId(ticketId);
   }
 
 
