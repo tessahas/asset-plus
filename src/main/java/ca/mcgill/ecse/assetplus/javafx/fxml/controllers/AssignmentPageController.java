@@ -33,14 +33,16 @@ public class AssignmentPageController {
     ObservableList<String> approvalRequired =
       FXCollections.observableArrayList("Yes", "No");
 
+      approvalChoiceBox.setItems(approvalRequired);
+      approvalChoiceBox.setValue("No");
+      
       priorityChoiceBox.setItems(priorities);
       priorityChoiceBox.setValue(null);
 
       timeEstimateChoiceBox.setItems(timeEstimate);
       timeEstimateChoiceBox.setValue(null);
 
-      approvalChoiceBox.setItems(approvalRequired);
-      approvalChoiceBox.setValue("No");
+      
 
     // the combo boxes are refreshable
     employeeEmailChoiceBox.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> {

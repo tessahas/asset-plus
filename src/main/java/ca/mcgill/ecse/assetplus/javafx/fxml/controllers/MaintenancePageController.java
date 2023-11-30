@@ -20,36 +20,7 @@ public class MaintenancePageController {
 
   @FXML private Button createButton, updateButton, deleteButton, addImageButton, deleteImageButton;
 
-  @FXML private ChoiceBox<String> createTicketPriorityChoiceBox, createTicketTimeEstimateChoiceBox, createTicketApprovalChoiceBox,
-        updateTicketPriorityChoiceBox, updateTicketTimeEstimateChoiceBox, updateTicketApprovalChoiceBox;
 
-
-
-  @FXML void initialize() {
-    ObservableList<String> priorities =
-      FXCollections.observableArrayList("Low", "Normal", "Urgent");
-    
-    ObservableList<String> timeEstimate =
-      FXCollections.observableArrayList("LessThanADay", "OneToThreeDays", "ThreeToSevenDays", "OneToThreeWeeks", "ThreeOrMoreWeeks");
-    
-    ObservableList<String> approvalRequired =
-      FXCollections.observableArrayList("Yes", "No");
-
-    createTicketPriorityChoiceBox.setItems(priorities);
-    createTicketPriorityChoiceBox.setValue(null);
-    updateTicketPriorityChoiceBox.setItems(priorities);
-    updateTicketApprovalChoiceBox.setValue(null);
-
-    createTicketTimeEstimateChoiceBox.setItems(timeEstimate);
-    createTicketTimeEstimateChoiceBox.setValue(null);
-    updateTicketTimeEstimateChoiceBox.setItems(timeEstimate);
-    updateTicketTimeEstimateChoiceBox.setValue(null);
-
-    createTicketApprovalChoiceBox.setItems(approvalRequired);
-    createTicketApprovalChoiceBox.setValue("No");
-    updateTicketApprovalChoiceBox.setItems(approvalRequired);
-    updateTicketApprovalChoiceBox.setValue("No");
-  }
   // Event Listener on Button[#addImageButton].onAction
   @FXML
   public void addImageClicked(ActionEvent event) {

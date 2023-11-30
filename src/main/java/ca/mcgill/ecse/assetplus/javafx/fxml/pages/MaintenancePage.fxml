@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="360.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MaintenancePageController.java">
+<GridPane prefHeight="360.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.MaintenancePageController">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="300.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0" />
    </columnConstraints>
@@ -21,8 +21,8 @@
       <RowConstraints maxHeight="119.19998168945312" minHeight="25.0" prefHeight="44.2000244140625" vgrow="ALWAYS" />
       <RowConstraints maxHeight="119.19998168945312" minHeight="25.0" prefHeight="44.2000244140625" vgrow="ALWAYS" />
       <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="68.19999771118165" vgrow="ALWAYS" />
-      <RowConstraints fx:id="createTicketAssetNumberTextField" maxHeight="50.0" minHeight="30.0" prefHeight="40.0" vgrow="ALWAYS" />
       <RowConstraints maxHeight="174.8000030517578" minHeight="30.0" prefHeight="50.0" vgrow="ALWAYS" />
+      <RowConstraints />
    </rowConstraints>
    <children>
       <Label text="Update Ticket" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -116,9 +116,9 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="createTicketAssetNumberTextField" promptText="Asset Number" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <TextField fx:id="createTicketAssetNumberTextField" promptText="Asset Number" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets right="5.0" />
+            <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </TextField>
       <TextField fx:id="createTicketRaiserEmailTextField" promptText="User email" GridPane.rowIndex="2">
