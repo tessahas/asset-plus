@@ -195,6 +195,21 @@
                                           "assetType": {
                                             "@reference": "../../.."
                                           }
+                                        },
+                                        {
+                                          "assetNumber": 4,
+                                          "floorNumber": 1,
+                                          "roomNumber": -1,
+                                          "purchaseDate": "2023-11-30",
+                                          "assetPlus": {
+                                            "@reference": "../../../../../../../../../../../../../.."
+                                          },
+                                          "maintenanceTickets": [
+                                            ""
+                                          ],
+                                          "assetType": {
+                                            "@reference": "../../.."
+                                          }
                                         }
                                       ]
                                     }
@@ -318,7 +333,7 @@
             ]
           },
           {
-            "name": "jerome",
+            "name": "mathieu",
             "expectedLifeSpan": 5,
             "assetPlus": {
               "@reference": "../../.."
@@ -341,6 +356,9 @@
           },
           {
             "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketRaiser/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[2]"
+          },
+          {
+            "@reference": "../../employees/Employee/maintenanceNotes/MaintenanceNote/ticket/ticketRaiser/maintenanceNotes/MaintenanceNote/ticket/asset/assetType/specificAssets/SpecificAsset[3]"
           }
         ]
       }

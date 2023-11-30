@@ -17,7 +17,7 @@ import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 import ca.mcgill.ecse.assetplus.model.*;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.PriorityLevel;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
-import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TicketStatus;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.Status;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket.TimeEstimate;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -119,7 +119,7 @@ public class MaintenanceTicketsStepDefinitions {
             if (row.get("assetNumber")!=null){
                 assetNumber = Integer.parseInt(row.get("assetNumber"));
             }
-            TicketStatus status = TicketStatus.valueOf(row.get("status"));
+            Status status = Status.valueOf(row.get("status"));
             MaintenanceTicket maintenanceTicket = new MaintenanceTicket(id, raisedOnDate, description, assetPlus, ticketRaiser);
 
             try{
@@ -129,15 +129,15 @@ public class MaintenanceTicketsStepDefinitions {
                 PriorityLevel priority = PriorityLevel.valueOf(row.get("priority"));
                 Boolean approvalRequired = Boolean.parseBoolean(row.get("approvalRequired"));
 
-                if(status != TicketStatus.Open){
+                if(status != Status.Open){
                     maintenanceTicket.assign(ticketFixer,priority, timeEstimate, approvalRequired);
 
-                    if(status != TicketStatus.Assigned){
+                    if(status != Status.Assigned){
                         maintenanceTicket.startWork();
 
-                        if(status != TicketStatus.InProgress){
+                        if(status != Status.InProgress){
                             maintenanceTicket.markAsResolved();
-                            if(status == TicketStatus.Closed && maintenanceTicket.getTicketStatusFullName().equalsIgnoreCase("resolved")){
+                            if(status == Status.Closed && maintenanceTicket.getStatusFullName().equalsIgnoreCase("resolved")){
                                 maintenanceTicket.approveWork();
                             }
 
@@ -352,7 +352,7 @@ public class MaintenanceTicketsStepDefinitions {
     public void the_ticket_shall_be_marked_as(String givenTicketID, String expectedStatus) {
         MaintenanceTicket ticket = MaintenanceTicket.getWithId(Integer.parseInt(givenTicketID));
         //expected, actual
-        assertEquals(expectedStatus, ticket.getTicketStatusFullName());
+        assertEquals(expectedStatus, ticket.getStatusFullName());
     }
 
     /**

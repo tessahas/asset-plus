@@ -83,16 +83,16 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
   			errorMessage += "Maintenance ticket does not exist.";
   			return errorMessage;
   		}
-  		if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("assigned")){
+  		if(right_ticket.getStatusFullName().equalsIgnoreCase("assigned")){
   			errorMessage += "The maintenance ticket is already assigned.";
   		}
-  		else if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("resolved")){
+  		else if(right_ticket.getStatusFullName().equalsIgnoreCase("resolved")){
   			errorMessage += "Cannot assign a maintenance ticket which is resolved.";
   		}
-  		else if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("closed")){
+  		else if(right_ticket.getStatusFullName().equalsIgnoreCase("closed")){
   			errorMessage += "Cannot assign a maintenance ticket which is closed.";
   		}
-  		else if(right_ticket.getTicketStatusFullName().equalsIgnoreCase("inprogress")){
+  		else if(right_ticket.getStatusFullName().equalsIgnoreCase("inprogress")){
   			errorMessage += "Cannot assign a maintenance ticket which is in progress.";
   		}
   		if(!errorMessage.isEmpty()){
@@ -155,13 +155,13 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
         errorMessage += "Maintenance ticket does not exist.";
     }else if (!MaintenanceTicket.hasWithId(toStart.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
-    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("open")) {
+    }else if (toStart.getStatusFullName().equalsIgnoreCase("open")) {
       errorMessage += "Cannot start a maintenance ticket which is open.";
-    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
+    }else if (toStart.getStatusFullName().equalsIgnoreCase("resolved")) {
       errorMessage += "Cannot start a maintenance ticket which is resolved.";
-    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("closed")) {
+    }else if (toStart.getStatusFullName().equalsIgnoreCase("closed")) {
       errorMessage += "Cannot start a maintenance ticket which is closed.";
-    }else if (toStart.getTicketStatusFullName().equalsIgnoreCase("inprogress")) {
+    }else if (toStart.getStatusFullName().equalsIgnoreCase("inprogress")) {
       errorMessage += "The maintenance ticket is already in progress.";
     }
 
@@ -191,13 +191,13 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
         errorMessage += "Maintenance ticket does not exist.";
     }else if (!MaintenanceTicket.hasWithId(toComplete.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
-    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("open")) {
+    }else if (toComplete.getStatusFullName().equalsIgnoreCase("open")) {
       errorMessage += "Cannot complete a maintenance ticket which is open.";
-    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("assigned")) {
+    }else if (toComplete.getStatusFullName().equalsIgnoreCase("assigned")) {
       errorMessage += "Cannot complete a maintenance ticket which is assigned.";
-    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("closed")) {
+    }else if (toComplete.getStatusFullName().equalsIgnoreCase("closed")) {
       errorMessage += "The maintenance ticket is already closed.";
-    }else if (toComplete.getTicketStatusFullName().equalsIgnoreCase("resolved")) {
+    }else if (toComplete.getStatusFullName().equalsIgnoreCase("resolved")) {
       errorMessage += "The maintenance ticket is already resolved.";
     }
     if(!errorMessage.isEmpty()){
@@ -228,16 +228,16 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     }else if (!MaintenanceTicket.hasWithId(toApprove.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
     }
-    else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("open")) {
+    else if(toApprove.getStatusFullName().equalsIgnoreCase("open")) {
       errorMessage += "Cannot approve a maintenance ticket which is open.";
     }
-    else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("Assigned")) {
+    else if(toApprove.getStatusFullName().equalsIgnoreCase("Assigned")) {
       errorMessage += "Cannot approve a maintenance ticket which is assigned.";
     }
-    else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("Closed")) {
+    else if(toApprove.getStatusFullName().equalsIgnoreCase("Closed")) {
       errorMessage += "The maintenance ticket is already closed.";
     }
-    else if(toApprove.getTicketStatusFullName().equalsIgnoreCase("InProgress")) {
+    else if(toApprove.getStatusFullName().equalsIgnoreCase("InProgress")) {
       errorMessage += "Cannot approve a maintenance ticket which is is progress.";
     }
     try {
@@ -267,16 +267,16 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     } else if (!MaintenanceTicket.hasWithId(toDisapprove.getId())) {
       errorMessage += "Maintenance ticket does not exist.";
     }
-    else if(toDisapprove.getTicketStatusFullName().equalsIgnoreCase("open")) {
+    else if(toDisapprove.getStatusFullName().equalsIgnoreCase("open")) {
       errorMessage += "Cannot disapprove a maintenance ticket which is open.";
     }
-    else if(toDisapprove.getTicketStatusFullName().equalsIgnoreCase("Assigned")) {
+    else if(toDisapprove.getStatusFullName().equalsIgnoreCase("Assigned")) {
       errorMessage += "Cannot disapprove a maintenance ticket which is assigned.";
     }
-    else if(toDisapprove.getTicketStatusFullName().equalsIgnoreCase("Closed")) {
+    else if(toDisapprove.getStatusFullName().equalsIgnoreCase("Closed")) {
       errorMessage += "Cannot disapprove a maintenance ticket which is closed.";
     }
-    else if(toDisapprove.getTicketStatusFullName().equalsIgnoreCase("InProgress")) {
+    else if(toDisapprove.getStatusFullName().equalsIgnoreCase("InProgress")) {
       errorMessage += "Cannot disapprove a maintenance ticket which is in progress.";
     }
     try {
