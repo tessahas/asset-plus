@@ -60,15 +60,16 @@ public class AssetPageController {
     }
     else if (floorNumberString == null || floorNumberString.trim().isEmpty()) {
       ViewUtils.showError("The floor number cannot be empty");
-    }
-    else if (purchaseDateString == null || purchaseDateString.trim().isEmpty()) {
-      ViewUtils.showError("The date cannot be empty");
-    }
-    else {
+    } else {
       String assetType = addAssetTypeChoiceBox.getValue();
       int assetNumber = Integer.parseInt(assetNumberString);
       int floorNumber = Integer.parseInt(floorNumberString);
-      int roomNumber = Integer.parseInt(roomNumberString);
+      int roomNumber;
+      if (roomNumberString == null || roomNumberString.trim().isEmpty()){
+        roomNumber = -1;
+      } else {
+        roomNumber = Integer.parseInt(roomNumberString);
+      }
       Date purchaseDate = Date.valueOf(purchaseDateString);
       String errorMessage = AssetPlusFeatureSet3Controller.addSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType);
       if (errorMessage.isEmpty()) {
@@ -96,17 +97,17 @@ public class AssetPageController {
     }
     else if (floorNumberString == null || floorNumberString.trim().isEmpty()) {
       ViewUtils.showError("The floor number cannot be empty");
-    }
-    else if (purchaseDateString == null || purchaseDateString.trim().isEmpty()) {
-      ViewUtils.showError("The purchase date cannot be empty");
-    }
-    else {
+    } else {
       String assetType = updateAssetTypeChoiceBox.getValue();
       int assetNumber = Integer.parseInt(assetNumberString);
       int floorNumber = Integer.parseInt(floorNumberString);
-      int roomNumber = Integer.parseInt(roomNumberString);
+      int roomNumber;
+      if (roomNumberString == null || roomNumberString.trim().isEmpty()){
+        roomNumber = -1;
+      } else {
+        roomNumber = Integer.parseInt(roomNumberString);
+      }
       Date purchaseDate = Date.valueOf(purchaseDateString);
-
       String errorMessage = AssetPlusFeatureSet3Controller.updateSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType);
       if (errorMessage.isEmpty()){
         updateAssetNumberTextField.setText("");
