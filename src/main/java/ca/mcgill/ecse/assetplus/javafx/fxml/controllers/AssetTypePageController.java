@@ -25,6 +25,7 @@ public class AssetTypePageController {
   @FXML private Button deleteButton;
 
   @FXML
+  // Event Listener on Button[#createButton].onAction
   public void createClicked(ActionEvent event) {
     String createNewAssetTypeString = createNewAssetTypeTextField.getText();
     String createExpectedLifespanString = createExpectedLifespanTextField.getText();
@@ -46,6 +47,8 @@ public class AssetTypePageController {
     }
   }
 
+  @FXML
+  // Event Listener on Button[#updateButton].onAction
   public void updateClicked(ActionEvent event) {
     String updateOldAssetTypeString = updateOldAssetTypeTextField.getText();
     String updateNewAssetTypeString = updateNewAssetTypeTextField.getText();
@@ -70,6 +73,8 @@ public class AssetTypePageController {
     }
   }
 
+  @FXML
+  // Event Listener on Button[#deleteButton].onAction
   public void deleteClicked(ActionEvent event) {
     String updateOldAssetTypeString = updateOldAssetTypeTextField.getText();
 

@@ -46,6 +46,7 @@ public class AssetPageController {
   }
 
   @FXML
+  // Event Listener on Button[#addButton].onAction
   public void addClicked(ActionEvent event) {
     String assetNumberString = addAssetNumberTextField.getText();
     String purchaseDateString = addPurchaseDateTextField.getText();
@@ -84,6 +85,7 @@ public class AssetPageController {
   }
   
   @FXML
+  // Event Listener on Button[#updateButton].onAction
   public void updateClicked(ActionEvent event) {
     String assetNumberString = updateAssetNumberTextField.getText();
     String purchaseDateString = updatePurchaseDateTextField.getText();
@@ -122,6 +124,7 @@ public class AssetPageController {
   }
 
   @FXML
+  // Event Listener on Button[#deleteButton].onAction
   public void deleteClicked(ActionEvent event) {
     String assetNumberString = updateAssetNumberTextField.getText();
     if (assetNumberString == null || assetNumberString.trim().isEmpty()) {
