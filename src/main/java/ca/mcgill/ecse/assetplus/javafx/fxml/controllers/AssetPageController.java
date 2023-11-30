@@ -85,11 +85,57 @@ public class AssetPageController {
   
   @FXML
   public void updateClicked(ActionEvent event) {
-    // TO DO
+    String assetNumberString = updateAssetNumberTextField.getText();
+    String purchaseDateString = updatePurchaseDateTextField.getText();
+    String floorNumberString = updateFloorNumberTextField.getText();
+    String roomNumberString = updateRoomNumberTextField.getText();
+    if (assetNumberString == null || assetNumberString.trim().isEmpty()) {
+      ViewUtils.showError("The asset number cannot be empty");
+    }
+    else if (purchaseDateString == null || purchaseDateString.trim().isEmpty()) {
+      ViewUtils.showError("The purchase date cannot be empty");
+    }
+    else if (floorNumberString == null || floorNumberString.trim().isEmpty()) {
+      ViewUtils.showError("The floor number cannot be empty");
+    }
+    else if (purchaseDateString == null || purchaseDateString.trim().isEmpty()) {
+      ViewUtils.showError("The purchase date cannot be empty");
+    }
+    else {
+      String assetType = updateAssetTypeChoiceBox.getValue();
+      int assetNumber = Integer.parseInt(assetNumberString);
+      int floorNumber = Integer.parseInt(floorNumberString);
+      int roomNumber = Integer.parseInt(roomNumberString);
+      Date purchaseDate = Date.valueOf(purchaseDateString);
+
+      String errorMessage = AssetPlusFeatureSet3Controller.updateSpecificAsset(assetNumber, floorNumber, roomNumber, purchaseDate, assetType);
+      if (errorMessage.isEmpty()){
+        updateAssetNumberTextField.setText("");
+        updatePurchaseDateTextField.setText("");
+        updateFloorNumberTextField.setText("");
+        updateRoomNumberTextField.setText("");
+      } else {
+        ViewUtils.showError(errorMessage);
+      }
+    }
+
   }
 
   @FXML
   public void deleteClicked(ActionEvent event) {
-    // TO DO
+    String assetNumberString = updateAssetNumberTextField.getText();
+    if (assetNumberString == null || assetNumberString.trim().isEmpty()) {
+      ViewUtils.showError("The asset number cannot be empty");
+    } else {
+      int assetNumber = Integer.parseInt(assetNumberString);
+      if (AssetPlusFeatureSet3Controller.hasAsset(assetNumber)){
+        AssetPlusFeatureSet3Controller.deleteSpecificAsset(assetNumber);
+        updateAssetNumberTextField.setText("");
+        return;
+      } else {
+        ViewUtils.showError("Asset you tried to delete does not exist");
+      }
+
+    }
   }
 }

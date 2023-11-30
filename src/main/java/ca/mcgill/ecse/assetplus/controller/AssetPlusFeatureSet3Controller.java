@@ -136,4 +136,8 @@ public class AssetPlusFeatureSet3Controller {
     
   }
 
+  public static boolean hasAsset(int assetNumber){
+    return SpecificAsset.hasWithAssetNumber(assetNumber);
+  }
+
 }
