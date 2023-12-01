@@ -176,7 +176,7 @@ public class ListViewController {
                             setStyle("-fx-background-color: #FFDAB9;");  //light orange
                             break;
                         case "Closed":
-                            setStyle("-fx-background-color: lightred"); //light red 
+                            setStyle("-fx-background-color: lightred;"); //light red 
                             break;
                         case "Resolved":
                             setStyle("-fx-background-color: #E6E6FA"); //light purple
