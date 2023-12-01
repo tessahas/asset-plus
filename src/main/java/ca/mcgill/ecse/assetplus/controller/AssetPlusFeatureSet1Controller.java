@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * <h1>AssetPlusFeatureSet1Controller</h1>
@@ -327,7 +328,12 @@ catch(Exception e) {
 
 	public static ObservableList<String> getEmployees() {
     List<String> employeeEmails = assetPlus.getEmployees().stream().map(Employee::getEmail).toList();
-    return FXCollections.observableList(employeeEmails);
+		List<String> hotelStaffEmails = new ArrayList<>();
+		for (String email: employeeEmails) {
+			hotelStaffEmails.add(email);
+		}
+		hotelStaffEmails.add("manager@ap.com");
+    return FXCollections.observableList(hotelStaffEmails);
   }
 
 }
