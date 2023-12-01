@@ -39,6 +39,13 @@ public class UsersPageController {
 
   @FXML
   // Event Listener on Button[#createGuestButton].onAction
+  /**
+   * <h1>createGuestClicked</h1>
+   * This method is called whenever a "create guest" button is clicked on the users page.
+   * 
+   * @param event This is the action of the "create guest" button being clicked.
+   * @author Mathieu Allaire
+   */
   public void createGuestClicked(ActionEvent event) {
     String createAccountString = createEmailTextField.getText();
     String createNameString = createNameTextField.getText();
@@ -92,6 +99,13 @@ public class UsersPageController {
 
   @FXML
   // Event Listener on Button[#createEmployeeButton].onAction
+  /**
+   * <h1>createEmployeeClicked</h1>
+   * This method is called whenever a "create employee" button is clicked on the users page.
+   * 
+   * @param event This is the action of the "create employee" button being clicked.
+   * @author Mathieu Allaire
+   */
   public void createEmployeeClicked(ActionEvent event) {
     String createAccountString = createEmailTextField.getText();
     String createNameString = createNameTextField.getText();
@@ -150,6 +164,13 @@ public class UsersPageController {
 
   @FXML
   // Event Listener on Button[#updateGuestOrEmployeeButton].onAction
+  /**
+   * <h1>updateGuestOrEmployeeClicked</h1>
+   * This method is called whenever an "update guest or employee" button is clicked on the users page.
+   * 
+   * @param event This is the action of the "update guest or employee" button being clicked.
+   * @author Mathieu Allaire
+   */
   public void updateGuestOrEmployeeClicked(ActionEvent event) {
     String findEmailString = findEmailTextField.getText();
     String updateNameString = updateNameTextField.getText();
@@ -205,6 +226,13 @@ public class UsersPageController {
 
   @FXML
   // Event Listener on Button[#deleteGuestOrEmployeeButton].onAction
+  /**
+   * <h1>deleteGuestOrEmployeeClicked</h1>
+   * This method is called whenever a "delete guest or employee" button is clicked on the users page.
+   * 
+   * @param event This is the action of the "delete guest or employee" button being clicked.
+   * @author Mathieu Allaire
+   */
   public void deleteGuestOrEmployeeClicked(ActionEvent event) {
     String findEmailString = findEmailTextField.getText();
     
@@ -233,6 +261,13 @@ public class UsersPageController {
 
   @FXML
     // Event Listener on Button[#updateManagerButton].onAction
+    /**
+   * <h1>updateManagerClicked</h1>
+   * This method is called whenever an "update manager" button is clicked on the users page.
+   * 
+   * @param event This is the action of the "update manager" button being clicked.
+   * @author Mathieu Allaire
+   */
     public void updateManagerClicked(ActionEvent event){
       String confirmOldManagerPasswordTextString = confirmOldManagerPasswordTextField.getText();
       String updateManagerPasswordString = updateManagerPasswordTextField.getText();

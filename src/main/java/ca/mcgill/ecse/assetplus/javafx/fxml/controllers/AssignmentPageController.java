@@ -22,6 +22,12 @@ public class AssignmentPageController {
   @FXML private Button assignButton, startWorkButton, completeWorkButton, approveButton, disapproveButton;
   
   @FXML
+    /**
+   * <h1>initialize</h1>
+   * This method is called to update the dropdown menus in the assignment page.
+   * 
+   * @author 
+   */
   public void initialize() {
     // non refrechable choice boxese (always the same list to choose from)
     ObservableList<String> priorities =
@@ -56,6 +62,13 @@ public class AssignmentPageController {
 
   // Event Listener on Button[#assignButton].onAction
   @FXML
+  /**
+   * <h1>assignButtonClicked</h1>
+   * This method is called whenever an "assign" button is clicked on the assignment page.
+   * 
+   * @param event This is the action of the "assign" button being clicked.
+   * @author 
+   */
   public void assignButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     String employeeEmail = employeeEmailChoiceBox.getValue();
@@ -89,6 +102,13 @@ public class AssignmentPageController {
   }
 
   @FXML
+  /**
+   * <h1>startWorkButtonClicked</h1>
+   * This method is called whenever an "start work" button is clicked on the assignment page.
+   * 
+   * @param event This is the action of the "start work" button being clicked.
+   * @author 
+   */
   public void startWorkButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
@@ -106,6 +126,13 @@ public class AssignmentPageController {
   }
 
   @FXML
+  /**
+   * <h1>completeWorkButtonClicked</h1>
+   * This method is called whenever an "complete work" button is clicked on the assignment page.
+   * 
+   * @param event This is the action of the "complete work" button being clicked.
+   * @author 
+   */
   public void completeWorkButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
@@ -123,6 +150,13 @@ public class AssignmentPageController {
   }
 
   @FXML
+    /**
+   * <h1>approveButtonClicked</h1>
+   * This method is called whenever an "approve" button is clicked on the assignment page.
+   * 
+   * @param event This is the action of the "approve" button being clicked.
+   * @author 
+   */
   public void approveButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
@@ -140,6 +174,13 @@ public class AssignmentPageController {
   }
 
   @FXML
+  /**
+   * <h1>disapproveButtonClicked</h1>
+   * This method is called whenever an "disapprove" button is clicked on the assignment page.
+   * 
+   * @param event This is the action of the "disapprove" button being clicked.
+   * @author 
+   */
   public void disapproveButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
     String note = noteTextField.getText();

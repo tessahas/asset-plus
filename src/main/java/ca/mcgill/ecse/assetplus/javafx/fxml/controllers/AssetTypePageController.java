@@ -26,6 +26,13 @@ public class AssetTypePageController {
 
   @FXML
   // Event Listener on Button[#createButton].onAction
+  /**
+   * <h1>createButtonClicked</h1>
+   * This method is called when a "create" button is clicked on the asset type page.
+   * 
+   * @param event This is the action of a "create" button being clicked.
+   * @author Jerome Desrosiers
+   */
   public void createButtonClicked(ActionEvent event) {
     String createNewAssetTypeString = createNewAssetTypeTextField.getText();
     String createExpectedLifespanString = createExpectedLifespanTextField.getText();
@@ -50,6 +57,13 @@ public class AssetTypePageController {
 
   @FXML
   // Event Listener on Button[#updateButton].onAction
+    /**
+   * <h1>updateButtonClicked</h1>
+   * This method is called when an "update" button is clicked on the asset type page.
+   * 
+   * @param event This is the action of an "update" button being clicked.
+   * @author Jerome Desrosiers
+   */
   public void updateButtonClicked(ActionEvent event) {
     String updateOldAssetTypeString = updateOldAssetTypeTextField.getText();
     String updateNewAssetTypeString = updateNewAssetTypeTextField.getText();
@@ -77,6 +91,13 @@ public class AssetTypePageController {
 
   @FXML
   // Event Listener on Button[#deleteButton].onAction
+    /**
+   * <h1>deleteButtonClicked</h1>
+   * This method is called when a "delete" button is clicked on the asset type page.
+   * 
+   * @param event This is the action of a "delete" button being clicked.
+   * @author Jerome Desrosiers
+   */
   public void deleteButtonClicked(ActionEvent event) {
     String updateOldAssetTypeString = updateOldAssetTypeTextField.getText();
 

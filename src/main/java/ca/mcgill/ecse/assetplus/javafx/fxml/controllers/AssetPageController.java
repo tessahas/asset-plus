@@ -29,6 +29,12 @@ public class AssetPageController {
   @FXML private ChoiceBox<String> updateAssetTypeChoiceBox;
 
    @FXML
+  /**
+  * <h1>initialize</h1> 
+  * This method is called to update the dropdown menus in the asset page.
+  *
+  * @author Luis Jarquin
+  */
   public void initialize() {
     // the driver and assignment choice boxes are refreshable
     addAssetTypeChoiceBox.addEventHandler(AssetPlusFxmlView.REFRESH_EVENT, e -> {
@@ -53,6 +59,13 @@ public class AssetPageController {
 
   @FXML
   // Event Listener on Button[#addButton].onAction
+  /**
+   * <h1>addButtonClicked</h1>
+   * This method is called whenever an "add" button is clicked in the asset page.
+   * 
+   * @param event This is the action of an "add" button being clicked.
+   * @author Luis Jarquin
+   */
   public void addButtonClicked(ActionEvent event) {
     String assetNumberString = addAssetNumberTextField.getText();
     String purchaseDateString = addPurchaseDateTextField.getText();
@@ -92,6 +105,13 @@ public class AssetPageController {
   
   @FXML
   // Event Listener on Button[#updateButton].onAction
+  /**
+   * <h1>updateButtonClicked</h1>
+   * This method is called when an "update" button is clicked on the asset page.
+   * 
+   * @param event This is the action of an "update" button being clicked.
+   * @author Luis Jarquin
+   */
   public void updateButtonClicked(ActionEvent event) {
     String assetNumberString = updateAssetNumberTextField.getText();
     String purchaseDateString = updatePurchaseDateTextField.getText();
@@ -131,6 +151,13 @@ public class AssetPageController {
 
   @FXML
   // Event Listener on Button[#deleteButton].onAction
+  /**
+   * <h1>deleteButtonClicked</h1>
+   * This method is called whenever a "delete" button is clicked on the asset page.
+   * 
+   * @param event This is the action of a "delete" button being clicked.
+   * @author Luis Jarquin
+   */
   public void deleteButtonClicked(ActionEvent event) {
     String assetNumberString = updateAssetNumberTextField.getText();
     if (assetNumberString == null || assetNumberString.trim().isEmpty()) {

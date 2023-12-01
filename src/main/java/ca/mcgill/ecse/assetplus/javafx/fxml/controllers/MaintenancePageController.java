@@ -22,6 +22,13 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#addImageButton].onAction
   @FXML
+  /**
+   * <h1>addImageClicked</h1>
+   * This method is called whenever an "add image" button is clicked on the maintenance page.
+   * 
+   * @param event This is the action of the "add image" button being clicked.
+   * @author 
+   */
   void addImageClicked(ActionEvent event) {
     String url = addImageURLTextField.getText().trim();
     String idString = imageTicketIdTextField.getText().trim();
@@ -45,6 +52,13 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#deleteImageButton].onAction
   @FXML
+  /**
+   * <h1>deleteImageClicked</h1>
+   * This method is called whenever a "delete image" button is clicked on the maintenance page.
+   * 
+   * @param event This is the action of the "delete image" button being clicked.
+   * @author 
+   */
   void deleteImageClicked(ActionEvent event) {
     String url = deleteImageURLTextField.getText().trim();
     String idString = imageTicketIdTextField.getText().trim();
@@ -71,6 +85,13 @@ public class MaintenancePageController {
 
   // Event Listener on Button[#createButton].onAction
   @FXML
+  /**
+   * <h1>createButtonClicked</h1>
+   * This method is called whenever a "create" button is clicked on the maintenance page.
+   * 
+   * @param event This is the action of the "create" button being clicked.
+   * @author 
+   */
   void createButtonClicked(ActionEvent event) {
     String idString = createTicketIdTextField.getText().trim();
     String dateString = createTicketDateTextField.getText().trim();
@@ -117,6 +138,13 @@ public class MaintenancePageController {
   }
   // Event Listener on Button[#updateButton].onAction
   @FXML
+  /**
+   * <h1>updateButtonClicked</h1>
+   * This method is called whenever an "update" button is clicked on the maintenance page.
+   * 
+   * @param event This is the action of the "update" button being clicked.
+   * @author 
+   */
   void updateButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     String dateString = updateTicketDateTextField.getText();
@@ -162,6 +190,13 @@ public class MaintenancePageController {
    }
   // Event Listener on Button[#deleteButton].onAction
   @FXML
+  /**
+   * <h1>deleteButtonClicked</h1>
+   * This method is called whenever a "delete" button is clicked on the maintenance page.
+   * 
+   * @param event This is the action of the "delete" button being clicked.
+   * @author 
+   */
   void deleteButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
     if (idString == null || idString.trim().isEmpty()) {
