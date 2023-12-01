@@ -78,8 +78,15 @@ public class UsersPageController {
         ViewUtils.showError(errorMessage);
         return;
       }
-      AssetPlusFxmlView.getInstance().refresh();
-      return;
+      else {
+        createEmailTextField.setText("");
+        createNameTextField.setText("");
+        createPhoneNumberTextField.setText("");
+        createUserPasswordTextField.setText("");
+        confirmUserPasswordTextField.setText("");
+        AssetPlusFxmlView.getInstance().refresh();
+        return;
+      }
     }
   }
 
@@ -120,9 +127,19 @@ public class UsersPageController {
     else{
       String errorMessage = AssetPlusFeatureSet1Controller.addEmployeeOrGuest(createAccountString,createUserPasswordString,
       createNameString,createPhoneNumberString,isEmployee);
-      if(!errorMessage.isEmpty()){
+
+      if(errorMessage.isEmpty()){
+        createEmailTextField.setText("");
+        createNameTextField.setText("");
+        createPhoneNumberTextField.setText("");
+        createUserPasswordTextField.setText("");
+        confirmUserPasswordTextField.setText("");
+      }
+      else {
+        
         ViewUtils.showError(errorMessage);
         return;
+        
       }
       AssetPlusFxmlView.getInstance().refresh();
       return;
@@ -173,8 +190,16 @@ public class UsersPageController {
         ViewUtils.showError(errorMessage);
         return;
       }
-      AssetPlusFxmlView.getInstance().refresh();
-      return;
+      else {
+        findEmailTextField.setText("");
+        updateNameTextField.setText("");
+        updatePhoneNumberTextField.setText("");
+        confirmOldUserPasswordTextField.setText("");
+        updateUserPasswordTextField.setText("");
+        confirmNewUserPasswordTextField.setText("");
+        AssetPlusFxmlView.getInstance().refresh();
+        return;
+      }
     }
   }
 
@@ -193,6 +218,13 @@ public class UsersPageController {
     }
     else{
       AssetPlusFeatureSet6Controller.deleteEmployeeOrGuest(findEmailString);
+      // clearing text fields
+      findEmailTextField.setText("");
+      updateNameTextField.setText("");
+      updatePhoneNumberTextField.setText("");
+      confirmOldUserPasswordTextField.setText("");
+      updateUserPasswordTextField.setText("");
+      confirmNewManagerPasswordTextField.setText("");
       AssetPlusFxmlView.getInstance().refresh();
       return;
     }
