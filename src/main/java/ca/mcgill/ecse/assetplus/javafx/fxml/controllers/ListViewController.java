@@ -264,6 +264,9 @@ public class ListViewController {
     }
 
     public ObservableList<TOMaintenanceTicket> getAllTickets() {
+        if (AssetPlusFeatureSet6Controller.getTickets() == null) {
+            return FXCollections.emptyObservableList();
+        }
         return FXCollections.observableList(AssetPlusFeatureSet6Controller.getTickets());
     }
 
