@@ -224,7 +224,7 @@ public class UsersPageController {
       updatePhoneNumberTextField.setText("");
       confirmOldUserPasswordTextField.setText("");
       updateUserPasswordTextField.setText("");
-      confirmNewManagerPasswordTextField.setText("");
+      confirmNewUserPasswordTextField.setText("");
       AssetPlusFxmlView.getInstance().refresh();
       return;
     }
