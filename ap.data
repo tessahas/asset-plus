@@ -20,7 +20,7 @@
                     "id": 2,
                     "raisedOnDate": "2023-07-10",
                     "description": "This is a dummy description 2",
-                    "ticketStatus": "Open",
+                    "status": "Open",
                     "ticketNotes": [
                       {
                         "MaintenanceNote": {
@@ -63,7 +63,7 @@
                               "id": 1,
                               "raisedOnDate": "2023-07-20",
                               "description": "This is a dummy description 1",
-                              "ticketStatus": "Open",
+                              "status": "Open",
                               "ticketNotes": [
                                 {
                                   "MaintenanceNote": [
@@ -90,7 +90,7 @@
                                                 "id": 3,
                                                 "raisedOnDate": "2023-07-20",
                                                 "description": "It is noisy",
-                                                "ticketStatus": "Open",
+                                                "status": "Open",
                                                 "ticketNotes": [
                                                   ""
                                                 ],
