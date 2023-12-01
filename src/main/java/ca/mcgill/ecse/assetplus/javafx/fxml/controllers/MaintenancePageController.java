@@ -34,6 +34,7 @@ public class MaintenancePageController {
       int id = Integer.parseInt(idString);
       if (ViewUtils.successful(AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(url,id))) {
         addImageURLTextField.setText("");
+        imageTicketIdTextField.setText("");
       }
     }
   }
@@ -56,6 +57,7 @@ public class MaintenancePageController {
 
       if (ViewUtils.successful(AssetPlusFeatureSet5Controller.deleteImageFromMaintenanceTicket(name,id))) {
         deleteImageURLTextField.setText("");
+        imageTicketIdTextField.setText("");
       }
     }
   }

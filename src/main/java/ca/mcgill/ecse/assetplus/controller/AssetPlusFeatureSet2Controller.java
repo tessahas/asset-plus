@@ -3,6 +3,7 @@ import java.util.List;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.AssetType;
 import ca.mcgill.ecse.assetplus.model.AssetPlus;
+import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -132,6 +133,17 @@ public class AssetPlusFeatureSet2Controller {
     // Delete the asset type that has the specified asset type name if it exists.
     try {
       if (AssetType.hasWithName(name)) {
+        // might have to move this to the pagecontroller instead
+        if (assetPlus.hasMaintenanceTickets()) {
+          List<MaintenanceTicket> tickets = assetPlus.getMaintenanceTickets();
+          for (MaintenanceTicket ticket : tickets) {
+            if (ticket.hasAsset()) {
+              if (ticket.getAsset().getAssetType().getName().equalsIgnoreCase(name)){
+                ticket.delete();
+              }
+            }
+          }
+        }
         AssetType.getWithName(name).delete();
       }
       AssetPlusPersistence.save();
