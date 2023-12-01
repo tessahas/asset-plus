@@ -147,6 +147,15 @@ public class AssignmentPageController {
 
     if (ticketIdString == null || ticketIdString.trim().isEmpty()) {
       ViewUtils.showError("The ticket number cannot be empty");
+      return;
+    }
+    if(note == null || note.trim().isEmpty()){
+      ViewUtils.showError("The ticket note cannot be empty");  
+      return;    
+    }
+    if(dateString == null || dateString.trim().isEmpty()){
+      ViewUtils.showError("The date cannot be empty");
+      return;
     }
     else {
       int ticketId = Integer.parseInt(ticketIdString);
