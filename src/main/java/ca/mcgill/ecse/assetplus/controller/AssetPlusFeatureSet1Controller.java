@@ -35,17 +35,14 @@ public class AssetPlusFeatureSet1Controller {
    	* 
    	* @author Mathieu Allaire
    	*/
-	private static boolean onlyOneLowerChar(String input) {
-		boolean flip = false;
+	private static boolean OneLowerChar(String input) {
+		
 	    for (char c : input.toCharArray()) {
 	        if (Character.isLowerCase(c)) {
-	            if(flip == true) {
-	            	return false;
-	            }
-	        	flip = true;
+	            return true;
 	        }
 	    }
-	    return flip;
+	    return false;
 	}
 	
 	
@@ -60,17 +57,13 @@ public class AssetPlusFeatureSet1Controller {
    	* 
    	* @author Mathieu Allaire
    	*/
-	private static boolean onlyOneUpperChar(String input) {
-		boolean flip = false;
+	private static boolean OneUpperChar(String input) {
 	    for (char c : input.toCharArray()) {
 	        if (Character.isUpperCase(c)) {
-	            if(flip == true) {
-	            	return false;
+	            	return true;
 	            }
-	        	flip = true;
-	        }
 	    }
-	    return flip;
+	    return false;
 	}
 	
 
@@ -108,10 +101,10 @@ public class AssetPlusFeatureSet1Controller {
     		|| ((!password.contains("!"))&& (!password.contains("#")) && password.contains("$")) )){
     	errorMessage += "Password must contain one character out of !#$";		
     }
-    else if(!onlyOneLowerChar(password)) {
+    else if(!OneLowerChar(password)) {
     	errorMessage += "Password must contain one lower-case character";
     }
-    else if(!onlyOneUpperChar(password)) {
+    else if(!OneUpperChar(password)) {
     	errorMessage += "Password must contain one upper-case character";
     }
     else if(password.contains(" ")) {
