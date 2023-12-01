@@ -95,10 +95,17 @@ public class ListViewController {
             () -> data.getValue().getFixedByEmail()));
         overviewTable.getColumns().add(fixedempColumn);
 
-        //TIME TO RESOLVE COLUMN (customizable string)
         var timeResColumn = new TableColumn<TOMaintenanceTicket, String>("Time To Resolve");
         timeResColumn.setCellValueFactory(data -> Bindings.createStringBinding(
-            () -> data.getValue().getTimeToResolve()));
+            () -> {
+                TOMaintenanceTicket ticket = data.getValue();
+                if (ticket != null && ticket.getTimeToResolve() != null) {
+                    return ticket.getTimeToResolve();
+                } else {
+                    return ""; // or any default value or appropriate handling
+                }
+            }
+            ));
         overviewTable.getColumns().add(timeResColumn);
 
         //PRIORITY COLUMN (string)
