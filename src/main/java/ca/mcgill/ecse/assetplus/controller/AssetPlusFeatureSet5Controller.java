@@ -73,6 +73,9 @@ public class AssetPlusFeatureSet5Controller {
     if (maintenanceTicket == null) {
       errorMessage+="Invalid ticket ID";
     }
+    if (!imageURL.startsWith("http://") && !imageURL.startsWith("https://")) {
+      errorMessage+="Image URL must start with http:// or https://. ";
+    }
     else {
       for (TicketImage ticketImage: maintenanceTicket.getTicketImages()) {
         if (ticketImage.getImageURL().equals(imageURL)) {
