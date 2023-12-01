@@ -303,9 +303,9 @@ catch(Exception e) {
 				  
 				  return errorMessage;
 			  }
-			  errorMessage += "This employee does not exist";
+			  
 		  }
-		  
+		  errorMessage += "This employee does not exist";
 	  }
 	  else{
 		  for(Guest guest:assetPlus.getGuests()) {
@@ -323,8 +323,9 @@ catch(Exception e) {
 		
 				  return errorMessage;
 			  }
-			  errorMessage += "This guest does not exist";
 		  }
+			errorMessage += "This guest does not exist";
+
 	  } 
 	    
 	  return errorMessage;
