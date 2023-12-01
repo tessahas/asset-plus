@@ -303,8 +303,9 @@ catch(Exception e) {
 				  
 				  return errorMessage;
 			  }
-			  errorMessage += "This employee does not exist";
+			  
 		  }
+			errorMessage += "This employee does not exist";
 		  
 	  }
 	  else{
@@ -323,8 +324,9 @@ catch(Exception e) {
 		
 				  return errorMessage;
 			  }
-			  errorMessage += "This guest does not exist";
+			  
 		  }
+			errorMessage += "This guest does not exist";
 	  } 
 	    
 	  return errorMessage;
