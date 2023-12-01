@@ -119,6 +119,7 @@ public class AssetPlusFeatureSet3Controller {
 
 /**
  * @author Luis Felipe Jarquin Romero
+ * This method deletes the specific asset.
  * @param assetNumber The asset number of the specific asset to be deleted.
  */
 
@@ -136,6 +137,13 @@ public class AssetPlusFeatureSet3Controller {
     
   }
 
+
+  /**
+   * This method returns true when a specific asset has an asset with assetNumber
+   * @param assetNumber
+   * @return boolean that tells you if the asset is in our asset plus.
+   * @author Luis Felipe Jarquin Romero
+   */
   public static boolean hasAsset(int assetNumber){
     return SpecificAsset.hasWithAssetNumber(assetNumber);
   }

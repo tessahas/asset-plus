@@ -117,6 +117,13 @@ public class AssetPlusFeatureSet6Controller {
     }
     return null;
   }
+
+  /**
+   * This methods is used to verify if a user with email exists.
+   * @param email
+   * @return
+   * @author Yuri Sorice
+   */
   public static boolean hasUser(String email){
     return User.hasWithEmail(email);
   }

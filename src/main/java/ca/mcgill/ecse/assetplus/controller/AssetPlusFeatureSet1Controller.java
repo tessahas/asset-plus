@@ -325,7 +325,14 @@ catch(Exception e) {
 	    
 	  return errorMessage;
   }
+	
 
+	/**
+	 * This method returns the employees as an observable list
+	 * @return ObservableList<String>
+	 * 
+	 * @author Jerome Desrosiers
+	 */
 	public static ObservableList<String> getEmployees() {
     List<String> employeeEmails = assetPlus.getEmployees().stream().map(Employee::getEmail).toList();
 		List<String> hotelStaffEmails = new ArrayList<>();

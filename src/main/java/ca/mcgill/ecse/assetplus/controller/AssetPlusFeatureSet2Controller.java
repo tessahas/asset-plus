@@ -151,11 +151,24 @@ public class AssetPlusFeatureSet2Controller {
     catch (RuntimeException e){}
   }
 
+
+  /**
+   * This method returns the asset types as an observable list for JavaFX to be able to use it
+   * @return ObservableList<String> which is all the asset types
+   * @author Kevin Li
+   */
   public static ObservableList<String> getAssetTypes() {
     List<String> assetTypeStrings = assetPlus.getAssetTypes().stream().map(AssetType::getName).toList();
     return FXCollections.observableList(assetTypeStrings);
   }
 
+
+  /**
+   * This method, just like the last one, returns a list of asset types, however, it
+   * is as a List<String> because this is used in our page controllers
+   * @return List<String>
+   * @author Luis Felipe Jarquin Romero
+   */
   public static List<String> getAssetTypesAsList() {
     List<String> assetTypeStrings = assetPlus.getAssetTypes().stream().map(AssetType::getName).toList();
     return assetTypeStrings;
