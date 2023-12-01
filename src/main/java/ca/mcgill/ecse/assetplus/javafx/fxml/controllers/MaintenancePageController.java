@@ -26,15 +26,19 @@ public class MaintenancePageController {
     String url = addImageURLTextField.getText().trim();
     String idString = imageTicketIdTextField.getText().trim();
     if (url == null || url.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid image URL. ");
+      ViewUtils.showError("The URL cannot be empty. ");
     } else if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid ticket ID. ");
+      ViewUtils.showError("The ticket ID cannot be empty. ");
     } else {
       // reset the text field if success
       int id = Integer.parseInt(idString);
-      if (ViewUtils.successful(AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(url,id))) {
+      String error = AssetPlusFeatureSet5Controller.addImageToMaintenanceTicket(url,id);
+      if (error.isEmpty()) {
         addImageURLTextField.setText("");
         imageTicketIdTextField.setText("");
+      }
+      else {
+        ViewUtils.showError(error);
       }
     }
   }
@@ -42,22 +46,25 @@ public class MaintenancePageController {
   // Event Listener on Button[#deleteImageButton].onAction
   @FXML
   void deleteImageClicked(ActionEvent event) {
-    String name = deleteImageURLTextField.getText().trim();
+    String url = deleteImageURLTextField.getText().trim();
     String idString = imageTicketIdTextField.getText().trim();
 
-    if (name == null || name.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid image URL. ");
+    if (url == null || url.trim().isEmpty()) {
+      ViewUtils.showError("The URL cannot be empty. ");
     } 
     else if (idString == null || idString.trim().isEmpty()) {
-      ViewUtils.showError("Please input a valid ticket ID. ");
+      ViewUtils.showError("The ticket ID cannot be empty. ");
     } 
     else {
       // reset the text field if success
       int id = Integer.parseInt(idString);
-
-      if (ViewUtils.successful(AssetPlusFeatureSet5Controller.deleteImageFromMaintenanceTicket(name,id))) {
+      String error = AssetPlusFeatureSet5Controller.deleteImageFromMaintenanceTicket(url,id);
+      if (error.isEmpty()) {
         deleteImageURLTextField.setText("");
         imageTicketIdTextField.setText("");
+      }
+      else {
+        ViewUtils.showError(error);
       }
     }
   }
