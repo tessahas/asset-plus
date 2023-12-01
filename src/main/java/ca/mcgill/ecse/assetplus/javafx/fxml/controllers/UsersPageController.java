@@ -258,8 +258,15 @@ public class UsersPageController {
       if (!errorString.isEmpty()){
         ViewUtils.showError(errorString);
       }
-      AssetPlusFxmlView.getInstance().refresh();
-      return;
+      else {
+        //clearing text fields
+        confirmOldManagerPasswordTextField.setText("");
+        updateManagerPasswordTextField.setText("");
+        confirmNewManagerPasswordTextField.setText("");
+      
+        AssetPlusFxmlView.getInstance().refresh();
+        return;
+      }
 
 
     }
