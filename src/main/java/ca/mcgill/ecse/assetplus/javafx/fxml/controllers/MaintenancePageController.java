@@ -27,7 +27,7 @@ public class MaintenancePageController {
    * This method is called whenever an "add image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "add image" button being clicked.
-   * @author 
+   * @author Yuri Sorice
    */
   void addImageClicked(ActionEvent event) {
     String url = addImageURLTextField.getText().trim();
@@ -57,7 +57,7 @@ public class MaintenancePageController {
    * This method is called whenever a "delete image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "delete image" button being clicked.
-   * @author 
+   * @author Yuri Sorice
    */
   void deleteImageClicked(ActionEvent event) {
     String url = deleteImageURLTextField.getText().trim();
@@ -90,7 +90,7 @@ public class MaintenancePageController {
    * This method is called whenever a "create" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "create" button being clicked.
-   * @author 
+   * @author Yuri Sorice
    */
   void createButtonClicked(ActionEvent event) {
     String idString = createTicketIdTextField.getText().trim();
@@ -143,7 +143,7 @@ public class MaintenancePageController {
    * This method is called whenever an "update" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "update" button being clicked.
-   * @author 
+   * @author Yuri Sorice
    */
   void updateButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
@@ -195,7 +195,7 @@ public class MaintenancePageController {
    * This method is called whenever a "delete" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "delete" button being clicked.
-   * @author 
+   * @author Yuri Sorice
    */
   void deleteButtonClicked(ActionEvent event) {
     String idString = updateTicketIdTextField.getText();
