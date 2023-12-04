@@ -21,18 +21,19 @@ public class AssetPlusFeatureSet5Controller {
   public static String addImageToMaintenanceTicket(String imageURL, int ticketID) {
     String errorMessage = "";
 
-    if (!imageURL.startsWith("http://") && !imageURL.startsWith("https://")) {
-      errorMessage+="Image URL must start with http:// or https://. ";
-      return errorMessage;
-    }
-
     if (imageURL.isEmpty()) {
-      errorMessage+="Image URL cannot be empty. ";
-      return errorMessage;
+      errorMessage+="Image URL cannot be empty";
     }
 
-    if (!MaintenanceTicket.hasWithId(ticketID)) {
-      errorMessage+="Ticket does not exist. ";
+    else if (!imageURL.startsWith("http://") && !imageURL.startsWith("https://")) {
+      errorMessage+="Image URL must start with http:// or https://";
+    }
+
+    else if (!MaintenanceTicket.hasWithId(ticketID)) {
+      errorMessage+="Ticket does not exist";
+    }
+
+    if (!errorMessage.isEmpty()) {
       return errorMessage;
     }
 
@@ -41,7 +42,7 @@ public class AssetPlusFeatureSet5Controller {
     if (maintenanceTicket != null) {
       for (TicketImage ticketImage: maintenanceTicket.getTicketImages()) {
         if (ticketImage.getImageURL().equals(imageURL)) {
-          errorMessage+="Image already exists for the ticket. ";
+          errorMessage+="Image already exists for the ticket";
           return errorMessage;
         }
       }
@@ -78,9 +79,11 @@ public class AssetPlusFeatureSet5Controller {
     
     if (maintenanceTicket == null) {
       errorMessage+="Invalid ticket ID";
+      return errorMessage;
     }
-    if (!imageURL.startsWith("http://") && !imageURL.startsWith("https://")) {
+    else if (!imageURL.startsWith("http://") && !imageURL.startsWith("https://")) {
       errorMessage+="Image URL must start with http:// or https://. ";
+      return errorMessage;
     }
     else {
       for (TicketImage ticketImage: maintenanceTicket.getTicketImages()) {
