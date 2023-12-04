@@ -1,4 +1,5 @@
 package ca.mcgill.ecse.assetplus.controller;
+import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.AssetType;
@@ -136,17 +137,19 @@ public class AssetPlusFeatureSet2Controller {
         // might have to move this to the pagecontroller instead
         if (assetPlus.hasMaintenanceTickets()) {
           List<MaintenanceTicket> tickets = assetPlus.getMaintenanceTickets();
+          List<Integer> toDeleteIds = new ArrayList<Integer>();
           for (MaintenanceTicket ticket : tickets) {
-            if (ticket.hasAsset()) {
-              if (ticket.getAsset().getAssetType().getName().equalsIgnoreCase(name)){
-                ticket.delete();
-              }
+            if (ticket.hasAsset() && ticket.getAsset().getAssetType().getName().equalsIgnoreCase(name)) {
+                toDeleteIds.add(ticket.getId());
             }
+          }
+          for (Integer id : toDeleteIds) {
+            MaintenanceTicket.getWithId(id).delete();
           }
         }
         AssetType.getWithName(name).delete();
+        AssetPlusPersistence.save();
       }
-      AssetPlusPersistence.save();
     }
     catch (RuntimeException e){}
   }
