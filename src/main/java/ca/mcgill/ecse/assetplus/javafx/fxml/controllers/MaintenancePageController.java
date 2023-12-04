@@ -24,7 +24,7 @@ public class MaintenancePageController {
   @FXML
   /**
    * <h1>addImageClicked</h1>
-   * This method is called whenever an "add image" button is clicked on the maintenance page.
+   * This method is called whenever the "add image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "add image" button being clicked.
    * @author Kevin Li
@@ -54,7 +54,7 @@ public class MaintenancePageController {
   @FXML
   /**
    * <h1>deleteImageClicked</h1>
-   * This method is called whenever a "delete image" button is clicked on the maintenance page.
+   * This method is called whenever the "delete image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "delete image" button being clicked.
    * @author Kevin Li
