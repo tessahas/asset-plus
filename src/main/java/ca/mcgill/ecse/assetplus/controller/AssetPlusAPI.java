@@ -13,9 +13,11 @@ public class AssetPlusAPI {
 private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
   /**
-   * <h2>getEstimateEnum<h2>
-   * @param timeEstimate - Time estimate of the ticket as a string
-   * @return TimeEstimate, Priority - Returns the input as their enum counterpart
+   * <h3>getEstimateEnum</h3>
+   * Helper function that gets the time estimate of a maintenance ticket according to its time estimate string.
+   * 
+   * @param timeEstimateString Time estimate of the ticket as a string.
+   * @return TimeEstimate - Returns the input as their enum counterpart.
    * 
    * @author Yuri Sorice
    */
@@ -25,9 +27,11 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
   }
 
   /**
-   * <h2>getPriorityEnum<h2>
-   * @param priority - priority of the ticket as a string
-   * @return Priority - Returns the input as their enum counterpart
+   * <h3>getPriorityEnum</h3>
+   * Helper function that gets the priority level of a maintenance ticket accordint to its priority string.
+   * 
+   * @param priorityString Priority of the ticket as a string.
+   * @return PriorityLevel - Returns the input as their enum counterpart.
    * 
    * @author Yuri Sorice
    */
@@ -36,19 +40,29 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     return priority;
   }
 
+  /**
+   * <h3>getTicketwithId</h3>
+   * Helper function that returns the maintenance ticket with the given ticket id.
+   * 
+   * @param ticketId Integer containg the ticket id of the desired ticket.
+   * @return MaintenanceTicket - Returns the maintenance ticket with the given ticket id.
+   * 
+   * @author Yuri Sorice
+   */
   public static MaintenanceTicket getTicketwithId(int ticketId) {
     return MaintenanceTicket.getWithId(ticketId);
   }
 
 
   /**
-  * <h1>assign</h1> 
-  * This method is called when a Hotel Staff member is assigned to a ticket
-  * @param ticketId - Id of the ticket that a Hotel Staff member is assigned to.
-  * @param employeeEmail - Email of the Hotel Staff member assigned to the ticket. 
-  * @param timeEstimate - Time Estimate of the ticket.
-  * @param priority - Priority of the ticket.
-  * @param requiresApproval - Whether the ticket requires approval from the manager to be closed.
+  * <h1>assign</h1>
+  * This method is called when a Hotel Staff member is assigned to a ticket.
+  * 
+  * @param ticketId Id of the ticket that a Hotel Staff member is assigned to.
+  * @param employeeEmail Email of the Hotel Staff member assigned to the ticket. 
+  * @param timeEstimate Time Estimate of the ticket.
+  * @param priority Priority of the ticket.
+  * @param requiresApproval Whether the ticket requires approval from the manager to be closed.
   * @return String - This returns a string with an error message gathered during execution. If it is empty, the Employee or Guest's account registration was successful.
   *
   * @author Mathieu Allaire
@@ -144,7 +158,7 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
    * <h1>startTicketWork</h1>
    * This method is called whenever the hotel staff tries to start work on the maintenance ticket toStart.
    *
-   * @param  toStart - This is the MaintenanceTicket object which's status will be changed to "InProgress" if the method is successful.
+   * @param toStart This is the MaintenanceTicket object which's status will be changed to "InProgress" if the method is successful.
    * @return String - This method returns a string containing an error message gathered during execution, if this returned string is empty, the status of toStart maintenance ticket was successfully changed to "InProgress".
    * 
    * @author Jerome Desrosiers
@@ -215,11 +229,13 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     return errorMessage;
   }
   /**
-   * <1>approveTicketWork</1>
+   * <h1>approveTicketWork</h1>
    * This method is called when the manager attempts to approve work on a ticket, checking if the given ticket has the right status.
-   * @author Yuri Sorice
+   * 
    * @param toApprove The ticket that the manager wants to approve.
    * @return String - Returns a string with an error message gathered during execution, if this returned string is empty, the status of toApprove maintenance ticket was succesfully changed to "Closed".
+   * 
+   * @author Yuri Sorice
    */
   public static String approveTicketWork(MaintenanceTicket toApprove){
     String errorMessage = "";
@@ -252,14 +268,15 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
    /**
   * <h1>disapproveTicketWork</h1> 
-  * This method is called when a manager wants to disapprove a ticket that requires approval,
+  * This method is called when a manager wants to disapprove a ticket that requires approval.
   * 
-  * @param  disapproveTicketWork - maintenance ticket to disapprove
-  * @return String - error message
+  * @param date Date on which the ticket to disapprove is disapproved.
+  * @param reason String containing the reason the ticket is to be disapproved.
+  * @param  toDisapprove Maintenance ticket to disapprove.
+  * @return String - Returns an error message, if any occured, as a string. If this string is empty, no error occured and execution was successful.
   *
   * @author Tessa Hason
   */
-
    public static String disapproveTicketWork(Date date, String reason, MaintenanceTicket toDisapprove){
     String errorMessage = "";
     if (toDisapprove == null){
@@ -290,18 +307,45 @@ private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     return errorMessage;
   }
 
+  /**
+   * <h3>getTimeEstimate</h3>
+   * Helper function gets the estimated time to resolve the ticket.
+   * 
+   * @param ticketId Ticket Id of the desired ticket.
+   * @return TimeEstimate - Returns a time estimate object corresponding to the time estimate of the desired ticket.
+   * 
+   * @author Yuri Sorice
+   */
   public static TimeEstimate getTimeEstimate(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
     TimeEstimate timeEstimate = ticket.getTimeToResolve();
     return timeEstimate;
   }
 
+  /**
+   * <h3>getPriorityLevel</h3>
+   * Helper function that gets the priority level of a maintenance ticket with ticket id ticketId.
+   * 
+   * @param ticketId Integer with value of the ticket id of the desired maintenance ticket.
+   * @return PriorityLevel - Returns a PriorityLevel object corresponding to the priority level of the desired maintenance ticket.
+   * 
+   * @author Yuri Sorice
+   */
   public static PriorityLevel getPriorityLevel(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
     PriorityLevel priorityLevel = ticket.getPriority();
     return priorityLevel;
   }
 
+  /**
+   * <h3>getRequiresApproval</h3>
+   * Helper function returning a boolean corresponding to whether or not the desired maintenance ticket with ticket id ticketId needs manager approval to close said ticket.
+   * 
+   * @param ticketId Integer with value of the ticket id of the desired maintenance ticket.
+   * @return Boolean - Returns a "True" is the maintenance ticket requires manager approval to be marked as "closed" and "False" otherwise.
+   * 
+   * @author Yuri Sorice
+   */
   public static Boolean getRequiresApproval(int ticketId) {
     MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketId);
     Boolean requiresApproval = ticket.hasFixApprover();

@@ -25,9 +25,10 @@ public class AssetPlusFeatureSet2Controller {
   private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
   /**
-   * <h1>addAssetType</h1>
+   * <h2>addAssetType</h2>
    * This is the method called when a manager attempts to add a new 
    * asset type to the AssetPlus system. 
+   * 
    * @param name This is the name the manager wants to give the new asset type. Cannot be empty.
    * @param expectedLifeSpanInDays This is the expected life span (in days) the manager wants to give to the new asset type. Cannot be less than or equal to zero.
    * @return String - This returns a string containing an error message gathered during execution, if this returned string is empty, the creation of a new asset type was successful.
@@ -68,12 +69,13 @@ public class AssetPlusFeatureSet2Controller {
   }
 
   /**
-   * <h1>updateAssetType</h1>
+   * <h2>updateAssetType</h2>
    * This is the method called whenever a manager attempts 
    * to update the name and expected life span of a 
    * specific asset type in the AssetPlus system.
-   * @param oldName This is the name of the asset type to be updated. An asset type with this name must exist in the system.
-   * @param newName This is the new name the user wants to give to the asset type being updated. No asset type can already exist with this name.
+   * 
+   * @param oldName This is the name of the asset type to be updated as a string. An asset type with this name must exist in the system.
+   * @param newName This is the new name the user wants to give to the asset type being updated as a string. No asset type can already exist with this name.
    * @param newExpectedLifeSpanInDays This is the new expected life span (in days) the user wants to give to the asset type being updated. Cannot be less than or equal to zero.
    * 
    * @return String - This returns a string containing an error message gathered during execution, if this returned string is empty, the update of the specified asset type was successful.
@@ -119,12 +121,12 @@ public class AssetPlusFeatureSet2Controller {
 
   
   /**
-   * <h1>deleteAssetType</h1>
+   * <h2>deleteAssetType</h2>
    * This is the method called whenever a manager
    * attempts to delete a specified asset type
    * in the AssetPlus program.
    * 
-   * @param name This is the name of the asset type the user wishes to delete. An asset type with this name must already exist in the system.
+   * @param name This is the name of the asset type the user wishes to delete as a string. An asset type with this name must already exist in the system.
    * 
    * @author Jérôme Desrosiers
    */
@@ -153,8 +155,11 @@ public class AssetPlusFeatureSet2Controller {
 
 
   /**
-   * This method returns the asset types as an observable list for JavaFX to be able to use it
-   * @return ObservableList<String> which is all the asset types
+   * <h3>getAssetTypes</h3>
+   * This helper method returns the asset types as an observable list for JavaFX to be able to use it.
+   * 
+   * @return ObservableList<String> - Returns an ObservableList object containing all the asset types existing in the system.
+   * 
    * @author Kevin Li
    */
   public static ObservableList<String> getAssetTypes() {
@@ -164,9 +169,12 @@ public class AssetPlusFeatureSet2Controller {
 
 
   /**
-   * This method, just like the last one, returns a list of asset types, however, it
-   * is as a List<String> because this is used in our page controllers
-   * @return List<String>
+   * <h3>getAssetTypeAsList</h3>
+   * This helper method method, just like the last one, returns a list of asset types, however, it
+   * returns a List<String> because this is used in our page controllers.
+   * 
+   * @return List<String> - Returns a List object containing all the asset types that exist in the system stored as strings.
+   * 
    * @author Luis Felipe Jarquin Romero
    */
   public static List<String> getAssetTypesAsList() {
