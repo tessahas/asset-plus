@@ -27,7 +27,7 @@ public class MaintenancePageController {
    * This method is called whenever an "add image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "add image" button being clicked.
-   * @author Yuri Sorice
+   * @author Kevin Li
    */
   void addImageClicked(ActionEvent event) {
     String url = addImageURLTextField.getText().trim();
@@ -57,7 +57,7 @@ public class MaintenancePageController {
    * This method is called whenever a "delete image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "delete image" button being clicked.
-   * @author Yuri Sorice
+   * @author Kevin Li
    */
   void deleteImageClicked(ActionEvent event) {
     String url = deleteImageURLTextField.getText().trim();
