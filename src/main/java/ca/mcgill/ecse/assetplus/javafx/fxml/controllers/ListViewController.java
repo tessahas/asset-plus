@@ -28,7 +28,6 @@ import java.time.LocalDate;
  * 
  * @author Tessa Hason
  */
-
 public class ListViewController {
     @FXML  private ResourceBundle resources;
 
@@ -51,7 +50,7 @@ public class ListViewController {
     @FXML private TextField searchTicketTextField;
 
     /**
-     * <h1>initialize</h1>
+     * <h2>initialize</h2>
      * Initializes the controller.
      * 
      * @author Tessa Hason
@@ -197,10 +196,11 @@ public class ListViewController {
       
     // Event Listener on DatePicker[#searchByDate].onAction
     /**
-     * <h1>selectedDateChanged</h1>
+     * <h2>selectedDateChanged</h2>
      * Event handler for changes in the selected date.
      *
      * @param event The ActionEvent triggered by the date change.
+     * 
      * @author Tessa Hason
      */
     @FXML
@@ -209,12 +209,13 @@ public class ListViewController {
     }
 
     /**
-     * <h1>createTableColumn</h1>
+     * <h2>createTableColumn</h2>
      * Creates a TableColumn for the TableView.
      *
      * @param header The header text for the column.
      * @param propertyName The property name associated with the column.
-     * @return A TableColumn instance.
+     * @return TableColumn<TOMaintenanceTicket, String> - Returns a TableColumn instance.
+     * 
      * @author Tessa Hason
      */
     public static TableColumn<TOMaintenanceTicket, String> createTableColumn(String header, String propertyName) {
@@ -225,10 +226,11 @@ public class ListViewController {
 
     // Event Listener on Button[#seeAllTicketsButton].onAction
     /**
-     * <h1>seeAllTicketsButtonClicked</h1>
+     * <h2>seeAllTicketsButtonClicked</h2>
      * Event handler for the "See All Tickets" button.
      *
      * @param event The ActionEvent triggered by the button click.
+     * 
      * @author Tessa Hason
      */
     @FXML
@@ -240,10 +242,11 @@ public class ListViewController {
 
     // Event Listener on Button[#searchRaiserButton].onAction
     /**
-     * <h1>searchRaiserButtonClicked</h1>
+     * <h2>searchRaiserButtonClicked</h2>
      * Event handler for the "Search Raiser" button.
      *
      * @param event The ActionEvent triggered by the button click.
+     * 
      * @author Tessa Hason
      */
     @FXML
@@ -266,10 +269,11 @@ public class ListViewController {
 
     // Event Listener on Button[#searchTicketButton].onAction
     /**
-     * <h1>searchTicketButtonClicked</h1>
+     * <h2>searchTicketButtonClicked</h2>
      * Event handler for the "Search" button (for Ticket ID).
      *
      * @param event The ActionEvent triggered by the button click.
+     * 
      * @author Tessa Hason
      */
     @FXML 
@@ -292,10 +296,11 @@ public class ListViewController {
     }
 
     /**
-     * <h1>getAllTickets</h1>
+     * <h2>getAllTickets</h2>
      * Retrieves all maintenance tickets.
      *
-     * @return An ObservableList containing all maintenance tickets.
+     * @return ObservableList<TOMaintenanceTicket> - An ObservableList containing all maintenance tickets.
+     * 
      * @author Tessa Hason
      */
     public ObservableList<TOMaintenanceTicket> getAllTickets() {
@@ -307,10 +312,11 @@ public class ListViewController {
 
     // Event Listener on Button[#searchByDateButton].onAction
      /**
-     * <h1>searchByDateButtonClicked</h1>
+     * <h2>searchByDateButtonClicked</h2>
      * Event handler for the "Search By Date" button.
      *
      * @param event The ActionEvent triggered by the button click.
+     * 
      * @author Tessa Hason
      */
     @FXML

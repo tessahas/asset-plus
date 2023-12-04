@@ -12,6 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 
+/**
+ * <h1>AssetPageController</h1>
+ * This class is the controller for the 'AssetsPage.fxml' view.
+ * 
+ * @author Luis Jarquin
+ */
 public class AssetPageController {
   @FXML private TextField addAssetNumberTextField;
   @FXML private TextField addPurchaseDateTextField;
@@ -30,7 +36,7 @@ public class AssetPageController {
 
    @FXML
   /**
-  * <h1>initialize</h1> 
+  * <h2>initialize</h2> 
   * This method is called to update the dropdown menus in the asset page.
   *
   * @author Luis Jarquin
@@ -60,7 +66,7 @@ public class AssetPageController {
   @FXML
   // Event Listener on Button[#addButton].onAction
   /**
-   * <h1>addButtonClicked</h1>
+   * <h2>addButtonClicked</h2>
    * This method is called whenever an "add" button is clicked in the asset page.
    * 
    * @param event This is the action of an "add" button being clicked.
@@ -106,7 +112,7 @@ public class AssetPageController {
   @FXML
   // Event Listener on Button[#updateButton].onAction
   /**
-   * <h1>updateButtonClicked</h1>
+   * <h2>updateButtonClicked</h2>
    * This method is called when an "update" button is clicked on the asset page.
    * 
    * @param event This is the action of an "update" button being clicked.
@@ -152,7 +158,7 @@ public class AssetPageController {
   @FXML
   // Event Listener on Button[#deleteButton].onAction
   /**
-   * <h1>deleteButtonClicked</h1>
+   * <h2>deleteButtonClicked</h2>
    * This method is called whenever a "delete" button is clicked on the asset page.
    * 
    * @param event This is the action of a "delete" button being clicked.

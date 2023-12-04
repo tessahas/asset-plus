@@ -13,7 +13,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 
-
+/**
+ * <h1>AssetTypePageController</h1>
+ * This class is the controller for the 'AssetTypePage.fxml' view.
+ * 
+ * @author Jerome Desrosiers
+ */
 public class AssetTypePageController {
   @FXML private TextField createNewAssetTypeTextField;
   @FXML private TextField createExpectedLifespanTextField;
@@ -27,7 +32,7 @@ public class AssetTypePageController {
   @FXML
   // Event Listener on Button[#createButton].onAction
   /**
-   * <h1>createButtonClicked</h1>
+   * <h2>createButtonClicked</h2>
    * This method is called when a "create" button is clicked on the asset type page.
    * 
    * @param event This is the action of a "create" button being clicked.
@@ -58,7 +63,7 @@ public class AssetTypePageController {
   @FXML
   // Event Listener on Button[#updateButton].onAction
     /**
-   * <h1>updateButtonClicked</h1>
+   * <h2>updateButtonClicked</h2>
    * This method is called when an "update" button is clicked on the asset type page.
    * 
    * @param event This is the action of an "update" button being clicked.
@@ -92,7 +97,7 @@ public class AssetTypePageController {
   @FXML
   // Event Listener on Button[#deleteButton].onAction
     /**
-   * <h1>deleteButtonClicked</h1>
+   * <h2>deleteButtonClicked</h2>
    * This method is called when a "delete" button is clicked on the asset type page.
    * 
    * @param event This is the action of a "delete" button being clicked.

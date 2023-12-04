@@ -12,6 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.sql.Date;
 // makes sure order is good for null checks
+
+/**
+ * <h1>MaintenancePageController</h1>
+ * This class is the controller for the 'MaintenancePage.fxml' view.
+ * 
+ * @author Kevin Li
+ */
 public class MaintenancePageController {
   @FXML private TextField createTicketIdTextField, createTicketRaiserEmailTextField, createTicketDateTextField, createTicketDescriptionTextField, createTicketAssetNumberTextField,
         updateTicketIdTextField, updateTicketRaiserEmailTextField, updateTicketDateTextField, updateTicketDescriptionTextField, updateTicketAssetNumberTextField,
@@ -23,10 +30,11 @@ public class MaintenancePageController {
   // Event Listener on Button[#addImageButton].onAction
   @FXML
   /**
-   * <h1>addImageClicked</h1>
-   * This method is called whenever the "add image" button is clicked on the maintenance page.
+   * <h2>addImageClicked</h2>
+   * This method is called whenever an "add image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "add image" button being clicked.
+   * 
    * @author Kevin Li
    */
   void addImageClicked(ActionEvent event) {
@@ -53,10 +61,11 @@ public class MaintenancePageController {
   // Event Listener on Button[#deleteImageButton].onAction
   @FXML
   /**
-   * <h1>deleteImageClicked</h1>
-   * This method is called whenever the "delete image" button is clicked on the maintenance page.
+   * <h2>deleteImageClicked</h2>
+   * This method is called whenever a "delete image" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "delete image" button being clicked.
+   * 
    * @author Kevin Li
    */
   void deleteImageClicked(ActionEvent event) {
@@ -86,10 +95,11 @@ public class MaintenancePageController {
   // Event Listener on Button[#createButton].onAction
   @FXML
   /**
-   * <h1>createButtonClicked</h1>
+   * <h2>createButtonClicked</h2>
    * This method is called whenever a "create" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "create" button being clicked.
+   * 
    * @author Yuri Sorice
    */
   void createButtonClicked(ActionEvent event) {
@@ -139,10 +149,11 @@ public class MaintenancePageController {
   // Event Listener on Button[#updateButton].onAction
   @FXML
   /**
-   * <h1>updateButtonClicked</h1>
+   * <h2>updateButtonClicked</h2>
    * This method is called whenever an "update" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "update" button being clicked.
+   * 
    * @author Yuri Sorice
    */
   void updateButtonClicked(ActionEvent event) {
@@ -191,10 +202,11 @@ public class MaintenancePageController {
   // Event Listener on Button[#deleteButton].onAction
   @FXML
   /**
-   * <h1>deleteButtonClicked</h1>
+   * <h2>deleteButtonClicked</h2>
    * This method is called whenever a "delete" button is clicked on the maintenance page.
    * 
    * @param event This is the action of the "delete" button being clicked.
+   * 
    * @author Yuri Sorice
    */
   void deleteButtonClicked(ActionEvent event) {

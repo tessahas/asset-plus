@@ -23,10 +23,12 @@ import javafx.stage.Stage;
 public class ViewUtils {
 
   /**
+   * <h2>callController</h2>
    * Calls the controller and shows an error, if applicable.
    * 
-   * @param result The result from the controller.
-   * @return True if the call to the controller is successful; otherwise, false.
+   * @param result The result from the controller as a string.
+   * @return boolean - Returns a boolean "True" if the call to the controller is successful; otherwise, returns "False".
+   * 
    * @author Tessa Hason
    */
   public static boolean callController(String result) {
@@ -39,10 +41,12 @@ public class ViewUtils {
   }
 
   /**
+   * <h2>successful</h2>
    * Calls the controller and returns true on success. This method is included for readability.
    * 
-   * @param controllerResult The result from the controller.
-   * @return True if the call to the controller is successful; otherwise, false.
+   * @param controllerResult The result from the controller as a string.
+   * @return boolean - Returns the boolean "True" if the call to the controller is successful; otherwise, returns "False".
+   * 
    * @author Jerome Desrosiers
    */
   public static boolean successful(String controllerResult) {
@@ -50,10 +54,12 @@ public class ViewUtils {
   }
 
   /**
+   * <h2>makePopupWindow</h2>
    * Creates a popup window.
    *
-   * @param title: title of the popup window
-   * @param message: message to display
+   * @param title Title of the popup window as a string.
+   * @param message Message to display as a string.
+   * 
    * @author Luis Jarquin
    */
   public static void makePopupWindow(String title, String message) {
@@ -79,18 +85,23 @@ public class ViewUtils {
     dialog.show();
   }
   /**
+   * <h2>showError</h2>
    * Displays an error message in a popup window.
    *
-   * @param message The error message to display.
+   * @param message The error message to display as a string.
+   * 
    * @author Yuri Sorice
    */
   public static void showError(String message) {
     makePopupWindow("Error", message);
   }
+
   /**
+   * <h2>getTickets</h2>
    * Gets the maintenance tickets.
    *
-   * @return An ObservableList containing all maintenance tickets.
+   * @return ObservableList<TOMaintenanceTicket> - Returns an ObservableList containing all maintenance tickets as TOMaintenanceTicket objects.
+   * 
    * @author Mathieu Allaire, Kevin Liu
    */
   public static ObservableList<TOMaintenanceTicket> getTickets() {

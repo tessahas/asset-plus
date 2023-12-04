@@ -7,20 +7,21 @@ import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 
 /**
+ * <h1>AssetPlusFeatureSet6Controller</h1>
  * @author Tessa Hason
  * @version 1.0
  * @since 2023-10-18
  */
-
-
 public class AssetPlusFeatureSet6Controller {
 
   /**
-   * @author Tessa Hason
+   * <h2>deleteEmployeeOrGuest</h2>
    * This method is used to delete an Employee or a Guest within the AssetPlus application.
-   * @param email The employee or guest with the given email must be deleted.
+   * 
+   * @param email The employee or guest with the given email in this string that must be deleted.
+   * 
+   * @author Tessa Hason
    */
-
   public static void deleteEmployeeOrGuest(String email) {
 
     User userToDelete = User.getWithEmail(email);
@@ -37,13 +38,14 @@ public class AssetPlusFeatureSet6Controller {
   }
 
   /**
-   * @author Tessa Hason
+   * <h2>getTickets</h2>
    * The method is used to view the status of Maintenance Tickets for an employee/manager.
-   * @return Returns a list of TOMaintenanceTicket objects representing all MaintenanceTickets
+   * 
+   * @return List<TOMaintenanceTicket> - Returns a list of TOMaintenanceTicket objects representing all MaintenanceTickets
    * in the AssetPlus System.
+   * 
+   * @author Tessa Hason
    */
-
-  
   public static List<TOMaintenanceTicket> getTickets() {
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
     if (assetPlus.hasMaintenanceTickets()){
@@ -119,9 +121,12 @@ public class AssetPlusFeatureSet6Controller {
   }
 
   /**
+   * <h2>hasUser</h2>
    * This methods is used to verify if a user with email exists.
-   * @param email
-   * @return
+   * 
+   * @param email String containing the email we want to verify corresponds to an existing user in the system.
+   * @return boolean - Returns a boolean coresponding to whether or not a user with the given email exists in the assetPlus system.
+   * 
    * @author Yuri Sorice
    */
   public static boolean hasUser(String email){

@@ -26,12 +26,12 @@ public class AssetPlusFeatureSet1Controller {
 	private static AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
 
 	/**
-   	* <h3>onlyOneLowerChar</h3>
+   	* <h3>OneLowerChar</h3>
    	* This method is a private helper method contained inside the updateManager 
    	* method. It occurs when updateManager checks if the input string contains 
    	* only one lower-case character.
    	* 
-   	* @param String input - the input string the updateManager method wants to analyze.
+   	* @param input The input string the updateManager method wants to analyze.
    	* @return boolean - true if the string contains a single lower-case character, false otherwise.
    	* 
    	* @author Mathieu Allaire
@@ -48,12 +48,12 @@ public class AssetPlusFeatureSet1Controller {
 	
 	
 	/**
-   	* <h3>onlyOneUpperChar</h3>
+   	* <h3>OneUpperChar</h3>
    	* This method is a private helper method contained inside the updateManager 
    	* method. It occurs when updateManager checks if the input string contains 
    	* only one upper-case character.
    	* 
-   	* @param String input - the input string the updateManager method wants to analyze.
+   	* @param input The input string the updateManager method wants to analyze.
    	* @return boolean - true if the string contains a single upper-case character, false otherwise.
    	* 
    	* @author Mathieu Allaire
@@ -69,16 +69,15 @@ public class AssetPlusFeatureSet1Controller {
 	
 
 	/**
-   	* <h1>updateManager</h1> 
+   	* <h2>updateManager</h2> 
    	* This method is called whenever the Manager attempts to update their own
    	* account's password.
    	* 
-   	* @param String password - The new password the Manager would like to have to unlock his account.
+   	* @param password The new password the Manager would like to have to unlock his account.
    	* @return String - This returns a string with an error message gathered during execution. If it is empty, the Manager's account update was successful.
    	* 
    	* @author Mathieu Allaire
    	*/
-	
   public static String updateManager(String password) {
     String errorMessage = "";
     AssetPlus assetPlus = AssetPlusApplication.getAssetPlus();
@@ -127,15 +126,15 @@ catch(Exception e) {
   }
   
   /**
- 	* <h1>addEmployeeOrGuest</h1> 
+ 	* <h2>addEmployeeOrGuest</h2>
  	* This method is called whenever an Employee or a Guest attempts to register
  	* an account in the AssetPlus application.
  	* 
- 	* @param String email - the email of the registering user. If the user is an Employee, the email has to end in "@ap.com".
- 	* @param String password - the password of the created account.
- 	* @param String name - (Optional, can be an empty String) the name of the registering user.
- 	* @param String phoneNumber - (Optional, can be an empty String) the phone number of the registering user.
- 	* @param boolean isEmployee - true if the user is an Employee, false if the user is a Guest.
+ 	* @param email The email of the registering user as a string. If the user is an Employee, the email has to end in "@ap.com".
+ 	* @param password The password of the created account as a string.
+ 	* @param name (Optional, can be an empty String) the name of the registering user.
+ 	* @param phoneNumber (Optional, can be an empty String) the phone number of the registering user.
+ 	* @param isEmployee True if the user is an Employee, false if the user is a Guest.
  	* @return String - This returns a string with an error message gathered during execution. If it is empty, the Employee or Guest's account registration was successful.
  	* 
  	* @author Mathieu Allaire
@@ -252,15 +251,15 @@ catch(Exception e) {
 
   
   /**
- 	* <h1>updateEmployeeOrGuest</h1>
+ 	* <h2>updateEmployeeOrGuest</h2>
  	* This method is called whenever an Employee or a Guest attempts
  	* to update their account's information, whether it is their password,
  	* their name, or their phone number. 
  	* 
- 	* @param String email - The email of the Employee or Guest's account. Since an Employee email must end in "@ap.com" and both an Employee and Guest's email must be valid, this email must also be valid as described in the earlier addEmployeeOrGuest method. 
- 	* @param String newPassword - The new password the Employee or Guest wants to assign to their account. It cannot be empty or contain spaces.
- 	* @param String newName - (Optional, can be an empty String) the new name the Employee or Guest wants to assign to their account.
- 	* @param String newPhoneNumber - (Optional, can be an empty String) the new phone number the Employee or Guest wants to assign to their account.
+ 	* @param email The email of the Employee or Guest's account as a string. Since an Employee email must end in "@ap.com" and both an Employee and Guest's email must be valid, this email must also be valid as described in the earlier addEmployeeOrGuest method. 
+ 	* @param newPassword The new password the Employee or Guest wants to assign to their account as a string. It cannot be empty or contain spaces.
+ 	* @param newName (Optional, can be an empty String) the new name the Employee or Guest wants to assign to their account.
+ 	* @param newPhoneNumber (Optional, can be an empty String) the new phone number the Employee or Guest wants to assign to their account.
  	* @return String - This returns a string with an error message gathered during execution, if this returned string is empty, the update of the Employee or Guest's account was successful.
  	* 
  	* @author Mathieu Allaire
@@ -328,8 +327,10 @@ catch(Exception e) {
 	
 
 	/**
-	 * This method returns the employees as an observable list
-	 * @return ObservableList<String>
+	 * <h3>getEmployees</h3>
+	 * This helper method returns the employees as an observable list element for JavaFx to be able to use it.
+	 * 
+	 * @return ObservableList<String> - Rreturns an ObservableList object containing strings correponding to the employees existing in the system.
 	 * 
 	 * @author Jerome Desrosiers
 	 */

@@ -15,6 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+/**
+ * <h1>AssignmentPageController</h1>
+ * This class is the controller for the 'AssignmentPage.fxml' view.
+ * 
+ * @author Kevin Li
+ */
 public class AssignmentPageController {
 
   @FXML private TextField ticketIdTextField, noteTextField, dateTextField;
@@ -23,8 +29,8 @@ public class AssignmentPageController {
   
   @FXML
     /**
-   * <h1>initialize</h1>
-   * This method is called to initialize the dropdown menus in the assignment page.
+   * <h2>initialize</h2>
+   * This method is called to update the dropdown menus in the assignment page.
    * 
    * @author Kevin Li
    */
@@ -63,8 +69,8 @@ public class AssignmentPageController {
   // Event Listener on Button[#assignButton].onAction
   @FXML
   /**
-   * <h1>assignButtonClicked</h1>
-   * This method is called whenever the "assign" button is clicked on the assignment page.
+   * <h2>assignButtonClicked</h2>
+   * This method is called whenever an "assign" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "assign" button being clicked.
    * @author Kevin Li
@@ -103,10 +109,11 @@ public class AssignmentPageController {
 
   @FXML
   /**
-   * <h1>startWorkButtonClicked</h1>
-   * This method is called whenever the "start work" button is clicked on the assignment page.
+   * <h2>startWorkButtonClicked</h2>
+   * This method is called whenever an "start work" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "start work" button being clicked.
+   * 
    * @author Kevin Li
    */
   public void startWorkButtonClicked(ActionEvent event) {
@@ -127,10 +134,11 @@ public class AssignmentPageController {
 
   @FXML
   /**
-   * <h1>completeWorkButtonClicked</h1>
-   * This method is called whenever the "complete work" button is clicked on the assignment page.
+   * <h2>completeWorkButtonClicked</h2>
+   * This method is called whenever an "complete work" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "complete work" button being clicked.
+   * 
    * @author Kevin Li
    */
   public void completeWorkButtonClicked(ActionEvent event) {
@@ -151,11 +159,11 @@ public class AssignmentPageController {
 
   @FXML
     /**
-   * <h1>approveButtonClicked</h1>
-   * This method is called whenever the "approve" button is clicked on the assignment page.
+   * <h2>approveButtonClicked</h2>
+   * This method is called whenever an "approve" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "approve" button being clicked.
-   * @author Kevin Li
+   * @author 
    */
   public void approveButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
@@ -175,11 +183,11 @@ public class AssignmentPageController {
 
   @FXML
   /**
-   * <h1>disapproveButtonClicked</h1>
-   * This method is called whenever the "disapprove" button is clicked on the assignment page.
+   * <h2>disapproveButtonClicked</h2>
+   * This method is called whenever an "disapprove" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "disapprove" button being clicked.
-   * @author Kevin Li
+   * @author 
    */
   public void disapproveButtonClicked(ActionEvent event) {
     String ticketIdString = ticketIdTextField.getText();
