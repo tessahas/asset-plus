@@ -12,6 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 
+/**
+ * <h1>UsersPageController</h1>
+ * This class is the controller for the 'UsersPage.fxml' view.
+ * 
+ * @author 
+ */
 public class UsersPageController {
   @FXML private TextField createEmailTextField;
   @FXML private TextField createNameTextField;
@@ -40,10 +46,11 @@ public class UsersPageController {
   @FXML
   // Event Listener on Button[#createGuestButton].onAction
   /**
-   * <h1>createGuestClicked</h1>
+   * <h2>createGuestClicked</h2>
    * This method is called whenever a "create guest" button is clicked on the users page.
    * 
    * @param event This is the action of the "create guest" button being clicked.
+   * 
    * @author Mathieu Allaire
    */
   public void createGuestClicked(ActionEvent event) {
@@ -100,10 +107,11 @@ public class UsersPageController {
   @FXML
   // Event Listener on Button[#createEmployeeButton].onAction
   /**
-   * <h1>createEmployeeClicked</h1>
+   * <h2>createEmployeeClicked</h2>
    * This method is called whenever a "create employee" button is clicked on the users page.
    * 
    * @param event This is the action of the "create employee" button being clicked.
+   * 
    * @author Mathieu Allaire
    */
   public void createEmployeeClicked(ActionEvent event) {
@@ -165,10 +173,11 @@ public class UsersPageController {
   @FXML
   // Event Listener on Button[#updateGuestOrEmployeeButton].onAction
   /**
-   * <h1>updateGuestOrEmployeeClicked</h1>
+   * <h2>updateGuestOrEmployeeClicked</h2>
    * This method is called whenever an "update guest or employee" button is clicked on the users page.
    * 
    * @param event This is the action of the "update guest or employee" button being clicked.
+   * 
    * @author Mathieu Allaire
    */
   public void updateGuestOrEmployeeClicked(ActionEvent event) {
@@ -227,10 +236,11 @@ public class UsersPageController {
   @FXML
   // Event Listener on Button[#deleteGuestOrEmployeeButton].onAction
   /**
-   * <h1>deleteGuestOrEmployeeClicked</h1>
+   * <h2>deleteGuestOrEmployeeClicked</h2>
    * This method is called whenever a "delete guest or employee" button is clicked on the users page.
    * 
    * @param event This is the action of the "delete guest or employee" button being clicked.
+   * 
    * @author Mathieu Allaire
    */
   public void deleteGuestOrEmployeeClicked(ActionEvent event) {
@@ -262,10 +272,11 @@ public class UsersPageController {
   @FXML
     // Event Listener on Button[#updateManagerButton].onAction
     /**
-   * <h1>updateManagerClicked</h1>
+   * <h2>updateManagerClicked</h2>
    * This method is called whenever an "update manager" button is clicked on the users page.
    * 
    * @param event This is the action of the "update manager" button being clicked.
+   * 
    * @author Mathieu Allaire
    */
     public void updateManagerClicked(ActionEvent event){
