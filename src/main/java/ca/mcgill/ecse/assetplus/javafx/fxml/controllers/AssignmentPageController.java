@@ -30,12 +30,12 @@ public class AssignmentPageController {
   @FXML
     /**
    * <h2>initialize</h2>
-   * This method is called to update the dropdown menus in the assignment page.
+   * This method is called to initialize the dropdown menus in the assignment page.
    * 
    * @author Kevin Li
    */
   public void initialize() {
-    // non refrechable choice boxese (always the same list to choose from)
+    // non refreshable choice boxes (always the same list to choose from)
     ObservableList<String> priorities =
       FXCollections.observableArrayList("Low", "Normal", "Urgent");
     
@@ -70,7 +70,7 @@ public class AssignmentPageController {
   @FXML
   /**
    * <h2>assignButtonClicked</h2>
-   * This method is called whenever an "assign" button is clicked on the assignment page.
+   * This method is called whenever the "assign" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "assign" button being clicked.
    * @author Kevin Li
@@ -110,7 +110,7 @@ public class AssignmentPageController {
   @FXML
   /**
    * <h2>startWorkButtonClicked</h2>
-   * This method is called whenever an "start work" button is clicked on the assignment page.
+   * This method is called whenever the "start work" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "start work" button being clicked.
    * 
@@ -135,7 +135,7 @@ public class AssignmentPageController {
   @FXML
   /**
    * <h2>completeWorkButtonClicked</h2>
-   * This method is called whenever an "complete work" button is clicked on the assignment page.
+   * This method is called whenever the "complete work" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "complete work" button being clicked.
    * 
@@ -160,7 +160,7 @@ public class AssignmentPageController {
   @FXML
     /**
    * <h2>approveButtonClicked</h2>
-   * This method is called whenever an "approve" button is clicked on the assignment page.
+   * This method is called whenever the "approve" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "approve" button being clicked.
    * @author 
@@ -184,7 +184,7 @@ public class AssignmentPageController {
   @FXML
   /**
    * <h2>disapproveButtonClicked</h2>
-   * This method is called whenever an "disapprove" button is clicked on the assignment page.
+   * This method is called whenever the "disapprove" button is clicked on the assignment page.
    * 
    * @param event This is the action of the "disapprove" button being clicked.
    * @author 
