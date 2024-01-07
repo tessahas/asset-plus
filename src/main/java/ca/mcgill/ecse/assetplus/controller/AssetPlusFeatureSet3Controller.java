@@ -25,7 +25,7 @@ public class AssetPlusFeatureSet3Controller {
    * @param purchaseDate The purchase date of the specific asset stored as a Date object.
    * @param assetTypeName The asset type name stored as a string.
    * @return String - Returns an empty string if the addSpecificAsset was successful and no errors
-   * were raised. Returns a string with an error message otherwise.
+   * were raised. Returns a string with an error message otherwise!
    * 
    * @author Luis Felipe Jarquin Romero
    */
